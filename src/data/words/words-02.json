@@ -1,0 +1,4746 @@
+[
+  {
+    "id": 240,
+    "word": "abandon",
+    "pos": "v",
+    "ipa": "/əˈbæn.dən/",
+    "example": "The company abandoned its plan to expand overseas.",
+    "meaning": "từ bỏ, bỏ rơi"
+  },
+  {
+    "id": 241,
+    "word": "abroad",
+    "pos": "adv",
+    "ipa": "/əˈbrɑːd/",
+    "example": "She has worked abroad for five years.",
+    "meaning": "ở nước ngoài"
+  },
+  {
+    "id": 242,
+    "word": "abundant",
+    "pos": "adj",
+    "ipa": "/əˈbʌn.dənt/",
+    "example": "The region has abundant natural resources.",
+    "meaning": "dồi dào"
+  },
+  {
+    "id": 243,
+    "word": "academic",
+    "pos": "adj",
+    "ipa": "/ˌæk.əˈdem.ɪk/",
+    "example": "The academic year begins in September.",
+    "meaning": "thuộc học thuật"
+  },
+  {
+    "id": 244,
+    "word": "acknowledge",
+    "pos": "v",
+    "ipa": "/əkˈnɑː.lɪdʒ/",
+    "example": "We acknowledge receipt of your application.",
+    "meaning": "thừa nhận, xác nhận đã nhận"
+  },
+  {
+    "id": 245,
+    "word": "adjacent",
+    "pos": "adj",
+    "ipa": "/əˈdʒeɪ.sənt/",
+    "example": "The hotel is adjacent to the convention center.",
+    "meaning": "liền kề"
+  },
+  {
+    "id": 246,
+    "word": "admission",
+    "pos": "n",
+    "ipa": "/ədˈmɪʃ.ən/",
+    "example": "Admission to the museum is free on Sundays.",
+    "meaning": "sự cho vào; phí vào cửa"
+  },
+  {
+    "id": 247,
+    "word": "advance",
+    "pos": "n",
+    "ipa": "/ədˈvæns/",
+    "example": "Please book your tickets in advance.",
+    "meaning": "sự tiến bộ; tạm ứng"
+  },
+  {
+    "id": 248,
+    "word": "advantage",
+    "pos": "n",
+    "ipa": "/ədˈvæn.t̬ɪdʒ/",
+    "example": "Experience gives her an advantage over other candidates.",
+    "meaning": "lợi thế"
+  },
+  {
+    "id": 249,
+    "word": "advisor",
+    "pos": "n",
+    "ipa": "/ədˈvaɪ.zɚ/",
+    "example": "A financial advisor can help you plan your savings.",
+    "meaning": "cố vấn"
+  },
+  {
+    "id": 250,
+    "word": "affordable",
+    "pos": "adj",
+    "ipa": "/əˈfɔːr.də.bəl/",
+    "example": "The company offers affordable housing for staff.",
+    "meaning": "giá phải chăng"
+  },
+  {
+    "id": 251,
+    "word": "agency",
+    "pos": "n",
+    "ipa": "/ˈeɪ.dʒən.si/",
+    "example": "The travel agency arranged our flights.",
+    "meaning": "đại lý, cơ quan"
+  },
+  {
+    "id": 252,
+    "word": "aisle",
+    "pos": "n",
+    "ipa": "/aɪl/",
+    "example": "The cereal is in aisle five.",
+    "meaning": "lối đi (giữa các dãy)"
+  },
+  {
+    "id": 253,
+    "word": "alert",
+    "pos": "v",
+    "ipa": "/əˈlɝːt/",
+    "example": "The system alerts staff when stock is low.",
+    "meaning": "cảnh báo"
+  },
+  {
+    "id": 254,
+    "word": "allocate",
+    "pos": "v",
+    "ipa": "/ˈæl.ə.keɪt/",
+    "example": "We allocated more funds to research.",
+    "meaning": "phân bổ"
+  },
+  {
+    "id": 255,
+    "word": "alter",
+    "pos": "v",
+    "ipa": "/ˈɑːl.t̬ɚ/",
+    "example": "The tailor will alter the jacket for you.",
+    "meaning": "thay đổi, sửa đổi"
+  },
+  {
+    "id": 256,
+    "word": "alternative",
+    "pos": "n",
+    "ipa": "/ɑːlˈtɝː.nə.t̬ɪv/",
+    "example": "We need an alternative to the current supplier.",
+    "meaning": "lựa chọn thay thế"
+  },
+  {
+    "id": 257,
+    "word": "amenity",
+    "pos": "n",
+    "ipa": "/əˈmen.ə.t̬i/",
+    "example": "The hotel offers amenities such as a pool and gym.",
+    "meaning": "tiện nghi"
+  },
+  {
+    "id": 258,
+    "word": "analyze",
+    "pos": "v",
+    "ipa": "/ˈæn.əl.aɪz/",
+    "example": "Analysts are analyzing the sales data.",
+    "meaning": "phân tích"
+  },
+  {
+    "id": 259,
+    "word": "announce",
+    "pos": "v",
+    "ipa": "/əˈnaʊns/",
+    "example": "The company announced its quarterly results.",
+    "meaning": "thông báo"
+  },
+  {
+    "id": 260,
+    "word": "annual",
+    "pos": "adj",
+    "ipa": "/ˈæn.ju.əl/",
+    "example": "The annual meeting takes place in March.",
+    "meaning": "hằng năm"
+  },
+  {
+    "id": 261,
+    "word": "anniversary",
+    "pos": "n",
+    "ipa": "/ˌæn.əˈvɝː.sər.i/",
+    "example": "The firm celebrated its twentieth anniversary.",
+    "meaning": "ngày kỷ niệm"
+  },
+  {
+    "id": 262,
+    "word": "apparel",
+    "pos": "n",
+    "ipa": "/əˈper.əl/",
+    "example": "The store sells sports apparel.",
+    "meaning": "quần áo, trang phục"
+  },
+  {
+    "id": 263,
+    "word": "appliance",
+    "pos": "n",
+    "ipa": "/əˈplaɪ.əns/",
+    "example": "All kitchen appliances are on sale.",
+    "meaning": "thiết bị gia dụng"
+  },
+  {
+    "id": 264,
+    "word": "applicable",
+    "pos": "adj",
+    "ipa": "/əˈplɪk.ə.bəl/",
+    "example": "The discount is not applicable to sale items.",
+    "meaning": "có thể áp dụng"
+  },
+  {
+    "id": 265,
+    "word": "appreciate",
+    "pos": "v",
+    "ipa": "/əˈpriː.ʃi.eɪt/",
+    "example": "We appreciate your patience.",
+    "meaning": "đánh giá cao, cảm kích"
+  },
+  {
+    "id": 266,
+    "word": "approach",
+    "pos": "n",
+    "ipa": "/əˈproʊtʃ/",
+    "example": "The team took a new approach to the problem.",
+    "meaning": "cách tiếp cận"
+  },
+  {
+    "id": 267,
+    "word": "approval",
+    "pos": "n",
+    "ipa": "/əˈpruː.vəl/",
+    "example": "The plan requires approval from management.",
+    "meaning": "sự phê duyệt"
+  },
+  {
+    "id": 268,
+    "word": "approximately",
+    "pos": "adv",
+    "ipa": "/əˈprɑːk.sə.mət.li/",
+    "example": "The trip takes approximately two hours.",
+    "meaning": "xấp xỉ"
+  },
+  {
+    "id": 269,
+    "word": "arrange",
+    "pos": "v",
+    "ipa": "/əˈreɪndʒ/",
+    "example": "She arranged a meeting with the client.",
+    "meaning": "sắp xếp"
+  },
+  {
+    "id": 270,
+    "word": "article",
+    "pos": "n",
+    "ipa": "/ˈɑːr.t̬ɪ.kəl/",
+    "example": "The article discusses changes in the job market.",
+    "meaning": "bài báo; món hàng"
+  },
+  {
+    "id": 271,
+    "word": "aspect",
+    "pos": "n",
+    "ipa": "/ˈæs.pekt/",
+    "example": "We reviewed every aspect of the plan.",
+    "meaning": "khía cạnh"
+  },
+  {
+    "id": 272,
+    "word": "assemble",
+    "pos": "v",
+    "ipa": "/əˈsem.bəl/",
+    "example": "Workers assemble the parts by hand.",
+    "meaning": "lắp ráp; tập hợp"
+  },
+  {
+    "id": 273,
+    "word": "assess",
+    "pos": "v",
+    "ipa": "/əˈses/",
+    "example": "Inspectors will assess the damage.",
+    "meaning": "đánh giá, ước lượng"
+  },
+  {
+    "id": 274,
+    "word": "assign",
+    "pos": "v",
+    "ipa": "/əˈsaɪn/",
+    "example": "The manager assigned the project to Ms. Lee.",
+    "meaning": "giao (việc)"
+  },
+  {
+    "id": 275,
+    "word": "assistance",
+    "pos": "n",
+    "ipa": "/əˈsɪs.təns/",
+    "example": "Please contact us if you need assistance.",
+    "meaning": "sự giúp đỡ"
+  },
+  {
+    "id": 276,
+    "word": "associate",
+    "pos": "n",
+    "ipa": "/əˈsoʊ.si.ət/",
+    "example": "She is a sales associate at the store.",
+    "meaning": "đồng nghiệp, cộng sự"
+  },
+  {
+    "id": 277,
+    "word": "assume",
+    "pos": "v",
+    "ipa": "/əˈsuːm/",
+    "example": "I assume the report is ready.",
+    "meaning": "cho rằng; đảm nhận"
+  },
+  {
+    "id": 278,
+    "word": "assure",
+    "pos": "v",
+    "ipa": "/əˈʃʊr/",
+    "example": "We assure you that the order will arrive on time.",
+    "meaning": "đảm bảo, cam đoan"
+  },
+  {
+    "id": 279,
+    "word": "attain",
+    "pos": "v",
+    "ipa": "/əˈteɪn/",
+    "example": "The firm attained its sales goal in June.",
+    "meaning": "đạt được"
+  },
+  {
+    "id": 280,
+    "word": "attendance",
+    "pos": "n",
+    "ipa": "/əˈten.dəns/",
+    "example": "Attendance at the workshop was high.",
+    "meaning": "sự tham dự"
+  },
+  {
+    "id": 281,
+    "word": "attract",
+    "pos": "v",
+    "ipa": "/əˈtrækt/",
+    "example": "The sale attracted many new customers.",
+    "meaning": "thu hút"
+  },
+  {
+    "id": 282,
+    "word": "attribute",
+    "pos": "v",
+    "ipa": "/əˈtrɪb.juːt/",
+    "example": "He attributed the success to teamwork.",
+    "meaning": "cho là do"
+  },
+  {
+    "id": 283,
+    "word": "authorize",
+    "pos": "v",
+    "ipa": "/ˈɑː.θɚ.aɪz/",
+    "example": "Only managers can authorize refunds.",
+    "meaning": "cho phép, ủy quyền"
+  },
+  {
+    "id": 284,
+    "word": "automatic",
+    "pos": "adj",
+    "ipa": "/ˌɑː.t̬əˈmæt̬.ɪk/",
+    "example": "The doors open automatically.",
+    "meaning": "tự động"
+  },
+  {
+    "id": 285,
+    "word": "availability",
+    "pos": "n",
+    "ipa": "/əˌveɪ.ləˈbɪl.ə.t̬i/",
+    "example": "Check the availability of rooms online.",
+    "meaning": "sự có sẵn"
+  },
+  {
+    "id": 286,
+    "word": "award",
+    "pos": "n",
+    "ipa": "/əˈwɔːrd/",
+    "example": "She won an award for outstanding service.",
+    "meaning": "giải thưởng"
+  },
+  {
+    "id": 287,
+    "word": "aware",
+    "pos": "adj",
+    "ipa": "/əˈwer/",
+    "example": "Staff should be aware of the new procedures.",
+    "meaning": "nhận thức, biết"
+  },
+  {
+    "id": 288,
+    "word": "bargain",
+    "pos": "n",
+    "ipa": "/ˈbɑːr.ɡɪn/",
+    "example": "The coat was a real bargain.",
+    "meaning": "món hời"
+  },
+  {
+    "id": 289,
+    "word": "barrier",
+    "pos": "n",
+    "ipa": "/ˈber.i.ɚ/",
+    "example": "Language can be a barrier to communication.",
+    "meaning": "rào cản"
+  },
+  {
+    "id": 290,
+    "word": "beneficial",
+    "pos": "adj",
+    "ipa": "/ˌben.əˈfɪʃ.əl/",
+    "example": "The partnership is beneficial to both companies.",
+    "meaning": "có lợi"
+  },
+  {
+    "id": 291,
+    "word": "benefit",
+    "pos": "n",
+    "ipa": "/ˈben.ə.fɪt/",
+    "example": "Health insurance is one of the benefits.",
+    "meaning": "lợi ích, phúc lợi"
+  },
+  {
+    "id": 292,
+    "word": "bid",
+    "pos": "n",
+    "ipa": "/bɪd/",
+    "example": "The company submitted a bid for the contract.",
+    "meaning": "giá thầu"
+  },
+  {
+    "id": 293,
+    "word": "billing",
+    "pos": "n",
+    "ipa": "/ˈbɪl.ɪŋ/",
+    "example": "Questions about billing should go to accounting.",
+    "meaning": "việc lập hóa đơn"
+  },
+  {
+    "id": 294,
+    "word": "bonus",
+    "pos": "n",
+    "ipa": "/ˈboʊ.nəs/",
+    "example": "Employees received a year-end bonus.",
+    "meaning": "tiền thưởng"
+  },
+  {
+    "id": 295,
+    "word": "booklet",
+    "pos": "n",
+    "ipa": "/ˈbʊk.lət/",
+    "example": "Each guest receives a booklet with the schedule.",
+    "meaning": "tập sách nhỏ"
+  },
+  {
+    "id": 296,
+    "word": "boost",
+    "pos": "v",
+    "ipa": "/buːst/",
+    "example": "The ad campaign boosted sales.",
+    "meaning": "thúc đẩy, tăng"
+  },
+  {
+    "id": 297,
+    "word": "branch",
+    "pos": "n",
+    "ipa": "/bræntʃ/",
+    "example": "The bank opened a new branch downtown.",
+    "meaning": "chi nhánh"
+  },
+  {
+    "id": 298,
+    "word": "breakthrough",
+    "pos": "n",
+    "ipa": "/ˈbreɪk.θruː/",
+    "example": "Scientists announced a breakthrough in battery technology.",
+    "meaning": "bước đột phá"
+  },
+  {
+    "id": 299,
+    "word": "broaden",
+    "pos": "v",
+    "ipa": "/ˈbrɑː.dən/",
+    "example": "The firm hopes to broaden its customer base.",
+    "meaning": "mở rộng"
+  },
+  {
+    "id": 300,
+    "word": "bulk",
+    "pos": "n",
+    "ipa": "/bʌlk/",
+    "example": "Buying in bulk reduces the cost per unit.",
+    "meaning": "số lượng lớn"
+  },
+  {
+    "id": 301,
+    "word": "bulletin",
+    "pos": "n",
+    "ipa": "/ˈbʊl.ə.tɪn/",
+    "example": "The bulletin board lists upcoming events.",
+    "meaning": "bản tin"
+  },
+  {
+    "id": 302,
+    "word": "capacity",
+    "pos": "n",
+    "ipa": "/kəˈpæs.ə.t̬i/",
+    "example": "The plant is operating at full capacity.",
+    "meaning": "sức chứa, công suất"
+  },
+  {
+    "id": 303,
+    "word": "cashier",
+    "pos": "n",
+    "ipa": "/kæʃˈɪr/",
+    "example": "Please pay the cashier at the front.",
+    "meaning": "thu ngân"
+  },
+  {
+    "id": 304,
+    "word": "cater",
+    "pos": "v",
+    "ipa": "/ˈkeɪ.t̬ɚ/",
+    "example": "The restaurant caters to large groups.",
+    "meaning": "phục vụ, đáp ứng"
+  },
+  {
+    "id": 305,
+    "word": "caution",
+    "pos": "n",
+    "ipa": "/ˈkɑː.ʃən/",
+    "example": "Use caution when operating the machine.",
+    "meaning": "sự thận trọng"
+  },
+  {
+    "id": 306,
+    "word": "certificate",
+    "pos": "n",
+    "ipa": "/sɚˈtɪf.ɪ.kət/",
+    "example": "She received a certificate of completion.",
+    "meaning": "chứng chỉ"
+  },
+  {
+    "id": 307,
+    "word": "challenge",
+    "pos": "n",
+    "ipa": "/ˈtʃæl.ɪndʒ/",
+    "example": "Meeting the deadline was a major challenge.",
+    "meaning": "thách thức"
+  },
+  {
+    "id": 308,
+    "word": "chairperson",
+    "pos": "n",
+    "ipa": "/ˈtʃerˌpɝː.sən/",
+    "example": "The chairperson opened the meeting.",
+    "meaning": "chủ tọa, chủ tịch"
+  },
+  {
+    "id": 309,
+    "word": "characteristic",
+    "pos": "n",
+    "ipa": "/ˌker.ək.təˈrɪs.tɪk/",
+    "example": "Durability is a key characteristic of this product.",
+    "meaning": "đặc điểm"
+  },
+  {
+    "id": 310,
+    "word": "circulate",
+    "pos": "v",
+    "ipa": "/ˈsɝː.kjə.leɪt/",
+    "example": "The memo was circulated to all departments.",
+    "meaning": "lưu hành, phân phát"
+  },
+  {
+    "id": 311,
+    "word": "claim",
+    "pos": "n",
+    "ipa": "/kleɪm/",
+    "example": "You can file an insurance claim online.",
+    "meaning": "yêu cầu bồi thường; tuyên bố"
+  },
+  {
+    "id": 312,
+    "word": "clarify",
+    "pos": "v",
+    "ipa": "/ˈkler.ə.faɪ/",
+    "example": "Could you clarify the terms of the offer?",
+    "meaning": "làm rõ"
+  },
+  {
+    "id": 313,
+    "word": "classified",
+    "pos": "adj",
+    "ipa": "/ˈklæs.ə.faɪd/",
+    "example": "Classified ads are listed in the back section.",
+    "meaning": "được phân loại; mật"
+  },
+  {
+    "id": 314,
+    "word": "clearance",
+    "pos": "n",
+    "ipa": "/ˈklɪr.əns/",
+    "example": "The clearance sale ends on Sunday.",
+    "meaning": "sự thanh lý; giấy thông quan"
+  },
+  {
+    "id": 315,
+    "word": "commence",
+    "pos": "v",
+    "ipa": "/kəˈmens/",
+    "example": "The ceremony will commence at noon.",
+    "meaning": "bắt đầu"
+  },
+  {
+    "id": 316,
+    "word": "commission",
+    "pos": "n",
+    "ipa": "/kəˈmɪʃ.ən/",
+    "example": "Sales staff earn a commission on each sale.",
+    "meaning": "tiền hoa hồng"
+  },
+  {
+    "id": 317,
+    "word": "commitment",
+    "pos": "n",
+    "ipa": "/kəˈmɪt.mənt/",
+    "example": "The company's commitment to quality is clear.",
+    "meaning": "cam kết"
+  },
+  {
+    "id": 318,
+    "word": "committee",
+    "pos": "n",
+    "ipa": "/kəˈmɪt̬.i/",
+    "example": "The committee will review the proposal.",
+    "meaning": "ủy ban"
+  },
+  {
+    "id": 319,
+    "word": "commodity",
+    "pos": "n",
+    "ipa": "/kəˈmɑː.də.t̬i/",
+    "example": "Oil is a valuable commodity.",
+    "meaning": "hàng hóa, mặt hàng"
+  },
+  {
+    "id": 320,
+    "word": "communicate",
+    "pos": "v",
+    "ipa": "/kəˈmjuː.nə.keɪt/",
+    "example": "Teams communicate through the company's chat app.",
+    "meaning": "giao tiếp"
+  },
+  {
+    "id": 321,
+    "word": "community",
+    "pos": "n",
+    "ipa": "/kəˈmjuː.nə.t̬i/",
+    "example": "The firm supports the local community.",
+    "meaning": "cộng đồng"
+  },
+  {
+    "id": 322,
+    "word": "compact",
+    "pos": "adj",
+    "ipa": "/kəmˈpækt/",
+    "example": "The compact design saves space.",
+    "meaning": "nhỏ gọn"
+  },
+  {
+    "id": 323,
+    "word": "compatible",
+    "pos": "adj",
+    "ipa": "/kəmˈpæt̬.ə.bəl/",
+    "example": "This printer is compatible with most computers.",
+    "meaning": "tương thích"
+  },
+  {
+    "id": 324,
+    "word": "compensate",
+    "pos": "v",
+    "ipa": "/ˈkɑːm.pən.seɪt/",
+    "example": "The airline will compensate passengers for the delay.",
+    "meaning": "bồi thường"
+  },
+  {
+    "id": 325,
+    "word": "competent",
+    "pos": "adj",
+    "ipa": "/ˈkɑːm.pə.t̬ənt/",
+    "example": "She is a competent and reliable manager.",
+    "meaning": "có năng lực"
+  },
+  {
+    "id": 326,
+    "word": "competitive",
+    "pos": "adj",
+    "ipa": "/kəmˈpet̬.ə.t̬ɪv/",
+    "example": "We offer competitive prices.",
+    "meaning": "cạnh tranh"
+  },
+  {
+    "id": 327,
+    "word": "compile",
+    "pos": "v",
+    "ipa": "/kəmˈpaɪl/",
+    "example": "Please compile the data into one report.",
+    "meaning": "biên soạn, tổng hợp"
+  },
+  {
+    "id": 328,
+    "word": "complete",
+    "pos": "adj",
+    "ipa": "/kəmˈpliːt/",
+    "example": "The complete set includes all accessories.",
+    "meaning": "hoàn chỉnh"
+  },
+  {
+    "id": 329,
+    "word": "complex",
+    "pos": "adj",
+    "ipa": "/kɑːmˈpleks/",
+    "example": "The tax rules are quite complex.",
+    "meaning": "phức tạp"
+  },
+  {
+    "id": 330,
+    "word": "complicated",
+    "pos": "adj",
+    "ipa": "/ˈkɑːm.plə.keɪ.t̬ɪd/",
+    "example": "The application process is too complicated.",
+    "meaning": "rắc rối"
+  },
+  {
+    "id": 331,
+    "word": "component",
+    "pos": "n",
+    "ipa": "/kəmˈpoʊ.nənt/",
+    "example": "The factory produces electronic components.",
+    "meaning": "bộ phận, linh kiện"
+  },
+  {
+    "id": 332,
+    "word": "comprehensive",
+    "pos": "adj",
+    "ipa": "/ˌkɑːm.prɪˈhen.sɪv/",
+    "example": "The company offers comprehensive health coverage.",
+    "meaning": "toàn diện"
+  },
+  {
+    "id": 333,
+    "word": "concentrate",
+    "pos": "v",
+    "ipa": "/ˈkɑːn.sən.treɪt/",
+    "example": "The firm will concentrate on the Asian market.",
+    "meaning": "tập trung"
+  },
+  {
+    "id": 334,
+    "word": "concern",
+    "pos": "n",
+    "ipa": "/kənˈsɝːn/",
+    "example": "Safety is our main concern.",
+    "meaning": "mối quan ngại"
+  },
+  {
+    "id": 335,
+    "word": "concise",
+    "pos": "adj",
+    "ipa": "/kənˈsaɪs/",
+    "example": "Please keep your report clear and concise.",
+    "meaning": "ngắn gọn"
+  },
+  {
+    "id": 336,
+    "word": "condition",
+    "pos": "n",
+    "ipa": "/kənˈdɪʃ.ən/",
+    "example": "The car is in excellent condition.",
+    "meaning": "điều kiện, tình trạng"
+  },
+  {
+    "id": 337,
+    "word": "conference",
+    "pos": "n",
+    "ipa": "/ˈkɑːn.fɚ.əns/",
+    "example": "She will present at the international conference.",
+    "meaning": "hội nghị"
+  },
+  {
+    "id": 338,
+    "word": "confirm",
+    "pos": "v",
+    "ipa": "/kənˈfɝːm/",
+    "example": "Please confirm your reservation by Friday.",
+    "meaning": "xác nhận"
+  },
+  {
+    "id": 339,
+    "word": "conflict",
+    "pos": "n",
+    "ipa": "/ˈkɑːn.flɪkt/",
+    "example": "There is a conflict between the two meetings.",
+    "meaning": "xung đột, trùng lịch"
+  },
+  {
+    "id": 340,
+    "word": "consecutive",
+    "pos": "adj",
+    "ipa": "/kənˈsek.jə.t̬ɪv/",
+    "example": "Sales rose for the third consecutive month.",
+    "meaning": "liên tiếp"
+  },
+  {
+    "id": 341,
+    "word": "consent",
+    "pos": "n",
+    "ipa": "/kənˈsent/",
+    "example": "Written consent is required for the procedure.",
+    "meaning": "sự đồng ý"
+  },
+  {
+    "id": 342,
+    "word": "consequence",
+    "pos": "n",
+    "ipa": "/ˈkɑːn.sə.kwens/",
+    "example": "Late delivery had serious consequences.",
+    "meaning": "hậu quả"
+  },
+  {
+    "id": 343,
+    "word": "conservative",
+    "pos": "adj",
+    "ipa": "/kənˈsɝː.və.t̬ɪv/",
+    "example": "The firm made a conservative estimate of profits.",
+    "meaning": "thận trọng, bảo thủ"
+  },
+  {
+    "id": 344,
+    "word": "considerable",
+    "pos": "adj",
+    "ipa": "/kənˈsɪd.ɚ.ə.bəl/",
+    "example": "The project saved a considerable amount of money.",
+    "meaning": "đáng kể"
+  },
+  {
+    "id": 345,
+    "word": "consistent",
+    "pos": "adj",
+    "ipa": "/kənˈsɪs.tənt/",
+    "example": "The quality of our service is consistent.",
+    "meaning": "nhất quán"
+  },
+  {
+    "id": 346,
+    "word": "constant",
+    "pos": "adj",
+    "ipa": "/ˈkɑːn.stənt/",
+    "example": "The machine requires constant monitoring.",
+    "meaning": "liên tục, không đổi"
+  },
+  {
+    "id": 347,
+    "word": "construction",
+    "pos": "n",
+    "ipa": "/kənˈstrʌk.ʃən/",
+    "example": "Construction of the new bridge begins in May.",
+    "meaning": "sự xây dựng"
+  },
+  {
+    "id": 348,
+    "word": "consultant",
+    "pos": "n",
+    "ipa": "/kənˈsʌl.tənt/",
+    "example": "We hired a consultant to improve efficiency.",
+    "meaning": "nhà tư vấn"
+  },
+  {
+    "id": 349,
+    "word": "consume",
+    "pos": "v",
+    "ipa": "/kənˈsuːm/",
+    "example": "The factory consumes a lot of electricity.",
+    "meaning": "tiêu thụ"
+  },
+  {
+    "id": 350,
+    "word": "contact",
+    "pos": "v",
+    "ipa": "/ˈkɑːn.tækt/",
+    "example": "Please contact the HR department for details.",
+    "meaning": "liên lạc"
+  },
+  {
+    "id": 351,
+    "word": "contain",
+    "pos": "v",
+    "ipa": "/kənˈteɪn/",
+    "example": "The package contains two items.",
+    "meaning": "chứa đựng"
+  },
+  {
+    "id": 352,
+    "word": "contribute",
+    "pos": "v",
+    "ipa": "/kənˈtrɪb.juːt/",
+    "example": "Everyone contributed to the project's success.",
+    "meaning": "đóng góp"
+  },
+  {
+    "id": 353,
+    "word": "controversy",
+    "pos": "n",
+    "ipa": "/ˈkɑːn.trə.vɝː.si/",
+    "example": "The new policy caused controversy among staff.",
+    "meaning": "cuộc tranh cãi"
+  },
+  {
+    "id": 354,
+    "word": "convene",
+    "pos": "v",
+    "ipa": "/kənˈviːn/",
+    "example": "The committee will convene on Tuesday.",
+    "meaning": "triệu tập, họp"
+  },
+  {
+    "id": 355,
+    "word": "convention",
+    "pos": "n",
+    "ipa": "/kənˈven.ʃən/",
+    "example": "The annual convention attracts thousands of visitors.",
+    "meaning": "hội nghị lớn; quy ước"
+  },
+  {
+    "id": 356,
+    "word": "convert",
+    "pos": "v",
+    "ipa": "/kənˈvɝːt/",
+    "example": "The warehouse was converted into offices.",
+    "meaning": "chuyển đổi"
+  },
+  {
+    "id": 357,
+    "word": "convey",
+    "pos": "v",
+    "ipa": "/kənˈveɪ/",
+    "example": "The report conveys the main findings clearly.",
+    "meaning": "truyền đạt, vận chuyển"
+  },
+  {
+    "id": 358,
+    "word": "cooperate",
+    "pos": "v",
+    "ipa": "/koʊˈɑː.pə.reɪt/",
+    "example": "Local firms cooperate with the university.",
+    "meaning": "hợp tác"
+  },
+  {
+    "id": 359,
+    "word": "core",
+    "pos": "adj",
+    "ipa": "/kɔːr/",
+    "example": "Customer service is a core value of the company.",
+    "meaning": "cốt lõi"
+  },
+  {
+    "id": 360,
+    "word": "correspond",
+    "pos": "v",
+    "ipa": "/ˌkɔːr.əˈspɑːnd/",
+    "example": "He corresponds with clients by email.",
+    "meaning": "trao đổi thư từ; tương ứng"
+  },
+  {
+    "id": 361,
+    "word": "cost-effective",
+    "pos": "adj",
+    "ipa": "/ˌkɑːst.ɪˈfek.tɪv/",
+    "example": "Shipping by sea is more cost-effective.",
+    "meaning": "tiết kiệm chi phí"
+  },
+  {
+    "id": 362,
+    "word": "courier",
+    "pos": "n",
+    "ipa": "/ˈkɝː.i.ɚ/",
+    "example": "A courier will pick up the documents.",
+    "meaning": "người chuyển phát"
+  },
+  {
+    "id": 363,
+    "word": "courteous",
+    "pos": "adj",
+    "ipa": "/ˈkɝː.t̬i.əs/",
+    "example": "The staff are always courteous to customers.",
+    "meaning": "lịch sự, nhã nhặn"
+  },
+  {
+    "id": 364,
+    "word": "coverage",
+    "pos": "n",
+    "ipa": "/ˈkʌv.ɚ.ɪdʒ/",
+    "example": "The policy provides full coverage for accidents.",
+    "meaning": "phạm vi bảo hiểm; sự đưa tin"
+  },
+  {
+    "id": 365,
+    "word": "credential",
+    "pos": "n",
+    "ipa": "/krɪˈden.ʃəl/",
+    "example": "Applicants must show their credentials.",
+    "meaning": "chứng chỉ, bằng cấp"
+  },
+  {
+    "id": 366,
+    "word": "credit",
+    "pos": "n",
+    "ipa": "/ˈkred.ɪt/",
+    "example": "You can buy the item on credit.",
+    "meaning": "tín dụng"
+  },
+  {
+    "id": 367,
+    "word": "criteria",
+    "pos": "n",
+    "ipa": "/kraɪˈtɪr.i.ə/",
+    "example": "Candidates must meet all the criteria.",
+    "meaning": "tiêu chí"
+  },
+  {
+    "id": 368,
+    "word": "critical",
+    "pos": "adj",
+    "ipa": "/ˈkrɪt̬.ɪ.kəl/",
+    "example": "It is critical that we meet the deadline.",
+    "meaning": "quan trọng, nghiêm trọng"
+  },
+  {
+    "id": 369,
+    "word": "cumulative",
+    "pos": "adj",
+    "ipa": "/ˈkjuː.mjə.lə.t̬ɪv/",
+    "example": "The cumulative sales exceeded one million.",
+    "meaning": "tích lũy"
+  },
+  {
+    "id": 370,
+    "word": "currency",
+    "pos": "n",
+    "ipa": "/ˈkɝː.ən.si/",
+    "example": "You can exchange currency at the airport.",
+    "meaning": "tiền tệ"
+  },
+  {
+    "id": 371,
+    "word": "current",
+    "pos": "adj",
+    "ipa": "/ˈkɝː.ənt/",
+    "example": "The current price is lower than last year's.",
+    "meaning": "hiện tại"
+  },
+  {
+    "id": 372,
+    "word": "curriculum",
+    "pos": "n",
+    "ipa": "/kəˈrɪk.jə.ləm/",
+    "example": "The training curriculum covers safety and ethics.",
+    "meaning": "chương trình giảng dạy"
+  },
+  {
+    "id": 373,
+    "word": "cutback",
+    "pos": "n",
+    "ipa": "/ˈkʌt.bæk/",
+    "example": "Budget cutbacks affected several departments.",
+    "meaning": "sự cắt giảm"
+  },
+  {
+    "id": 374,
+    "word": "dealership",
+    "pos": "n",
+    "ipa": "/ˈdiː.lɚ.ʃɪp/",
+    "example": "The car dealership offers a free inspection.",
+    "meaning": "đại lý (ô tô)"
+  },
+  {
+    "id": 375,
+    "word": "debt",
+    "pos": "n",
+    "ipa": "/det/",
+    "example": "The firm paid off its debt early.",
+    "meaning": "khoản nợ"
+  },
+  {
+    "id": 376,
+    "word": "decade",
+    "pos": "n",
+    "ipa": "/ˈdek.eɪd/",
+    "example": "The company has grown steadily over the past decade.",
+    "meaning": "thập kỷ"
+  },
+  {
+    "id": 377,
+    "word": "decline",
+    "pos": "v",
+    "ipa": "/dɪˈklaɪn/",
+    "example": "Sales declined in the second quarter.",
+    "meaning": "giảm; từ chối"
+  },
+  {
+    "id": 378,
+    "word": "decrease",
+    "pos": "v",
+    "ipa": "/dɪˈkriːs/",
+    "example": "Production costs decreased by five percent.",
+    "meaning": "giảm"
+  },
+  {
+    "id": 379,
+    "word": "dedicate",
+    "pos": "v",
+    "ipa": "/ˈded.ɪ.keɪt/",
+    "example": "She dedicated her career to public health.",
+    "meaning": "cống hiến"
+  },
+  {
+    "id": 380,
+    "word": "default",
+    "pos": "n",
+    "ipa": "/dɪˈfɔːlt/",
+    "example": "The default setting can be changed later.",
+    "meaning": "mặc định; sự vỡ nợ"
+  },
+  {
+    "id": 381,
+    "word": "define",
+    "pos": "v",
+    "ipa": "/dɪˈfaɪn/",
+    "example": "The contract defines each party's duties.",
+    "meaning": "định nghĩa, xác định"
+  },
+  {
+    "id": 382,
+    "word": "definite",
+    "pos": "adj",
+    "ipa": "/ˈdef.ən.ət/",
+    "example": "We have no definite plans yet.",
+    "meaning": "rõ ràng, xác định"
+  },
+  {
+    "id": 383,
+    "word": "delegation",
+    "pos": "n",
+    "ipa": "/ˌdel.əˈɡeɪ.ʃən/",
+    "example": "A delegation from Japan visited the factory.",
+    "meaning": "phái đoàn"
+  },
+  {
+    "id": 384,
+    "word": "deliberate",
+    "pos": "adj",
+    "ipa": "/dɪˈlɪb.ɚ.ət/",
+    "example": "It was a deliberate decision to delay the launch.",
+    "meaning": "cố ý; thận trọng"
+  },
+  {
+    "id": 385,
+    "word": "demand",
+    "pos": "n",
+    "ipa": "/dɪˈmænd/",
+    "example": "Demand for solar panels is growing.",
+    "meaning": "nhu cầu"
+  },
+  {
+    "id": 386,
+    "word": "demonstrate",
+    "pos": "v",
+    "ipa": "/ˈdem.ən.streɪt/",
+    "example": "The sales rep demonstrated the new device.",
+    "meaning": "trình diễn, chứng minh"
+  },
+  {
+    "id": 387,
+    "word": "depend",
+    "pos": "v",
+    "ipa": "/dɪˈpend/",
+    "example": "Our success depends on customer loyalty.",
+    "meaning": "phụ thuộc"
+  },
+  {
+    "id": 388,
+    "word": "depict",
+    "pos": "v",
+    "ipa": "/dɪˈpɪkt/",
+    "example": "The chart depicts sales growth over five years.",
+    "meaning": "miêu tả"
+  },
+  {
+    "id": 389,
+    "word": "deplete",
+    "pos": "v",
+    "ipa": "/dɪˈpliːt/",
+    "example": "Heavy use depleted the battery quickly.",
+    "meaning": "làm cạn kiệt"
+  },
+  {
+    "id": 390,
+    "word": "description",
+    "pos": "n",
+    "ipa": "/dɪˈskrɪp.ʃən/",
+    "example": "Please read the job description carefully.",
+    "meaning": "bản mô tả"
+  },
+  {
+    "id": 391,
+    "word": "designate",
+    "pos": "v",
+    "ipa": "/ˈdez.ɪɡ.neɪt/",
+    "example": "Smoking is permitted in designated areas only.",
+    "meaning": "chỉ định"
+  },
+  {
+    "id": 392,
+    "word": "detail",
+    "pos": "n",
+    "ipa": "/ˈdiː.teɪl/",
+    "example": "The brochure includes details about the tour.",
+    "meaning": "chi tiết"
+  },
+  {
+    "id": 393,
+    "word": "determine",
+    "pos": "v",
+    "ipa": "/dɪˈtɝː.mɪn/",
+    "example": "The test will determine your eligibility.",
+    "meaning": "xác định"
+  },
+  {
+    "id": 394,
+    "word": "develop",
+    "pos": "v",
+    "ipa": "/dɪˈvel.əp/",
+    "example": "The firm is developing a new mobile app.",
+    "meaning": "phát triển"
+  },
+  {
+    "id": 395,
+    "word": "device",
+    "pos": "n",
+    "ipa": "/dɪˈvaɪs/",
+    "example": "The device can be charged with a USB cable.",
+    "meaning": "thiết bị"
+  },
+  {
+    "id": 396,
+    "word": "diagnose",
+    "pos": "v",
+    "ipa": "/ˌdaɪ.əɡˈnoʊs/",
+    "example": "The technician diagnosed the problem quickly.",
+    "meaning": "chẩn đoán"
+  },
+  {
+    "id": 397,
+    "word": "dimension",
+    "pos": "n",
+    "ipa": "/daɪˈmen.ʃən/",
+    "example": "Please check the dimensions of the box.",
+    "meaning": "kích thước"
+  },
+  {
+    "id": 398,
+    "word": "diminish",
+    "pos": "v",
+    "ipa": "/dɪˈmɪn.ɪʃ/",
+    "example": "Profits diminished after the price war.",
+    "meaning": "giảm bớt"
+  },
+  {
+    "id": 399,
+    "word": "disclose",
+    "pos": "v",
+    "ipa": "/dɪsˈkloʊz/",
+    "example": "Employees may not disclose confidential information.",
+    "meaning": "tiết lộ"
+  },
+  {
+    "id": 400,
+    "word": "discontinue",
+    "pos": "v",
+    "ipa": "/ˌdɪs.kənˈtɪn.juː/",
+    "example": "The model was discontinued last year.",
+    "meaning": "ngừng sản xuất, ngưng"
+  },
+  {
+    "id": 401,
+    "word": "discrepancy",
+    "pos": "n",
+    "ipa": "/dɪˈskrep.ən.si/",
+    "example": "We found a discrepancy in the accounts.",
+    "meaning": "sự chênh lệch"
+  },
+  {
+    "id": 402,
+    "word": "display",
+    "pos": "v",
+    "ipa": "/dɪˈspleɪ/",
+    "example": "The products are displayed in the window.",
+    "meaning": "trưng bày"
+  },
+  {
+    "id": 403,
+    "word": "dispose",
+    "pos": "v",
+    "ipa": "/dɪˈspoʊz/",
+    "example": "Please dispose of waste properly.",
+    "meaning": "vứt bỏ, xử lý"
+  },
+  {
+    "id": 404,
+    "word": "distribution",
+    "pos": "n",
+    "ipa": "/ˌdɪs.trɪˈbjuː.ʃən/",
+    "example": "The distribution center ships goods nationwide.",
+    "meaning": "sự phân phối"
+  },
+  {
+    "id": 405,
+    "word": "diverse",
+    "pos": "adj",
+    "ipa": "/daɪˈvɝːs/",
+    "example": "The firm has a diverse workforce.",
+    "meaning": "đa dạng"
+  },
+  {
+    "id": 406,
+    "word": "document",
+    "pos": "n",
+    "ipa": "/ˈdɑː.kjə.mənt/",
+    "example": "Please sign the document and return it.",
+    "meaning": "tài liệu"
+  },
+  {
+    "id": 407,
+    "word": "domestic",
+    "pos": "adj",
+    "ipa": "/dəˈmes.tɪk/",
+    "example": "Domestic flights depart from Terminal 2.",
+    "meaning": "trong nước"
+  },
+  {
+    "id": 408,
+    "word": "donate",
+    "pos": "v",
+    "ipa": "/ˈdoʊ.neɪt/",
+    "example": "The company donated computers to the school.",
+    "meaning": "quyên góp"
+  },
+  {
+    "id": 409,
+    "word": "draft",
+    "pos": "n",
+    "ipa": "/dræft/",
+    "example": "Please review the first draft of the report.",
+    "meaning": "bản thảo"
+  },
+  {
+    "id": 410,
+    "word": "dramatic",
+    "pos": "adj",
+    "ipa": "/drəˈmæt̬.ɪk/",
+    "example": "There was a dramatic rise in prices.",
+    "meaning": "đáng kể, đột ngột"
+  },
+  {
+    "id": 411,
+    "word": "due",
+    "pos": "adj",
+    "ipa": "/duː/",
+    "example": "The report is due on Monday.",
+    "meaning": "đến hạn"
+  },
+  {
+    "id": 412,
+    "word": "durable",
+    "pos": "adj",
+    "ipa": "/ˈdʊr.ə.bəl/",
+    "example": "The bag is made of durable material.",
+    "meaning": "bền"
+  },
+  {
+    "id": 413,
+    "word": "duty",
+    "pos": "n",
+    "ipa": "/ˈduː.t̬i/",
+    "example": "Her duties include answering client calls.",
+    "meaning": "nhiệm vụ; thuế"
+  },
+  {
+    "id": 414,
+    "word": "earn",
+    "pos": "v",
+    "ipa": "/ɝːn/",
+    "example": "He earns a good salary as an engineer.",
+    "meaning": "kiếm được"
+  },
+  {
+    "id": 415,
+    "word": "economic",
+    "pos": "adj",
+    "ipa": "/ˌek.əˈnɑː.mɪk/",
+    "example": "Economic growth slowed this year.",
+    "meaning": "thuộc kinh tế"
+  },
+  {
+    "id": 416,
+    "word": "edition",
+    "pos": "n",
+    "ipa": "/ɪˈdɪʃ.ən/",
+    "example": "The latest edition of the manual is online.",
+    "meaning": "ấn bản"
+  },
+  {
+    "id": 417,
+    "word": "effective",
+    "pos": "adj",
+    "ipa": "/ɪˈfek.tɪv/",
+    "example": "The new rules are effective from January 1.",
+    "meaning": "hiệu quả; có hiệu lực"
+  },
+  {
+    "id": 418,
+    "word": "effort",
+    "pos": "n",
+    "ipa": "/ˈef.ɚt/",
+    "example": "Thank you for your efforts on this project.",
+    "meaning": "nỗ lực"
+  },
+  {
+    "id": 419,
+    "word": "elaborate",
+    "pos": "adj",
+    "ipa": "/ɪˈlæb.ɚ.ət/",
+    "example": "They prepared an elaborate presentation.",
+    "meaning": "công phu, chi tiết"
+  },
+  {
+    "id": 420,
+    "word": "electronic",
+    "pos": "adj",
+    "ipa": "/ɪˌlekˈtrɑː.nɪk/",
+    "example": "Electronic tickets will be sent by email.",
+    "meaning": "điện tử"
+  },
+  {
+    "id": 421,
+    "word": "element",
+    "pos": "n",
+    "ipa": "/ˈel.ə.mənt/",
+    "example": "Trust is a key element of teamwork.",
+    "meaning": "yếu tố"
+  },
+  {
+    "id": 422,
+    "word": "eliminate",
+    "pos": "v",
+    "ipa": "/ɪˈlɪm.ə.neɪt/",
+    "example": "The new process eliminates unnecessary steps.",
+    "meaning": "loại bỏ"
+  },
+  {
+    "id": 423,
+    "word": "embark",
+    "pos": "v",
+    "ipa": "/ɪmˈbɑːrk/",
+    "example": "The firm embarked on a major expansion.",
+    "meaning": "bắt đầu, lên tàu"
+  },
+  {
+    "id": 424,
+    "word": "emerge",
+    "pos": "v",
+    "ipa": "/ɪˈmɝːdʒ/",
+    "example": "New trends emerge every year.",
+    "meaning": "nổi lên, xuất hiện"
+  },
+  {
+    "id": 425,
+    "word": "emphasize",
+    "pos": "v",
+    "ipa": "/ˈem.fə.saɪz/",
+    "example": "The speaker emphasized the importance of safety.",
+    "meaning": "nhấn mạnh"
+  },
+  {
+    "id": 426,
+    "word": "enable",
+    "pos": "v",
+    "ipa": "/ɪˈneɪ.bəl/",
+    "example": "The software enables remote access.",
+    "meaning": "cho phép, giúp có thể"
+  },
+  {
+    "id": 427,
+    "word": "encounter",
+    "pos": "v",
+    "ipa": "/ɪnˈkaʊn.t̬ɚ/",
+    "example": "We encountered a few problems during setup.",
+    "meaning": "gặp phải"
+  },
+  {
+    "id": 428,
+    "word": "encourage",
+    "pos": "v",
+    "ipa": "/ɪnˈkɝː.ɪdʒ/",
+    "example": "Managers encourage staff to share ideas.",
+    "meaning": "khuyến khích"
+  },
+  {
+    "id": 429,
+    "word": "endeavor",
+    "pos": "n",
+    "ipa": "/ɪnˈdev.ɚ/",
+    "example": "We wish you success in all your endeavors.",
+    "meaning": "nỗ lực"
+  },
+  {
+    "id": 430,
+    "word": "enhance",
+    "pos": "v",
+    "ipa": "/ɪnˈhæns/",
+    "example": "The update will enhance system performance.",
+    "meaning": "nâng cao"
+  },
+  {
+    "id": 431,
+    "word": "enormous",
+    "pos": "adj",
+    "ipa": "/ɪˈnɔːr.məs/",
+    "example": "The project requires an enormous amount of work.",
+    "meaning": "to lớn"
+  },
+  {
+    "id": 432,
+    "word": "enterprise",
+    "pos": "n",
+    "ipa": "/ˈen.t̬ɚ.praɪz/",
+    "example": "Small enterprises create many jobs.",
+    "meaning": "doanh nghiệp"
+  },
+  {
+    "id": 433,
+    "word": "entitle",
+    "pos": "v",
+    "ipa": "/ɪnˈtaɪ.t̬əl/",
+    "example": "Membership entitles you to a 15 percent discount.",
+    "meaning": "cho quyền"
+  },
+  {
+    "id": 434,
+    "word": "entrance",
+    "pos": "n",
+    "ipa": "/ˈen.trəns/",
+    "example": "The main entrance is on Oak Street.",
+    "meaning": "lối vào"
+  },
+  {
+    "id": 435,
+    "word": "envelope",
+    "pos": "n",
+    "ipa": "/ˈen.və.loʊp/",
+    "example": "Please put the form in an envelope.",
+    "meaning": "phong bì"
+  },
+  {
+    "id": 436,
+    "word": "environment",
+    "pos": "n",
+    "ipa": "/ɪnˈvaɪ.rən.mənt/",
+    "example": "The company is committed to protecting the environment.",
+    "meaning": "môi trường"
+  },
+  {
+    "id": 437,
+    "word": "essential",
+    "pos": "adj",
+    "ipa": "/ɪˈsen.ʃəl/",
+    "example": "Good communication is essential for teamwork.",
+    "meaning": "thiết yếu"
+  },
+  {
+    "id": 438,
+    "word": "establish",
+    "pos": "v",
+    "ipa": "/ɪˈstæb.lɪʃ/",
+    "example": "The company was established in 1995.",
+    "meaning": "thành lập"
+  },
+  {
+    "id": 439,
+    "word": "evident",
+    "pos": "adj",
+    "ipa": "/ˈev.ə.dənt/",
+    "example": "It was evident that sales were falling.",
+    "meaning": "rõ ràng"
+  },
+  {
+    "id": 440,
+    "word": "exceed",
+    "pos": "v",
+    "ipa": "/ɪkˈsiːd/",
+    "example": "Costs must not exceed the budget.",
+    "meaning": "vượt quá"
+  },
+  {
+    "id": 441,
+    "word": "excellent",
+    "pos": "adj",
+    "ipa": "/ˈek.səl.ənt/",
+    "example": "She received an excellent performance review.",
+    "meaning": "xuất sắc"
+  },
+  {
+    "id": 442,
+    "word": "exception",
+    "pos": "n",
+    "ipa": "/ɪkˈsep.ʃən/",
+    "example": "No exceptions will be made to this rule.",
+    "meaning": "ngoại lệ"
+  },
+  {
+    "id": 443,
+    "word": "excess",
+    "pos": "n",
+    "ipa": "/ɪkˈses/",
+    "example": "Excess baggage is charged an extra fee.",
+    "meaning": "phần dư thừa"
+  },
+  {
+    "id": 444,
+    "word": "exchange",
+    "pos": "v",
+    "ipa": "/ɪksˈtʃeɪndʒ/",
+    "example": "You may exchange the item within two weeks.",
+    "meaning": "đổi"
+  },
+  {
+    "id": 445,
+    "word": "exclude",
+    "pos": "v",
+    "ipa": "/ɪkˈskluːd/",
+    "example": "The price excludes shipping costs.",
+    "meaning": "loại trừ"
+  },
+  {
+    "id": 446,
+    "word": "execute",
+    "pos": "v",
+    "ipa": "/ˈek.sə.kjuːt/",
+    "example": "The team executed the plan flawlessly.",
+    "meaning": "thực hiện"
+  },
+  {
+    "id": 447,
+    "word": "exempt",
+    "pos": "adj",
+    "ipa": "/ɪɡˈzempt/",
+    "example": "Charities are exempt from this tax.",
+    "meaning": "được miễn"
+  },
+  {
+    "id": 448,
+    "word": "exhaust",
+    "pos": "v",
+    "ipa": "/ɪɡˈzɑːst/",
+    "example": "We have exhausted our supply of brochures.",
+    "meaning": "làm cạn kiệt"
+  },
+  {
+    "id": 449,
+    "word": "expand",
+    "pos": "v",
+    "ipa": "/ɪkˈspænd/",
+    "example": "The retailer plans to expand into Asia.",
+    "meaning": "mở rộng"
+  },
+  {
+    "id": 450,
+    "word": "expectation",
+    "pos": "n",
+    "ipa": "/ˌek.spekˈteɪ.ʃən/",
+    "example": "The product exceeded customer expectations.",
+    "meaning": "sự kỳ vọng"
+  },
+  {
+    "id": 451,
+    "word": "expedite",
+    "pos": "v",
+    "ipa": "/ˈek.spə.daɪt/",
+    "example": "We can expedite your order for an extra fee.",
+    "meaning": "xúc tiến, đẩy nhanh"
+  },
+  {
+    "id": 452,
+    "word": "expenditure",
+    "pos": "n",
+    "ipa": "/ɪkˈspen.dɪ.tʃɚ/",
+    "example": "Government expenditure rose last year.",
+    "meaning": "khoản chi tiêu"
+  },
+  {
+    "id": 453,
+    "word": "experience",
+    "pos": "n",
+    "ipa": "/ɪkˈspɪr.i.əns/",
+    "example": "The job requires five years of experience.",
+    "meaning": "kinh nghiệm"
+  },
+  {
+    "id": 454,
+    "word": "expertise",
+    "pos": "n",
+    "ipa": "/ˌek.spɝːˈtiːz/",
+    "example": "Her expertise in finance is well known.",
+    "meaning": "chuyên môn"
+  },
+  {
+    "id": 455,
+    "word": "explicit",
+    "pos": "adj",
+    "ipa": "/ɪkˈsplɪs.ɪt/",
+    "example": "The instructions were explicit and easy to follow.",
+    "meaning": "rõ ràng, minh bạch"
+  },
+  {
+    "id": 456,
+    "word": "explore",
+    "pos": "v",
+    "ipa": "/ɪkˈsplɔːr/",
+    "example": "We are exploring new business opportunities.",
+    "meaning": "khám phá, nghiên cứu"
+  },
+  {
+    "id": 457,
+    "word": "export",
+    "pos": "v",
+    "ipa": "/ɪkˈspɔːrt/",
+    "example": "The country exports coffee to Europe.",
+    "meaning": "xuất khẩu"
+  },
+  {
+    "id": 458,
+    "word": "extend",
+    "pos": "v",
+    "ipa": "/ɪkˈstend/",
+    "example": "The deadline was extended by one week.",
+    "meaning": "gia hạn, mở rộng"
+  },
+  {
+    "id": 459,
+    "word": "extensive",
+    "pos": "adj",
+    "ipa": "/ɪkˈsten.sɪv/",
+    "example": "She has extensive experience in sales.",
+    "meaning": "rộng rãi, sâu rộng"
+  },
+  {
+    "id": 460,
+    "word": "external",
+    "pos": "adj",
+    "ipa": "/ɪkˈstɝː.nəl/",
+    "example": "External auditors will review our accounts.",
+    "meaning": "bên ngoài"
+  },
+  {
+    "id": 461,
+    "word": "facility",
+    "pos": "n",
+    "ipa": "/fəˈsɪl.ə.t̬i/",
+    "example": "The company opened a new research facility.",
+    "meaning": "cơ sở, tiện nghi"
+  },
+  {
+    "id": 462,
+    "word": "factor",
+    "pos": "n",
+    "ipa": "/ˈfæk.tɚ/",
+    "example": "Price is an important factor for most buyers.",
+    "meaning": "yếu tố"
+  },
+  {
+    "id": 463,
+    "word": "faculty",
+    "pos": "n",
+    "ipa": "/ˈfæk.əl.ti/",
+    "example": "The faculty meets every Monday.",
+    "meaning": "đội ngũ giảng viên"
+  },
+  {
+    "id": 464,
+    "word": "feasible",
+    "pos": "adj",
+    "ipa": "/ˈfiː.zə.bəl/",
+    "example": "The plan is not financially feasible.",
+    "meaning": "khả thi"
+  },
+  {
+    "id": 465,
+    "word": "fee",
+    "pos": "n",
+    "ipa": "/fiː/",
+    "example": "A small fee is charged for parking.",
+    "meaning": "phí"
+  },
+  {
+    "id": 466,
+    "word": "figure",
+    "pos": "n",
+    "ipa": "/ˈfɪɡ.jɚ/",
+    "example": "Sales figures rose sharply in June.",
+    "meaning": "con số"
+  },
+  {
+    "id": 467,
+    "word": "finalize",
+    "pos": "v",
+    "ipa": "/ˈfaɪ.nə.laɪz/",
+    "example": "We will finalize the agreement tomorrow.",
+    "meaning": "hoàn tất"
+  },
+  {
+    "id": 468,
+    "word": "finance",
+    "pos": "v",
+    "ipa": "/ˈfaɪ.næns/",
+    "example": "The loan will finance the new factory.",
+    "meaning": "cấp vốn"
+  },
+  {
+    "id": 469,
+    "word": "fixture",
+    "pos": "n",
+    "ipa": "/ˈfɪks.tʃɚ/",
+    "example": "Light fixtures are included in the rent.",
+    "meaning": "thiết bị cố định"
+  },
+  {
+    "id": 470,
+    "word": "fluctuate",
+    "pos": "v",
+    "ipa": "/ˈflʌk.tʃu.eɪt/",
+    "example": "Oil prices fluctuate daily.",
+    "meaning": "dao động"
+  },
+  {
+    "id": 471,
+    "word": "focus",
+    "pos": "v",
+    "ipa": "/ˈfoʊ.kəs/",
+    "example": "We should focus on customer needs.",
+    "meaning": "tập trung"
+  },
+  {
+    "id": 472,
+    "word": "forecast",
+    "pos": "n",
+    "ipa": "/ˈfɔːr.kæst/",
+    "example": "The sales forecast looks promising.",
+    "meaning": "dự báo"
+  },
+  {
+    "id": 473,
+    "word": "foresee",
+    "pos": "v",
+    "ipa": "/fɔːrˈsiː/",
+    "example": "Nobody could foresee the sudden change.",
+    "meaning": "lường trước"
+  },
+  {
+    "id": 474,
+    "word": "format",
+    "pos": "n",
+    "ipa": "/ˈfɔːr.mæt/",
+    "example": "Please send the file in PDF format.",
+    "meaning": "định dạng"
+  },
+  {
+    "id": 475,
+    "word": "formal",
+    "pos": "adj",
+    "ipa": "/ˈfɔːr.məl/",
+    "example": "A formal dress code applies at the event.",
+    "meaning": "trang trọng, chính thức"
+  },
+  {
+    "id": 476,
+    "word": "formerly",
+    "pos": "adv",
+    "ipa": "/ˈfɔːr.mɚ.li/",
+    "example": "The building was formerly a bank.",
+    "meaning": "trước đây"
+  },
+  {
+    "id": 477,
+    "word": "foundation",
+    "pos": "n",
+    "ipa": "/faʊnˈdeɪ.ʃən/",
+    "example": "The foundation funds local education projects.",
+    "meaning": "nền tảng; quỹ"
+  },
+  {
+    "id": 478,
+    "word": "franchise",
+    "pos": "n",
+    "ipa": "/ˈfræn.tʃaɪz/",
+    "example": "He owns a coffee shop franchise.",
+    "meaning": "nhượng quyền thương hiệu"
+  },
+  {
+    "id": 479,
+    "word": "fraud",
+    "pos": "n",
+    "ipa": "/frɔːd/",
+    "example": "The bank investigates credit card fraud.",
+    "meaning": "gian lận"
+  },
+  {
+    "id": 480,
+    "word": "frequent",
+    "pos": "adj",
+    "ipa": "/ˈfriː.kwənt/",
+    "example": "Frequent flyers receive special discounts.",
+    "meaning": "thường xuyên"
+  },
+  {
+    "id": 481,
+    "word": "fulfill",
+    "pos": "v",
+    "ipa": "/fʊlˈfɪl/",
+    "example": "We fulfill all orders within two days.",
+    "meaning": "thực hiện, đáp ứng"
+  },
+  {
+    "id": 482,
+    "word": "function",
+    "pos": "n",
+    "ipa": "/ˈfʌŋk.ʃən/",
+    "example": "The function of this button is to reset the device.",
+    "meaning": "chức năng"
+  },
+  {
+    "id": 483,
+    "word": "fund",
+    "pos": "n",
+    "ipa": "/fʌnd/",
+    "example": "The charity raised a fund for flood victims.",
+    "meaning": "quỹ"
+  },
+  {
+    "id": 484,
+    "word": "furnish",
+    "pos": "v",
+    "ipa": "/ˈfɝː.nɪʃ/",
+    "example": "The apartment is fully furnished.",
+    "meaning": "trang bị nội thất"
+  },
+  {
+    "id": 485,
+    "word": "furthermore",
+    "pos": "adv",
+    "ipa": "/ˌfɝː.ðɚˈmɔːr/",
+    "example": "Furthermore, the service is available around the clock.",
+    "meaning": "hơn nữa"
+  },
+  {
+    "id": 486,
+    "word": "gather",
+    "pos": "v",
+    "ipa": "/ˈɡæð.ɚ/",
+    "example": "Employees gathered in the lobby.",
+    "meaning": "tập hợp, thu thập"
+  },
+  {
+    "id": 487,
+    "word": "generate",
+    "pos": "v",
+    "ipa": "/ˈdʒen.ɚ.eɪt/",
+    "example": "The new product generated high revenue.",
+    "meaning": "tạo ra"
+  },
+  {
+    "id": 488,
+    "word": "generous",
+    "pos": "adj",
+    "ipa": "/ˈdʒen.ɚ.əs/",
+    "example": "The company offers a generous benefits package.",
+    "meaning": "hào phóng"
+  },
+  {
+    "id": 489,
+    "word": "genuine",
+    "pos": "adj",
+    "ipa": "/ˈdʒen.ju.ɪn/",
+    "example": "Make sure you buy genuine parts.",
+    "meaning": "chính hãng, thật"
+  },
+  {
+    "id": 490,
+    "word": "global",
+    "pos": "adj",
+    "ipa": "/ˈɡloʊ.bəl/",
+    "example": "The company has a global network of offices.",
+    "meaning": "toàn cầu"
+  },
+  {
+    "id": 491,
+    "word": "grant",
+    "pos": "n",
+    "ipa": "/ɡrænt/",
+    "example": "The university received a research grant.",
+    "meaning": "khoản tài trợ"
+  },
+  {
+    "id": 492,
+    "word": "gratitude",
+    "pos": "n",
+    "ipa": "/ˈɡræt̬.ə.tuːd/",
+    "example": "We would like to express our gratitude.",
+    "meaning": "lòng biết ơn"
+  },
+  {
+    "id": 493,
+    "word": "guarantee",
+    "pos": "v",
+    "ipa": "/ˌɡer.ənˈtiː/",
+    "example": "We guarantee delivery within three days.",
+    "meaning": "bảo đảm"
+  },
+  {
+    "id": 494,
+    "word": "guideline",
+    "pos": "n",
+    "ipa": "/ˈɡaɪd.laɪn/",
+    "example": "Please follow the safety guidelines.",
+    "meaning": "hướng dẫn, quy định"
+  },
+  {
+    "id": 495,
+    "word": "handle",
+    "pos": "v",
+    "ipa": "/ˈhæn.dəl/",
+    "example": "She handles customer complaints.",
+    "meaning": "xử lý"
+  },
+  {
+    "id": 496,
+    "word": "hazard",
+    "pos": "n",
+    "ipa": "/ˈhæz.ɚd/",
+    "example": "Wet floors are a safety hazard.",
+    "meaning": "mối nguy hiểm"
+  },
+  {
+    "id": 497,
+    "word": "hesitate",
+    "pos": "v",
+    "ipa": "/ˈhez.ə.teɪt/",
+    "example": "Do not hesitate to contact us.",
+    "meaning": "do dự"
+  },
+  {
+    "id": 498,
+    "word": "highlight",
+    "pos": "v",
+    "ipa": "/ˈhaɪ.laɪt/",
+    "example": "The report highlights several problems.",
+    "meaning": "nhấn mạnh, làm nổi bật"
+  },
+  {
+    "id": 499,
+    "word": "hospitality",
+    "pos": "n",
+    "ipa": "/ˌhɑː.spɪˈtæl.ə.t̬i/",
+    "example": "She works in the hospitality industry.",
+    "meaning": "ngành khách sạn, lòng hiếu khách"
+  },
+  {
+    "id": 500,
+    "word": "hurdle",
+    "pos": "n",
+    "ipa": "/ˈhɝː.dəl/",
+    "example": "Funding was the biggest hurdle.",
+    "meaning": "trở ngại"
+  },
+  {
+    "id": 501,
+    "word": "identify",
+    "pos": "v",
+    "ipa": "/aɪˈden.t̬ə.faɪ/",
+    "example": "We need to identify the cause of the delay.",
+    "meaning": "xác định, nhận ra"
+  },
+  {
+    "id": 502,
+    "word": "illustrate",
+    "pos": "v",
+    "ipa": "/ˈɪl.ə.streɪt/",
+    "example": "The graph illustrates the sales trend.",
+    "meaning": "minh họa"
+  },
+  {
+    "id": 503,
+    "word": "immediate",
+    "pos": "adj",
+    "ipa": "/ɪˈmiː.di.ət/",
+    "example": "The problem requires immediate attention.",
+    "meaning": "ngay lập tức"
+  },
+  {
+    "id": 504,
+    "word": "impact",
+    "pos": "n",
+    "ipa": "/ˈɪm.pækt/",
+    "example": "The new law will have a big impact on trade.",
+    "meaning": "tác động"
+  },
+  {
+    "id": 505,
+    "word": "implication",
+    "pos": "n",
+    "ipa": "/ˌɪm.plɪˈkeɪ.ʃən/",
+    "example": "The findings have serious implications for the industry.",
+    "meaning": "hệ quả, ngụ ý"
+  },
+  {
+    "id": 506,
+    "word": "import",
+    "pos": "v",
+    "ipa": "/ɪmˈpɔːrt/",
+    "example": "The shop imports tea from Sri Lanka.",
+    "meaning": "nhập khẩu"
+  },
+  {
+    "id": 507,
+    "word": "impose",
+    "pos": "v",
+    "ipa": "/ɪmˈpoʊz/",
+    "example": "The government imposed a new tax.",
+    "meaning": "áp đặt"
+  },
+  {
+    "id": 508,
+    "word": "impress",
+    "pos": "v",
+    "ipa": "/ɪmˈpres/",
+    "example": "Her presentation impressed the clients.",
+    "meaning": "gây ấn tượng"
+  },
+  {
+    "id": 509,
+    "word": "improve",
+    "pos": "v",
+    "ipa": "/ɪmˈpruːv/",
+    "example": "We aim to improve customer service.",
+    "meaning": "cải thiện"
+  },
+  {
+    "id": 510,
+    "word": "incident",
+    "pos": "n",
+    "ipa": "/ˈɪn.sɪ.dənt/",
+    "example": "Please report any incident to security.",
+    "meaning": "sự cố"
+  },
+  {
+    "id": 511,
+    "word": "include",
+    "pos": "v",
+    "ipa": "/ɪnˈkluːd/",
+    "example": "The price includes breakfast.",
+    "meaning": "bao gồm"
+  },
+  {
+    "id": 512,
+    "word": "income",
+    "pos": "n",
+    "ipa": "/ˈɪn.kʌm/",
+    "example": "Household income has risen steadily.",
+    "meaning": "thu nhập"
+  },
+  {
+    "id": 513,
+    "word": "incorporate",
+    "pos": "v",
+    "ipa": "/ɪnˈkɔːr.pə.reɪt/",
+    "example": "The design incorporates several new features.",
+    "meaning": "kết hợp, sáp nhập"
+  },
+  {
+    "id": 514,
+    "word": "increase",
+    "pos": "v",
+    "ipa": "/ɪnˈkriːs/",
+    "example": "Sales increased by ten percent.",
+    "meaning": "tăng"
+  },
+  {
+    "id": 515,
+    "word": "incur",
+    "pos": "v",
+    "ipa": "/ɪnˈkɝː/",
+    "example": "The firm incurred heavy losses last year.",
+    "meaning": "gánh chịu (chi phí)"
+  },
+  {
+    "id": 516,
+    "word": "indicate",
+    "pos": "v",
+    "ipa": "/ˈɪn.də.keɪt/",
+    "example": "Results indicate that demand is growing.",
+    "meaning": "chỉ ra"
+  },
+  {
+    "id": 517,
+    "word": "individual",
+    "pos": "n",
+    "ipa": "/ˌɪn.dəˈvɪdʒ.u.əl/",
+    "example": "Each individual must sign the form.",
+    "meaning": "cá nhân"
+  },
+  {
+    "id": 518,
+    "word": "industry",
+    "pos": "n",
+    "ipa": "/ˈɪn.də.stri/",
+    "example": "She works in the automobile industry.",
+    "meaning": "ngành công nghiệp"
+  },
+  {
+    "id": 519,
+    "word": "inevitable",
+    "pos": "adj",
+    "ipa": "/ɪˈnev.ə.t̬ə.bəl/",
+    "example": "Some delays are inevitable.",
+    "meaning": "không thể tránh khỏi"
+  },
+  {
+    "id": 520,
+    "word": "influence",
+    "pos": "n",
+    "ipa": "/ˈɪn.flu.əns/",
+    "example": "Social media has a strong influence on buyers.",
+    "meaning": "ảnh hưởng"
+  },
+  {
+    "id": 521,
+    "word": "inform",
+    "pos": "v",
+    "ipa": "/ɪnˈfɔːrm/",
+    "example": "Please inform us of any changes.",
+    "meaning": "thông báo"
+  },
+  {
+    "id": 522,
+    "word": "infrastructure",
+    "pos": "n",
+    "ipa": "/ˈɪn.frəˌstrʌk.tʃɚ/",
+    "example": "The city is investing in infrastructure.",
+    "meaning": "cơ sở hạ tầng"
+  },
+  {
+    "id": 523,
+    "word": "initial",
+    "pos": "adj",
+    "ipa": "/ɪˈnɪʃ.əl/",
+    "example": "The initial cost is high, but savings follow.",
+    "meaning": "ban đầu"
+  },
+  {
+    "id": 524,
+    "word": "initiate",
+    "pos": "v",
+    "ipa": "/ɪˈnɪʃ.i.eɪt/",
+    "example": "The manager initiated a review of procedures.",
+    "meaning": "khởi xướng"
+  },
+  {
+    "id": 525,
+    "word": "innovation",
+    "pos": "n",
+    "ipa": "/ˌɪn.əˈveɪ.ʃən/",
+    "example": "The firm is known for innovation.",
+    "meaning": "sự đổi mới"
+  },
+  {
+    "id": 526,
+    "word": "input",
+    "pos": "n",
+    "ipa": "/ˈɪn.pʊt/",
+    "example": "We value your input on this decision.",
+    "meaning": "ý kiến đóng góp"
+  },
+  {
+    "id": 527,
+    "word": "insist",
+    "pos": "v",
+    "ipa": "/ɪnˈsɪst/",
+    "example": "The client insisted on a full refund.",
+    "meaning": "khăng khăng"
+  },
+  {
+    "id": 528,
+    "word": "instruct",
+    "pos": "v",
+    "ipa": "/ɪnˈstrʌkt/",
+    "example": "Staff were instructed to remain calm.",
+    "meaning": "hướng dẫn, chỉ thị"
+  },
+  {
+    "id": 529,
+    "word": "instrument",
+    "pos": "n",
+    "ipa": "/ˈɪn.strə.mənt/",
+    "example": "Surgical instruments must be sterilized.",
+    "meaning": "dụng cụ"
+  },
+  {
+    "id": 530,
+    "word": "integrate",
+    "pos": "v",
+    "ipa": "/ˈɪn.t̬ə.ɡreɪt/",
+    "example": "The system integrates sales and inventory data.",
+    "meaning": "tích hợp"
+  },
+  {
+    "id": 531,
+    "word": "intend",
+    "pos": "v",
+    "ipa": "/ɪnˈtend/",
+    "example": "We intend to open a branch in Hanoi.",
+    "meaning": "có ý định"
+  },
+  {
+    "id": 532,
+    "word": "intensive",
+    "pos": "adj",
+    "ipa": "/ɪnˈten.sɪv/",
+    "example": "She attended an intensive training course.",
+    "meaning": "chuyên sâu"
+  },
+  {
+    "id": 533,
+    "word": "interact",
+    "pos": "v",
+    "ipa": "/ˌɪn.t̬ɚˈrækt/",
+    "example": "Staff interact with customers all day.",
+    "meaning": "tương tác"
+  },
+  {
+    "id": 534,
+    "word": "interrupt",
+    "pos": "v",
+    "ipa": "/ˌɪn.t̬ɚˈrʌpt/",
+    "example": "Please do not interrupt the presentation.",
+    "meaning": "ngắt lời, làm gián đoạn"
+  },
+  {
+    "id": 535,
+    "word": "interval",
+    "pos": "n",
+    "ipa": "/ˈɪn.t̬ɚ.vəl/",
+    "example": "Trains run at ten-minute intervals.",
+    "meaning": "khoảng thời gian"
+  },
+  {
+    "id": 536,
+    "word": "introduce",
+    "pos": "v",
+    "ipa": "/ˌɪn.trəˈduːs/",
+    "example": "She introduced the new manager to the team.",
+    "meaning": "giới thiệu"
+  },
+  {
+    "id": 537,
+    "word": "invest",
+    "pos": "v",
+    "ipa": "/ɪnˈvest/",
+    "example": "They invested heavily in new technology.",
+    "meaning": "đầu tư"
+  },
+  {
+    "id": 538,
+    "word": "investigate",
+    "pos": "v",
+    "ipa": "/ɪnˈves.tə.ɡeɪt/",
+    "example": "Police are investigating the theft.",
+    "meaning": "điều tra"
+  },
+  {
+    "id": 539,
+    "word": "invitation",
+    "pos": "n",
+    "ipa": "/ˌɪn.vɪˈteɪ.ʃən/",
+    "example": "We received an invitation to the opening.",
+    "meaning": "lời mời"
+  },
+  {
+    "id": 540,
+    "word": "involve",
+    "pos": "v",
+    "ipa": "/ɪnˈvɑːlv/",
+    "example": "The job involves frequent travel.",
+    "meaning": "liên quan, bao gồm"
+  },
+  {
+    "id": 541,
+    "word": "issue",
+    "pos": "n",
+    "ipa": "/ˈɪʃ.uː/",
+    "example": "The main issue is a lack of funding.",
+    "meaning": "vấn đề; số báo"
+  },
+  {
+    "id": 542,
+    "word": "item",
+    "pos": "n",
+    "ipa": "/ˈaɪ.t̬əm/",
+    "example": "Please check each item on the list.",
+    "meaning": "món hàng, mục"
+  },
+  {
+    "id": 543,
+    "word": "journal",
+    "pos": "n",
+    "ipa": "/ˈdʒɝː.nəl/",
+    "example": "The study was published in a medical journal.",
+    "meaning": "tạp chí chuyên ngành"
+  },
+  {
+    "id": 544,
+    "word": "justify",
+    "pos": "v",
+    "ipa": "/ˈdʒʌs.tə.faɪ/",
+    "example": "Can you justify this expense?",
+    "meaning": "biện minh, chứng minh hợp lý"
+  },
+  {
+    "id": 545,
+    "word": "label",
+    "pos": "n",
+    "ipa": "/ˈleɪ.bəl/",
+    "example": "Read the label before using the product.",
+    "meaning": "nhãn"
+  },
+  {
+    "id": 546,
+    "word": "lack",
+    "pos": "n",
+    "ipa": "/læk/",
+    "example": "A lack of staff delayed the project.",
+    "meaning": "sự thiếu"
+  },
+  {
+    "id": 547,
+    "word": "latest",
+    "pos": "adj",
+    "ipa": "/ˈleɪ.t̬ɪst/",
+    "example": "Check the latest news on our website.",
+    "meaning": "mới nhất"
+  },
+  {
+    "id": 548,
+    "word": "layoff",
+    "pos": "n",
+    "ipa": "/ˈleɪ.ɑːf/",
+    "example": "The company announced layoffs of two hundred workers.",
+    "meaning": "sự sa thải"
+  },
+  {
+    "id": 549,
+    "word": "leading",
+    "pos": "adj",
+    "ipa": "/ˈliː.dɪŋ/",
+    "example": "She works for a leading software company.",
+    "meaning": "hàng đầu"
+  },
+  {
+    "id": 550,
+    "word": "legal",
+    "pos": "adj",
+    "ipa": "/ˈliː.ɡəl/",
+    "example": "The firm sought legal advice.",
+    "meaning": "hợp pháp"
+  },
+  {
+    "id": 551,
+    "word": "legislation",
+    "pos": "n",
+    "ipa": "/ˌledʒ.ɪˈsleɪ.ʃən/",
+    "example": "New legislation protects consumers.",
+    "meaning": "luật pháp"
+  },
+  {
+    "id": 552,
+    "word": "leisure",
+    "pos": "n",
+    "ipa": "/ˈliː.ʒɚ/",
+    "example": "The resort offers many leisure activities.",
+    "meaning": "thời gian rảnh"
+  },
+  {
+    "id": 553,
+    "word": "liable",
+    "pos": "adj",
+    "ipa": "/ˈlaɪ.ə.bəl/",
+    "example": "The company is liable for any damage.",
+    "meaning": "chịu trách nhiệm"
+  },
+  {
+    "id": 554,
+    "word": "license",
+    "pos": "n",
+    "ipa": "/ˈlaɪ.səns/",
+    "example": "You need a license to operate this machine.",
+    "meaning": "giấy phép"
+  },
+  {
+    "id": 555,
+    "word": "likelihood",
+    "pos": "n",
+    "ipa": "/ˈlaɪk.li.hʊd/",
+    "example": "There is a strong likelihood of a delay.",
+    "meaning": "khả năng xảy ra"
+  },
+  {
+    "id": 556,
+    "word": "limit",
+    "pos": "n",
+    "ipa": "/ˈlɪm.ɪt/",
+    "example": "There is a limit of two items per customer.",
+    "meaning": "giới hạn"
+  },
+  {
+    "id": 557,
+    "word": "liquid",
+    "pos": "n",
+    "ipa": "/ˈlɪk.wɪd/",
+    "example": "Liquids are not allowed in carry-on bags.",
+    "meaning": "chất lỏng"
+  },
+  {
+    "id": 558,
+    "word": "locate",
+    "pos": "v",
+    "ipa": "/ˈloʊ.keɪt/",
+    "example": "The office is located near the station.",
+    "meaning": "đặt ở, tìm ra"
+  },
+  {
+    "id": 559,
+    "word": "lobby",
+    "pos": "n",
+    "ipa": "/ˈlɑː.bi/",
+    "example": "Please wait in the lobby.",
+    "meaning": "sảnh"
+  },
+  {
+    "id": 560,
+    "word": "loyal",
+    "pos": "adj",
+    "ipa": "/ˈlɔɪ.əl/",
+    "example": "We value our loyal customers.",
+    "meaning": "trung thành"
+  },
+  {
+    "id": 561,
+    "word": "magnitude",
+    "pos": "n",
+    "ipa": "/ˈmæɡ.nə.tuːd/",
+    "example": "They underestimated the magnitude of the problem.",
+    "meaning": "tầm quan trọng, quy mô"
+  },
+  {
+    "id": 562,
+    "word": "mainly",
+    "pos": "adv",
+    "ipa": "/ˈmeɪn.li/",
+    "example": "The firm sells mainly to large retailers.",
+    "meaning": "chủ yếu"
+  },
+  {
+    "id": 563,
+    "word": "maintain",
+    "pos": "v",
+    "ipa": "/meɪnˈteɪn/",
+    "example": "We strive to maintain high standards.",
+    "meaning": "duy trì"
+  },
+  {
+    "id": 564,
+    "word": "major",
+    "pos": "adj",
+    "ipa": "/ˈmeɪ.dʒɚ/",
+    "example": "Cost was a major concern.",
+    "meaning": "chính, lớn"
+  },
+  {
+    "id": 565,
+    "word": "manage",
+    "pos": "v",
+    "ipa": "/ˈmæn.ɪdʒ/",
+    "example": "She manages a team of ten people.",
+    "meaning": "quản lý"
+  },
+  {
+    "id": 566,
+    "word": "margin",
+    "pos": "n",
+    "ipa": "/ˈmɑːr.dʒɪn/",
+    "example": "The profit margin is quite small.",
+    "meaning": "biên lợi nhuận"
+  },
+  {
+    "id": 567,
+    "word": "mature",
+    "pos": "adj",
+    "ipa": "/məˈtʃʊr/",
+    "example": "It is a mature market with little growth.",
+    "meaning": "trưởng thành; chín chắn"
+  },
+  {
+    "id": 568,
+    "word": "maximum",
+    "pos": "n",
+    "ipa": "/ˈmæk.sə.məm/",
+    "example": "The maximum load is fifty kilograms.",
+    "meaning": "tối đa"
+  },
+  {
+    "id": 569,
+    "word": "measure",
+    "pos": "n",
+    "ipa": "/ˈmeʒ.ɚ/",
+    "example": "The firm took measures to cut costs.",
+    "meaning": "biện pháp"
+  },
+  {
+    "id": 570,
+    "word": "mechanic",
+    "pos": "n",
+    "ipa": "/məˈkæn.ɪk/",
+    "example": "The mechanic fixed the engine.",
+    "meaning": "thợ máy"
+  },
+  {
+    "id": 571,
+    "word": "medical",
+    "pos": "adj",
+    "ipa": "/ˈmed.ɪ.kəl/",
+    "example": "Medical expenses are covered by the plan.",
+    "meaning": "thuộc y tế"
+  },
+  {
+    "id": 572,
+    "word": "membership",
+    "pos": "n",
+    "ipa": "/ˈmem.bɚ.ʃɪp/",
+    "example": "Membership includes free parking.",
+    "meaning": "tư cách thành viên"
+  },
+  {
+    "id": 573,
+    "word": "mention",
+    "pos": "v",
+    "ipa": "/ˈmen.ʃən/",
+    "example": "She mentioned the delay in her email.",
+    "meaning": "đề cập"
+  },
+  {
+    "id": 574,
+    "word": "minimum",
+    "pos": "n",
+    "ipa": "/ˈmɪn.ɪ.məm/",
+    "example": "The minimum order is ten units.",
+    "meaning": "tối thiểu"
+  },
+  {
+    "id": 575,
+    "word": "minor",
+    "pos": "adj",
+    "ipa": "/ˈmaɪ.nɚ/",
+    "example": "Only minor repairs are needed.",
+    "meaning": "nhỏ, không quan trọng"
+  },
+  {
+    "id": 576,
+    "word": "misplace",
+    "pos": "v",
+    "ipa": "/mɪsˈpleɪs/",
+    "example": "I misplaced my access card.",
+    "meaning": "để thất lạc"
+  },
+  {
+    "id": 577,
+    "word": "mobile",
+    "pos": "adj",
+    "ipa": "/ˈmoʊ.bəl/",
+    "example": "Download our mobile app for easy booking.",
+    "meaning": "di động"
+  },
+  {
+    "id": 578,
+    "word": "modify",
+    "pos": "v",
+    "ipa": "/ˈmɑː.də.faɪ/",
+    "example": "You can modify your reservation online.",
+    "meaning": "sửa đổi"
+  },
+  {
+    "id": 579,
+    "word": "momentum",
+    "pos": "n",
+    "ipa": "/moʊˈmen.t̬əm/",
+    "example": "The campaign is gaining momentum.",
+    "meaning": "đà phát triển"
+  },
+  {
+    "id": 580,
+    "word": "monitor",
+    "pos": "v",
+    "ipa": "/ˈmɑː.nə.t̬ɚ/",
+    "example": "Nurses monitor patients around the clock.",
+    "meaning": "giám sát"
+  },
+  {
+    "id": 581,
+    "word": "motivate",
+    "pos": "v",
+    "ipa": "/ˈmoʊ.t̬ə.veɪt/",
+    "example": "Bonuses motivate employees to work harder.",
+    "meaning": "thúc đẩy, tạo động lực"
+  },
+  {
+    "id": 582,
+    "word": "multiple",
+    "pos": "adj",
+    "ipa": "/ˈmʌl.tə.pəl/",
+    "example": "The device can be used on multiple platforms.",
+    "meaning": "nhiều"
+  },
+  {
+    "id": 583,
+    "word": "municipal",
+    "pos": "adj",
+    "ipa": "/mjuːˈnɪs.ə.pəl/",
+    "example": "The municipal library is open on weekends.",
+    "meaning": "thuộc thành phố"
+  },
+  {
+    "id": 584,
+    "word": "mutual",
+    "pos": "adj",
+    "ipa": "/ˈmjuː.tʃu.əl/",
+    "example": "The deal is of mutual benefit.",
+    "meaning": "chung, lẫn nhau"
+  },
+  {
+    "id": 585,
+    "word": "narrow",
+    "pos": "adj",
+    "ipa": "/ˈner.oʊ/",
+    "example": "The road is too narrow for trucks.",
+    "meaning": "hẹp"
+  },
+  {
+    "id": 586,
+    "word": "necessary",
+    "pos": "adj",
+    "ipa": "/ˈnes.ə.ser.i/",
+    "example": "It is necessary to book in advance.",
+    "meaning": "cần thiết"
+  },
+  {
+    "id": 587,
+    "word": "negligence",
+    "pos": "n",
+    "ipa": "/ˈneɡ.lə.dʒəns/",
+    "example": "The accident was caused by negligence.",
+    "meaning": "sự sơ suất"
+  },
+  {
+    "id": 588,
+    "word": "nominate",
+    "pos": "v",
+    "ipa": "/ˈnɑː.mə.neɪt/",
+    "example": "She was nominated for employee of the year.",
+    "meaning": "đề cử"
+  },
+  {
+    "id": 589,
+    "word": "notice",
+    "pos": "n",
+    "ipa": "/ˈnoʊ.t̬ɪs/",
+    "example": "You must give a month's notice before leaving.",
+    "meaning": "thông báo"
+  },
+  {
+    "id": 590,
+    "word": "numerous",
+    "pos": "adj",
+    "ipa": "/ˈnuː.mɚ.əs/",
+    "example": "We have received numerous complaints.",
+    "meaning": "nhiều"
+  },
+  {
+    "id": 591,
+    "word": "objective",
+    "pos": "n",
+    "ipa": "/əbˈdʒek.tɪv/",
+    "example": "Our main objective is to increase sales.",
+    "meaning": "mục tiêu"
+  },
+  {
+    "id": 592,
+    "word": "observe",
+    "pos": "v",
+    "ipa": "/əbˈzɝːv/",
+    "example": "Visitors must observe the museum rules.",
+    "meaning": "quan sát; tuân thủ"
+  },
+  {
+    "id": 593,
+    "word": "obtain",
+    "pos": "v",
+    "ipa": "/əbˈteɪn/",
+    "example": "You can obtain a copy at the front desk.",
+    "meaning": "đạt được, thu được"
+  },
+  {
+    "id": 594,
+    "word": "obvious",
+    "pos": "adj",
+    "ipa": "/ˈɑːb.vi.əs/",
+    "example": "The benefits of the plan are obvious.",
+    "meaning": "hiển nhiên"
+  },
+  {
+    "id": 595,
+    "word": "occasion",
+    "pos": "n",
+    "ipa": "/əˈkeɪ.ʒən/",
+    "example": "The hall is rented out for special occasions.",
+    "meaning": "dịp"
+  },
+  {
+    "id": 596,
+    "word": "occupy",
+    "pos": "v",
+    "ipa": "/ˈɑː.kjə.paɪ/",
+    "example": "The firm occupies three floors of the building.",
+    "meaning": "chiếm, sử dụng"
+  },
+  {
+    "id": 597,
+    "word": "occur",
+    "pos": "v",
+    "ipa": "/əˈkɝː/",
+    "example": "The error occurred during installation.",
+    "meaning": "xảy ra"
+  },
+  {
+    "id": 598,
+    "word": "offer",
+    "pos": "v",
+    "ipa": "/ˈɑː.fɚ/",
+    "example": "The hotel offers free airport pickup.",
+    "meaning": "đưa ra, cung cấp"
+  },
+  {
+    "id": 599,
+    "word": "omit",
+    "pos": "v",
+    "ipa": "/oʊˈmɪt/",
+    "example": "Please do not omit any details.",
+    "meaning": "bỏ sót"
+  },
+  {
+    "id": 600,
+    "word": "operate",
+    "pos": "v",
+    "ipa": "/ˈɑː.pə.reɪt/",
+    "example": "The factory operates around the clock.",
+    "meaning": "vận hành"
+  },
+  {
+    "id": 601,
+    "word": "opportunity",
+    "pos": "n",
+    "ipa": "/ˌɑː.pɚˈtuː.nə.t̬i/",
+    "example": "This job is a great opportunity for growth.",
+    "meaning": "cơ hội"
+  },
+  {
+    "id": 602,
+    "word": "oppose",
+    "pos": "v",
+    "ipa": "/əˈpoʊz/",
+    "example": "Some members opposed the new policy.",
+    "meaning": "phản đối"
+  },
+  {
+    "id": 603,
+    "word": "option",
+    "pos": "n",
+    "ipa": "/ˈɑːp.ʃən/",
+    "example": "You have several payment options.",
+    "meaning": "lựa chọn"
+  },
+  {
+    "id": 604,
+    "word": "order",
+    "pos": "n",
+    "ipa": "/ˈɔːr.dɚ/",
+    "example": "Your order will be shipped tomorrow.",
+    "meaning": "đơn hàng"
+  },
+  {
+    "id": 605,
+    "word": "ordinary",
+    "pos": "adj",
+    "ipa": "/ˈɔːr.dən.er.i/",
+    "example": "This is no ordinary software program.",
+    "meaning": "bình thường"
+  },
+  {
+    "id": 606,
+    "word": "organize",
+    "pos": "v",
+    "ipa": "/ˈɔːr.ɡə.naɪz/",
+    "example": "She organized the company picnic.",
+    "meaning": "tổ chức"
+  },
+  {
+    "id": 607,
+    "word": "origin",
+    "pos": "n",
+    "ipa": "/ˈɔːr.ə.dʒɪn/",
+    "example": "The label shows the product's country of origin.",
+    "meaning": "nguồn gốc"
+  },
+  {
+    "id": 608,
+    "word": "outcome",
+    "pos": "n",
+    "ipa": "/ˈaʊt.kʌm/",
+    "example": "We are pleased with the outcome.",
+    "meaning": "kết quả"
+  },
+  {
+    "id": 609,
+    "word": "outdated",
+    "pos": "adj",
+    "ipa": "/ˌaʊtˈdeɪ.t̬ɪd/",
+    "example": "The old software is outdated.",
+    "meaning": "lỗi thời"
+  },
+  {
+    "id": 610,
+    "word": "output",
+    "pos": "n",
+    "ipa": "/ˈaʊt.pʊt/",
+    "example": "The factory increased its output by ten percent.",
+    "meaning": "sản lượng"
+  },
+  {
+    "id": 611,
+    "word": "outstanding",
+    "pos": "adj",
+    "ipa": "/ˌaʊtˈstæn.dɪŋ/",
+    "example": "There is an outstanding balance on your account.",
+    "meaning": "xuất sắc; chưa thanh toán"
+  },
+  {
+    "id": 612,
+    "word": "overall",
+    "pos": "adj",
+    "ipa": "/ˌoʊ.vɚˈɑːl/",
+    "example": "The overall results were positive.",
+    "meaning": "tổng thể"
+  },
+  {
+    "id": 613,
+    "word": "overlook",
+    "pos": "v",
+    "ipa": "/ˌoʊ.vɚˈlʊk/",
+    "example": "The inspector overlooked a minor error.",
+    "meaning": "bỏ sót; nhìn ra"
+  },
+  {
+    "id": 614,
+    "word": "oversee",
+    "pos": "v",
+    "ipa": "/ˌoʊ.vɚˈsiː/",
+    "example": "She oversees the entire production process.",
+    "meaning": "giám sát"
+  },
+  {
+    "id": 615,
+    "word": "participate",
+    "pos": "v",
+    "ipa": "/pɑːrˈtɪs.ə.peɪt/",
+    "example": "All staff are invited to participate.",
+    "meaning": "tham gia"
+  },
+  {
+    "id": 616,
+    "word": "particular",
+    "pos": "adj",
+    "ipa": "/pɚˈtɪk.jə.lɚ/",
+    "example": "Is there a particular model you prefer?",
+    "meaning": "cụ thể, đặc biệt"
+  },
+  {
+    "id": 617,
+    "word": "partnership",
+    "pos": "n",
+    "ipa": "/ˈpɑːrt.nɚ.ʃɪp/",
+    "example": "The two firms formed a partnership.",
+    "meaning": "quan hệ đối tác"
+  },
+  {
+    "id": 618,
+    "word": "patient",
+    "pos": "n",
+    "ipa": "/ˈpeɪ.ʃənt/",
+    "example": "The clinic treats over fifty patients a day.",
+    "meaning": "bệnh nhân"
+  },
+  {
+    "id": 619,
+    "word": "patron",
+    "pos": "n",
+    "ipa": "/ˈpeɪ.trən/",
+    "example": "The café is popular among local patrons.",
+    "meaning": "khách quen"
+  },
+  {
+    "id": 620,
+    "word": "payment",
+    "pos": "n",
+    "ipa": "/ˈpeɪ.mənt/",
+    "example": "Payment is due upon receipt of the invoice.",
+    "meaning": "khoản thanh toán"
+  },
+  {
+    "id": 621,
+    "word": "peak",
+    "pos": "n",
+    "ipa": "/piːk/",
+    "example": "Sales reached a peak in December.",
+    "meaning": "đỉnh điểm"
+  },
+  {
+    "id": 622,
+    "word": "pending",
+    "pos": "adj",
+    "ipa": "/ˈpen.dɪŋ/",
+    "example": "Your application is still pending.",
+    "meaning": "đang chờ xử lý"
+  },
+  {
+    "id": 623,
+    "word": "perform",
+    "pos": "v",
+    "ipa": "/pɚˈfɔːrm/",
+    "example": "The machine performs well under pressure.",
+    "meaning": "thực hiện, biểu diễn"
+  },
+  {
+    "id": 624,
+    "word": "performance",
+    "pos": "n",
+    "ipa": "/pɚˈfɔːr.məns/",
+    "example": "Her performance was reviewed by the board.",
+    "meaning": "hiệu suất, màn trình diễn"
+  },
+  {
+    "id": 625,
+    "word": "period",
+    "pos": "n",
+    "ipa": "/ˈpɪr.i.əd/",
+    "example": "The offer is valid for a limited period.",
+    "meaning": "khoảng thời gian"
+  },
+  {
+    "id": 626,
+    "word": "perishable",
+    "pos": "adj",
+    "ipa": "/ˈper.ɪ.ʃə.bəl/",
+    "example": "Perishable goods must be kept refrigerated.",
+    "meaning": "dễ hư hỏng"
+  },
+  {
+    "id": 627,
+    "word": "permanent",
+    "pos": "adj",
+    "ipa": "/ˈpɝː.mə.nənt/",
+    "example": "He was offered a permanent position.",
+    "meaning": "vĩnh viễn, lâu dài"
+  },
+  {
+    "id": 628,
+    "word": "persuade",
+    "pos": "v",
+    "ipa": "/pɚˈsweɪd/",
+    "example": "She persuaded the board to approve the plan.",
+    "meaning": "thuyết phục"
+  },
+  {
+    "id": 629,
+    "word": "phase",
+    "pos": "n",
+    "ipa": "/feɪz/",
+    "example": "The first phase of the project is complete.",
+    "meaning": "giai đoạn"
+  },
+  {
+    "id": 630,
+    "word": "pioneer",
+    "pos": "n",
+    "ipa": "/ˌpaɪ.əˈnɪr/",
+    "example": "The firm is a pioneer in solar energy.",
+    "meaning": "người tiên phong"
+  },
+  {
+    "id": 631,
+    "word": "plausible",
+    "pos": "adj",
+    "ipa": "/ˈplɑː.zə.bəl/",
+    "example": "That is a plausible explanation.",
+    "meaning": "hợp lý, đáng tin"
+  },
+  {
+    "id": 632,
+    "word": "policyholder",
+    "pos": "n",
+    "ipa": "/ˈpɑː.lə.siˌhoʊl.dɚ/",
+    "example": "Policyholders must pay a monthly premium.",
+    "meaning": "người mua bảo hiểm"
+  },
+  {
+    "id": 633,
+    "word": "portable",
+    "pos": "adj",
+    "ipa": "/ˈpɔːr.t̬ə.bəl/",
+    "example": "The speaker is lightweight and portable.",
+    "meaning": "xách tay, di động"
+  },
+  {
+    "id": 634,
+    "word": "potential",
+    "pos": "adj",
+    "ipa": "/pəˈten.ʃəl/",
+    "example": "We are seeking potential investors.",
+    "meaning": "tiềm năng"
+  },
+  {
+    "id": 635,
+    "word": "practical",
+    "pos": "adj",
+    "ipa": "/ˈpræk.tɪ.kəl/",
+    "example": "The seminar offers practical advice.",
+    "meaning": "thực tế, thiết thực"
+  },
+  {
+    "id": 636,
+    "word": "precaution",
+    "pos": "n",
+    "ipa": "/prɪˈkɑː.ʃən/",
+    "example": "Take precautions when handling chemicals.",
+    "meaning": "biện pháp phòng ngừa"
+  },
+  {
+    "id": 637,
+    "word": "precise",
+    "pos": "adj",
+    "ipa": "/prɪˈsaɪs/",
+    "example": "Please give precise instructions.",
+    "meaning": "chính xác"
+  },
+  {
+    "id": 638,
+    "word": "predict",
+    "pos": "v",
+    "ipa": "/prɪˈdɪkt/",
+    "example": "Experts predict strong growth next year.",
+    "meaning": "dự đoán"
+  },
+  {
+    "id": 639,
+    "word": "preference",
+    "pos": "n",
+    "ipa": "/ˈpref.ɚ.əns/",
+    "example": "Please state your seating preference.",
+    "meaning": "sự ưu tiên, sở thích"
+  },
+  {
+    "id": 640,
+    "word": "preliminary",
+    "pos": "adj",
+    "ipa": "/prɪˈlɪm.ə.ner.i/",
+    "example": "Preliminary results look promising.",
+    "meaning": "sơ bộ"
+  },
+  {
+    "id": 641,
+    "word": "premises",
+    "pos": "n",
+    "ipa": "/ˈprem.ɪ.sɪz/",
+    "example": "Smoking is banned on the premises.",
+    "meaning": "khuôn viên, cơ sở"
+  },
+  {
+    "id": 642,
+    "word": "prepare",
+    "pos": "v",
+    "ipa": "/prɪˈper/",
+    "example": "We are preparing for the product launch.",
+    "meaning": "chuẩn bị"
+  },
+  {
+    "id": 643,
+    "word": "presence",
+    "pos": "n",
+    "ipa": "/ˈprez.əns/",
+    "example": "The firm has a strong presence in Asia.",
+    "meaning": "sự hiện diện"
+  },
+  {
+    "id": 644,
+    "word": "preserve",
+    "pos": "v",
+    "ipa": "/prɪˈzɝːv/",
+    "example": "Store the food in a cool place to preserve freshness.",
+    "meaning": "bảo quản, giữ gìn"
+  },
+  {
+    "id": 645,
+    "word": "prevent",
+    "pos": "v",
+    "ipa": "/prɪˈvent/",
+    "example": "Regular maintenance prevents breakdowns.",
+    "meaning": "ngăn ngừa"
+  },
+  {
+    "id": 646,
+    "word": "previous",
+    "pos": "adj",
+    "ipa": "/ˈpriː.vi.əs/",
+    "example": "The previous manager resigned in May.",
+    "meaning": "trước đó"
+  },
+  {
+    "id": 647,
+    "word": "primary",
+    "pos": "adj",
+    "ipa": "/ˈpraɪ.mer.i/",
+    "example": "Our primary goal is customer satisfaction.",
+    "meaning": "chính, chủ yếu"
+  },
+  {
+    "id": 648,
+    "word": "priority",
+    "pos": "n",
+    "ipa": "/praɪˈɔːr.ə.t̬i/",
+    "example": "Safety is our top priority.",
+    "meaning": "sự ưu tiên"
+  },
+  {
+    "id": 649,
+    "word": "procedure",
+    "pos": "n",
+    "ipa": "/prəˈsiː.dʒɚ/",
+    "example": "Follow the emergency procedure carefully.",
+    "meaning": "thủ tục, quy trình"
+  },
+  {
+    "id": 650,
+    "word": "proceed",
+    "pos": "v",
+    "ipa": "/prəˈsiːd/",
+    "example": "Please proceed to the checkout.",
+    "meaning": "tiếp tục tiến hành"
+  },
+  {
+    "id": 651,
+    "word": "process",
+    "pos": "n",
+    "ipa": "/ˈprɑː.ses/",
+    "example": "The hiring process takes about three weeks.",
+    "meaning": "quy trình"
+  },
+  {
+    "id": 652,
+    "word": "produce",
+    "pos": "v",
+    "ipa": "/prəˈduːs/",
+    "example": "The factory produces five thousand units a day.",
+    "meaning": "sản xuất"
+  },
+  {
+    "id": 653,
+    "word": "productivity",
+    "pos": "n",
+    "ipa": "/ˌproʊ.dʌkˈtɪv.ə.t̬i/",
+    "example": "The new system improved productivity.",
+    "meaning": "năng suất"
+  },
+  {
+    "id": 654,
+    "word": "profession",
+    "pos": "n",
+    "ipa": "/prəˈfeʃ.ən/",
+    "example": "Teaching is a respected profession.",
+    "meaning": "nghề nghiệp"
+  },
+  {
+    "id": 655,
+    "word": "proficient",
+    "pos": "adj",
+    "ipa": "/prəˈfɪʃ.ənt/",
+    "example": "She is proficient in three languages.",
+    "meaning": "thành thạo"
+  },
+  {
+    "id": 656,
+    "word": "progress",
+    "pos": "n",
+    "ipa": "/ˈprɑː.ɡres/",
+    "example": "We are making good progress on the project.",
+    "meaning": "tiến độ, tiến bộ"
+  },
+  {
+    "id": 657,
+    "word": "project",
+    "pos": "n",
+    "ipa": "/ˈprɑː.dʒekt/",
+    "example": "The project will be completed by June.",
+    "meaning": "dự án"
+  },
+  {
+    "id": 658,
+    "word": "prominent",
+    "pos": "adj",
+    "ipa": "/ˈprɑː.mə.nənt/",
+    "example": "He is a prominent figure in the industry.",
+    "meaning": "nổi bật, quan trọng"
+  },
+  {
+    "id": 659,
+    "word": "promptly",
+    "pos": "adv",
+    "ipa": "/ˈprɑːmpt.li/",
+    "example": "Please reply to the email promptly.",
+    "meaning": "nhanh chóng, đúng giờ"
+  },
+  {
+    "id": 660,
+    "word": "proof",
+    "pos": "n",
+    "ipa": "/pruːf/",
+    "example": "Please bring proof of purchase.",
+    "meaning": "bằng chứng"
+  },
+  {
+    "id": 661,
+    "word": "property",
+    "pos": "n",
+    "ipa": "/ˈprɑː.pɚ.t̬i/",
+    "example": "The company owns several properties downtown.",
+    "meaning": "bất động sản, tài sản"
+  },
+  {
+    "id": 662,
+    "word": "proportion",
+    "pos": "n",
+    "ipa": "/prəˈpɔːr.ʃən/",
+    "example": "A large proportion of sales comes from online orders.",
+    "meaning": "tỷ lệ"
+  },
+  {
+    "id": 663,
+    "word": "prospect",
+    "pos": "n",
+    "ipa": "/ˈprɑː.spekt/",
+    "example": "The prospects for growth are excellent.",
+    "meaning": "triển vọng"
+  },
+  {
+    "id": 664,
+    "word": "protect",
+    "pos": "v",
+    "ipa": "/prəˈtekt/",
+    "example": "Passwords protect your personal data.",
+    "meaning": "bảo vệ"
+  },
+  {
+    "id": 665,
+    "word": "provide",
+    "pos": "v",
+    "ipa": "/prəˈvaɪd/",
+    "example": "The company provides free training to staff.",
+    "meaning": "cung cấp"
+  },
+  {
+    "id": 666,
+    "word": "provision",
+    "pos": "n",
+    "ipa": "/prəˈvɪʒ.ən/",
+    "example": "The contract includes a provision for early termination.",
+    "meaning": "điều khoản, sự cung cấp"
+  },
+  {
+    "id": 667,
+    "word": "publication",
+    "pos": "n",
+    "ipa": "/ˌpʌb.ləˈkeɪ.ʃən/",
+    "example": "The publication is released every month.",
+    "meaning": "ấn phẩm"
+  },
+  {
+    "id": 668,
+    "word": "publicity",
+    "pos": "n",
+    "ipa": "/pʌbˈlɪs.ə.t̬i/",
+    "example": "The event generated a lot of publicity.",
+    "meaning": "sự quảng bá"
+  },
+  {
+    "id": 669,
+    "word": "pursue",
+    "pos": "v",
+    "ipa": "/pɚˈsuː/",
+    "example": "She decided to pursue a career in finance.",
+    "meaning": "theo đuổi"
+  },
+  {
+    "id": 670,
+    "word": "qualify",
+    "pos": "v",
+    "ipa": "/ˈkwɑː.lə.faɪ/",
+    "example": "You qualify for a discount if you are a member.",
+    "meaning": "đủ điều kiện"
+  },
+  {
+    "id": 671,
+    "word": "quality",
+    "pos": "n",
+    "ipa": "/ˈkwɑː.lə.t̬i/",
+    "example": "We pride ourselves on the quality of our products.",
+    "meaning": "chất lượng"
+  },
+  {
+    "id": 672,
+    "word": "quantity",
+    "pos": "n",
+    "ipa": "/ˈkwɑːn.t̬ə.t̬i/",
+    "example": "Discounts are available for large quantities.",
+    "meaning": "số lượng"
+  },
+  {
+    "id": 673,
+    "word": "quarterly",
+    "pos": "adj",
+    "ipa": "/ˈkwɔːr.t̬ɚ.li/",
+    "example": "The quarterly report is due next week.",
+    "meaning": "hằng quý"
+  },
+  {
+    "id": 674,
+    "word": "questionnaire",
+    "pos": "n",
+    "ipa": "/ˌkwes.tʃəˈner/",
+    "example": "Please complete the customer questionnaire.",
+    "meaning": "bảng câu hỏi"
+  },
+  {
+    "id": 675,
+    "word": "quota",
+    "pos": "n",
+    "ipa": "/ˈkwoʊ.t̬ə/",
+    "example": "Each salesperson has a monthly quota.",
+    "meaning": "hạn ngạch, chỉ tiêu"
+  },
+  {
+    "id": 676,
+    "word": "random",
+    "pos": "adj",
+    "ipa": "/ˈræn.dəm/",
+    "example": "Winners are selected at random.",
+    "meaning": "ngẫu nhiên"
+  },
+  {
+    "id": 677,
+    "word": "range",
+    "pos": "n",
+    "ipa": "/reɪndʒ/",
+    "example": "The store offers a wide range of products.",
+    "meaning": "phạm vi, dãy"
+  },
+  {
+    "id": 678,
+    "word": "rapid",
+    "pos": "adj",
+    "ipa": "/ˈræp.ɪd/",
+    "example": "The company experienced rapid growth.",
+    "meaning": "nhanh chóng"
+  },
+  {
+    "id": 679,
+    "word": "rate",
+    "pos": "n",
+    "ipa": "/reɪt/",
+    "example": "The hotel rate includes breakfast.",
+    "meaning": "tỷ lệ, mức giá"
+  },
+  {
+    "id": 680,
+    "word": "rating",
+    "pos": "n",
+    "ipa": "/ˈreɪ.t̬ɪŋ/",
+    "example": "The restaurant has a high customer rating.",
+    "meaning": "xếp hạng, đánh giá"
+  },
+  {
+    "id": 681,
+    "word": "realistic",
+    "pos": "adj",
+    "ipa": "/ˌriː.əˈlɪs.tɪk/",
+    "example": "We need to set realistic goals.",
+    "meaning": "thực tế"
+  },
+  {
+    "id": 682,
+    "word": "reasonable",
+    "pos": "adj",
+    "ipa": "/ˈriː.zən.ə.bəl/",
+    "example": "The hotel offers reasonable rates.",
+    "meaning": "hợp lý, phải chăng"
+  },
+  {
+    "id": 683,
+    "word": "rebate",
+    "pos": "n",
+    "ipa": "/ˈriː.beɪt/",
+    "example": "Customers can claim a rebate on this product.",
+    "meaning": "tiền hoàn lại, giảm giá"
+  },
+  {
+    "id": 684,
+    "word": "receive",
+    "pos": "v",
+    "ipa": "/rɪˈsiːv/",
+    "example": "You will receive a confirmation email shortly.",
+    "meaning": "nhận"
+  },
+  {
+    "id": 685,
+    "word": "recent",
+    "pos": "adj",
+    "ipa": "/ˈriː.sənt/",
+    "example": "Recent sales figures are encouraging.",
+    "meaning": "gần đây"
+  },
+  {
+    "id": 686,
+    "word": "recipient",
+    "pos": "n",
+    "ipa": "/rɪˈsɪp.i.ənt/",
+    "example": "The recipient must sign for the package.",
+    "meaning": "người nhận"
+  },
+  {
+    "id": 687,
+    "word": "recognize",
+    "pos": "v",
+    "ipa": "/ˈrek.əɡ.naɪz/",
+    "example": "The firm recognized her hard work with a bonus.",
+    "meaning": "công nhận, nhận ra"
+  },
+  {
+    "id": 688,
+    "word": "reduce",
+    "pos": "v",
+    "ipa": "/rɪˈduːs/",
+    "example": "We aim to reduce waste by twenty percent.",
+    "meaning": "giảm"
+  },
+  {
+    "id": 689,
+    "word": "refer",
+    "pos": "v",
+    "ipa": "/rɪˈfɝː/",
+    "example": "Please refer to the manual for instructions.",
+    "meaning": "tham khảo, giới thiệu"
+  },
+  {
+    "id": 690,
+    "word": "reference",
+    "pos": "n",
+    "ipa": "/ˈref.ɚ.əns/",
+    "example": "She gave her former manager as a reference.",
+    "meaning": "thư giới thiệu; sự tham khảo"
+  },
+  {
+    "id": 691,
+    "word": "reflect",
+    "pos": "v",
+    "ipa": "/rɪˈflekt/",
+    "example": "The results reflect our team's hard work.",
+    "meaning": "phản ánh"
+  },
+  {
+    "id": 692,
+    "word": "refrain",
+    "pos": "v",
+    "ipa": "/rɪˈfreɪn/",
+    "example": "Please refrain from using your phone.",
+    "meaning": "kiềm chế"
+  },
+  {
+    "id": 693,
+    "word": "refuse",
+    "pos": "v",
+    "ipa": "/rɪˈfjuːz/",
+    "example": "The bank refused his loan application.",
+    "meaning": "từ chối"
+  },
+  {
+    "id": 694,
+    "word": "region",
+    "pos": "n",
+    "ipa": "/ˈriː.dʒən/",
+    "example": "The firm operates in the Asia-Pacific region.",
+    "meaning": "vùng, khu vực"
+  },
+  {
+    "id": 695,
+    "word": "register",
+    "pos": "v",
+    "ipa": "/ˈredʒ.ɪ.stɚ/",
+    "example": "Please register before the event begins.",
+    "meaning": "đăng ký"
+  },
+  {
+    "id": 696,
+    "word": "regret",
+    "pos": "v",
+    "ipa": "/rɪˈɡret/",
+    "example": "We regret to inform you that the flight is canceled.",
+    "meaning": "tiếc nuối"
+  },
+  {
+    "id": 697,
+    "word": "regular",
+    "pos": "adj",
+    "ipa": "/ˈreɡ.jə.lɚ/",
+    "example": "Regular customers receive a loyalty discount.",
+    "meaning": "thường xuyên"
+  },
+  {
+    "id": 698,
+    "word": "reject",
+    "pos": "v",
+    "ipa": "/rɪˈdʒekt/",
+    "example": "The board rejected the proposal.",
+    "meaning": "từ chối, bác bỏ"
+  },
+  {
+    "id": 699,
+    "word": "relevant",
+    "pos": "adj",
+    "ipa": "/ˈrel.ə.vənt/",
+    "example": "Please attach all relevant documents.",
+    "meaning": "liên quan"
+  },
+  {
+    "id": 700,
+    "word": "reliable",
+    "pos": "adj",
+    "ipa": "/rɪˈlaɪ.ə.bəl/",
+    "example": "We need a reliable delivery service.",
+    "meaning": "đáng tin cậy"
+  },
+  {
+    "id": 701,
+    "word": "relocate",
+    "pos": "v",
+    "ipa": "/ˌriːˈloʊ.keɪt/",
+    "example": "The company will relocate to a larger office.",
+    "meaning": "chuyển địa điểm"
+  },
+  {
+    "id": 702,
+    "word": "remain",
+    "pos": "v",
+    "ipa": "/rɪˈmeɪn/",
+    "example": "Prices will remain unchanged this year.",
+    "meaning": "vẫn còn, duy trì"
+  },
+  {
+    "id": 703,
+    "word": "remark",
+    "pos": "n",
+    "ipa": "/rɪˈmɑːrk/",
+    "example": "The manager made a few remarks about the report.",
+    "meaning": "nhận xét"
+  },
+  {
+    "id": 704,
+    "word": "remedy",
+    "pos": "n",
+    "ipa": "/ˈrem.ə.di/",
+    "example": "We are looking for a remedy to the problem.",
+    "meaning": "biện pháp khắc phục"
+  },
+  {
+    "id": 705,
+    "word": "remind",
+    "pos": "v",
+    "ipa": "/rɪˈmaɪnd/",
+    "example": "Please remind me to call the supplier.",
+    "meaning": "nhắc nhở"
+  },
+  {
+    "id": 706,
+    "word": "remote",
+    "pos": "adj",
+    "ipa": "/rɪˈmoʊt/",
+    "example": "Many employees work remotely.",
+    "meaning": "từ xa, xa xôi"
+  },
+  {
+    "id": 707,
+    "word": "render",
+    "pos": "v",
+    "ipa": "/ˈren.dɚ/",
+    "example": "The firm renders services to small businesses.",
+    "meaning": "cung cấp, làm cho"
+  },
+  {
+    "id": 708,
+    "word": "rent",
+    "pos": "v",
+    "ipa": "/rent/",
+    "example": "We rent the office space by the month.",
+    "meaning": "thuê"
+  },
+  {
+    "id": 709,
+    "word": "repair",
+    "pos": "v",
+    "ipa": "/rɪˈper/",
+    "example": "The technician repaired the printer.",
+    "meaning": "sửa chữa"
+  },
+  {
+    "id": 710,
+    "word": "replace",
+    "pos": "v",
+    "ipa": "/rɪˈpleɪs/",
+    "example": "Please replace the battery every year.",
+    "meaning": "thay thế"
+  },
+  {
+    "id": 711,
+    "word": "represent",
+    "pos": "v",
+    "ipa": "/ˌrep.rɪˈzent/",
+    "example": "She represents the company at trade shows.",
+    "meaning": "đại diện"
+  },
+  {
+    "id": 712,
+    "word": "reputation",
+    "pos": "n",
+    "ipa": "/ˌrep.jəˈteɪ.ʃən/",
+    "example": "The firm has a reputation for quality.",
+    "meaning": "danh tiếng"
+  },
+  {
+    "id": 713,
+    "word": "request",
+    "pos": "n",
+    "ipa": "/rɪˈkwest/",
+    "example": "Your request has been approved.",
+    "meaning": "yêu cầu"
+  },
+  {
+    "id": 714,
+    "word": "require",
+    "pos": "v",
+    "ipa": "/rɪˈkwaɪr/",
+    "example": "The job requires a college degree.",
+    "meaning": "yêu cầu, đòi hỏi"
+  },
+  {
+    "id": 715,
+    "word": "requirement",
+    "pos": "n",
+    "ipa": "/rɪˈkwaɪr.mənt/",
+    "example": "Meeting the requirements is mandatory.",
+    "meaning": "yêu cầu"
+  },
+  {
+    "id": 716,
+    "word": "reserve",
+    "pos": "v",
+    "ipa": "/rɪˈzɝːv/",
+    "example": "I would like to reserve a conference room.",
+    "meaning": "đặt trước"
+  },
+  {
+    "id": 717,
+    "word": "resident",
+    "pos": "n",
+    "ipa": "/ˈrez.ɪ.dənt/",
+    "example": "Residents can use the gym for free.",
+    "meaning": "cư dân"
+  },
+  {
+    "id": 718,
+    "word": "resolve",
+    "pos": "v",
+    "ipa": "/rɪˈzɑːlv/",
+    "example": "We resolved the issue within an hour.",
+    "meaning": "giải quyết"
+  },
+  {
+    "id": 719,
+    "word": "resource",
+    "pos": "n",
+    "ipa": "/ˈriː.sɔːrs/",
+    "example": "The company has limited resources.",
+    "meaning": "nguồn lực, tài nguyên"
+  },
+  {
+    "id": 720,
+    "word": "respond",
+    "pos": "v",
+    "ipa": "/rɪˈspɑːnd/",
+    "example": "Please respond to the invitation by Friday.",
+    "meaning": "phản hồi"
+  },
+  {
+    "id": 721,
+    "word": "responsible",
+    "pos": "adj",
+    "ipa": "/rɪˈspɑːn.sə.bəl/",
+    "example": "She is responsible for the training program.",
+    "meaning": "chịu trách nhiệm"
+  },
+  {
+    "id": 722,
+    "word": "restore",
+    "pos": "v",
+    "ipa": "/rɪˈstɔːr/",
+    "example": "Service was restored after two hours.",
+    "meaning": "khôi phục"
+  },
+  {
+    "id": 723,
+    "word": "restrict",
+    "pos": "v",
+    "ipa": "/rɪˈstrɪkt/",
+    "example": "Access to the lab is restricted.",
+    "meaning": "hạn chế"
+  },
+  {
+    "id": 724,
+    "word": "result",
+    "pos": "n",
+    "ipa": "/rɪˈzʌlt/",
+    "example": "The test results will be available tomorrow.",
+    "meaning": "kết quả"
+  },
+  {
+    "id": 725,
+    "word": "retain",
+    "pos": "v",
+    "ipa": "/rɪˈteɪn/",
+    "example": "We want to retain our best employees.",
+    "meaning": "giữ lại"
+  },
+  {
+    "id": 726,
+    "word": "reveal",
+    "pos": "v",
+    "ipa": "/rɪˈviːl/",
+    "example": "The survey revealed a drop in satisfaction.",
+    "meaning": "tiết lộ"
+  },
+  {
+    "id": 727,
+    "word": "review",
+    "pos": "v",
+    "ipa": "/rɪˈvjuː/",
+    "example": "The committee will review all applications.",
+    "meaning": "xem xét"
+  },
+  {
+    "id": 728,
+    "word": "revise",
+    "pos": "v",
+    "ipa": "/rɪˈvaɪz/",
+    "example": "Please revise the schedule accordingly.",
+    "meaning": "sửa đổi"
+  },
+  {
+    "id": 729,
+    "word": "reward",
+    "pos": "n",
+    "ipa": "/rɪˈwɔːrd/",
+    "example": "The program offers rewards for frequent buyers.",
+    "meaning": "phần thưởng"
+  },
+  {
+    "id": 730,
+    "word": "routine",
+    "pos": "n",
+    "ipa": "/ruːˈtiːn/",
+    "example": "Daily backups are part of our routine.",
+    "meaning": "thói quen, công việc thường lệ"
+  },
+  {
+    "id": 731,
+    "word": "satisfaction",
+    "pos": "n",
+    "ipa": "/ˌsæt̬.ɪsˈfæk.ʃən/",
+    "example": "Customer satisfaction has increased.",
+    "meaning": "sự hài lòng"
+  },
+  {
+    "id": 732,
+    "word": "scale",
+    "pos": "n",
+    "ipa": "/skeɪl/",
+    "example": "The firm operates on a large scale.",
+    "meaning": "quy mô"
+  },
+  {
+    "id": 733,
+    "word": "scarce",
+    "pos": "adj",
+    "ipa": "/skers/",
+    "example": "Skilled workers are scarce in this region.",
+    "meaning": "khan hiếm"
+  },
+  {
+    "id": 734,
+    "word": "scope",
+    "pos": "n",
+    "ipa": "/skoʊp/",
+    "example": "The scope of the project has expanded.",
+    "meaning": "phạm vi"
+  },
+  {
+    "id": 735,
+    "word": "secure",
+    "pos": "v",
+    "ipa": "/sɪˈkjʊr/",
+    "example": "We secured a contract with a major airline.",
+    "meaning": "đảm bảo, bảo vệ"
+  },
+  {
+    "id": 736,
+    "word": "segment",
+    "pos": "n",
+    "ipa": "/ˈseɡ.mənt/",
+    "example": "Young adults are our largest customer segment.",
+    "meaning": "phân khúc"
+  },
+  {
+    "id": 737,
+    "word": "select",
+    "pos": "v",
+    "ipa": "/sɪˈlekt/",
+    "example": "Please select a delivery date.",
+    "meaning": "chọn"
+  },
+  {
+    "id": 738,
+    "word": "sensitive",
+    "pos": "adj",
+    "ipa": "/ˈsen.sə.t̬ɪv/",
+    "example": "Handle sensitive data with care.",
+    "meaning": "nhạy cảm"
+  },
+  {
+    "id": 739,
+    "word": "separate",
+    "pos": "adj",
+    "ipa": "/ˈsep.ɚ.ət/",
+    "example": "Each department has a separate budget.",
+    "meaning": "riêng biệt"
+  },
+  {
+    "id": 740,
+    "word": "sequence",
+    "pos": "n",
+    "ipa": "/ˈsiː.kwəns/",
+    "example": "Follow the steps in the correct sequence.",
+    "meaning": "trình tự"
+  },
+  {
+    "id": 741,
+    "word": "series",
+    "pos": "n",
+    "ipa": "/ˈsɪr.iːz/",
+    "example": "The firm held a series of training workshops.",
+    "meaning": "chuỗi, loạt"
+  },
+  {
+    "id": 742,
+    "word": "session",
+    "pos": "n",
+    "ipa": "/ˈseʃ.ən/",
+    "example": "The morning session starts at nine.",
+    "meaning": "buổi họp, phiên"
+  },
+  {
+    "id": 743,
+    "word": "settle",
+    "pos": "v",
+    "ipa": "/ˈset̬.əl/",
+    "example": "Please settle your bill at the front desk.",
+    "meaning": "giải quyết, thanh toán"
+  },
+  {
+    "id": 744,
+    "word": "severe",
+    "pos": "adj",
+    "ipa": "/sɪˈvɪr/",
+    "example": "Severe weather caused flight cancellations.",
+    "meaning": "nghiêm trọng"
+  },
+  {
+    "id": 745,
+    "word": "share",
+    "pos": "n",
+    "ipa": "/ʃer/",
+    "example": "The company's share price rose sharply.",
+    "meaning": "cổ phần; phần"
+  },
+  {
+    "id": 746,
+    "word": "shift",
+    "pos": "n",
+    "ipa": "/ʃɪft/",
+    "example": "She works the night shift.",
+    "meaning": "ca làm việc; sự thay đổi"
+  },
+  {
+    "id": 747,
+    "word": "shortage",
+    "pos": "n",
+    "ipa": "/ˈʃɔːr.t̬ɪdʒ/",
+    "example": "There is a shortage of skilled labor.",
+    "meaning": "sự thiếu hụt"
+  },
+  {
+    "id": 748,
+    "word": "signature",
+    "pos": "n",
+    "ipa": "/ˈsɪɡ.nə.tʃɚ/",
+    "example": "Your signature is required on the form.",
+    "meaning": "chữ ký"
+  },
+  {
+    "id": 749,
+    "word": "significant",
+    "pos": "adj",
+    "ipa": "/sɪɡˈnɪf.ɪ.kənt/",
+    "example": "There has been a significant rise in costs.",
+    "meaning": "đáng kể, quan trọng"
+  },
+  {
+    "id": 750,
+    "word": "similar",
+    "pos": "adj",
+    "ipa": "/ˈsɪm.ə.lɚ/",
+    "example": "The two products are very similar.",
+    "meaning": "tương tự"
+  },
+  {
+    "id": 751,
+    "word": "site",
+    "pos": "n",
+    "ipa": "/saɪt/",
+    "example": "The construction site is closed to visitors.",
+    "meaning": "địa điểm, công trường"
+  },
+  {
+    "id": 752,
+    "word": "solution",
+    "pos": "n",
+    "ipa": "/səˈluː.ʃən/",
+    "example": "We offer solutions for small businesses.",
+    "meaning": "giải pháp"
+  },
+  {
+    "id": 753,
+    "word": "sophisticated",
+    "pos": "adj",
+    "ipa": "/səˈfɪs.tɪ.keɪ.t̬ɪd/",
+    "example": "The system uses sophisticated software.",
+    "meaning": "tinh vi, phức tạp"
+  },
+  {
+    "id": 754,
+    "word": "source",
+    "pos": "n",
+    "ipa": "/sɔːrs/",
+    "example": "The information came from a reliable source.",
+    "meaning": "nguồn"
+  },
+  {
+    "id": 755,
+    "word": "specialize",
+    "pos": "v",
+    "ipa": "/ˈspeʃ.əl.aɪz/",
+    "example": "The firm specializes in medical equipment.",
+    "meaning": "chuyên về"
+  },
+  {
+    "id": 756,
+    "word": "specific",
+    "pos": "adj",
+    "ipa": "/spəˈsɪf.ɪk/",
+    "example": "Please provide specific details.",
+    "meaning": "cụ thể"
+  },
+  {
+    "id": 757,
+    "word": "specification",
+    "pos": "n",
+    "ipa": "/ˌspes.ə.fəˈkeɪ.ʃən/",
+    "example": "The product meets all safety specifications.",
+    "meaning": "thông số kỹ thuật"
+  },
+  {
+    "id": 758,
+    "word": "spokesperson",
+    "pos": "n",
+    "ipa": "/ˈspoʊksˌpɝː.sən/",
+    "example": "A company spokesperson denied the rumors.",
+    "meaning": "người phát ngôn"
+  },
+  {
+    "id": 759,
+    "word": "sponsor",
+    "pos": "n",
+    "ipa": "/ˈspɑːn.sɚ/",
+    "example": "The firm is the main sponsor of the event.",
+    "meaning": "nhà tài trợ"
+  },
+  {
+    "id": 760,
+    "word": "spread",
+    "pos": "v",
+    "ipa": "/spred/",
+    "example": "News of the merger spread quickly.",
+    "meaning": "lan rộng"
+  },
+  {
+    "id": 761,
+    "word": "stable",
+    "pos": "adj",
+    "ipa": "/ˈsteɪ.bəl/",
+    "example": "The economy remained stable last year.",
+    "meaning": "ổn định"
+  },
+  {
+    "id": 762,
+    "word": "staff",
+    "pos": "n",
+    "ipa": "/stæf/",
+    "example": "The hotel staff are friendly and helpful.",
+    "meaning": "nhân viên"
+  },
+  {
+    "id": 763,
+    "word": "standard",
+    "pos": "n",
+    "ipa": "/ˈstæn.dɚd/",
+    "example": "The product meets international standards.",
+    "meaning": "tiêu chuẩn"
+  },
+  {
+    "id": 764,
+    "word": "status",
+    "pos": "n",
+    "ipa": "/ˈsteɪ.t̬əs/",
+    "example": "You can check your order status online.",
+    "meaning": "tình trạng"
+  },
+  {
+    "id": 765,
+    "word": "steady",
+    "pos": "adj",
+    "ipa": "/ˈsted.i/",
+    "example": "The firm has shown steady growth.",
+    "meaning": "đều đặn, ổn định"
+  },
+  {
+    "id": 766,
+    "word": "stimulate",
+    "pos": "v",
+    "ipa": "/ˈstɪm.jə.leɪt/",
+    "example": "Lower prices stimulated demand.",
+    "meaning": "kích thích"
+  },
+  {
+    "id": 767,
+    "word": "stipulate",
+    "pos": "v",
+    "ipa": "/ˈstɪp.jə.leɪt/",
+    "example": "The contract stipulates a payment deadline.",
+    "meaning": "quy định"
+  },
+  {
+    "id": 768,
+    "word": "storage",
+    "pos": "n",
+    "ipa": "/ˈstɔːr.ɪdʒ/",
+    "example": "The files are in cloud storage.",
+    "meaning": "kho lưu trữ"
+  },
+  {
+    "id": 769,
+    "word": "structure",
+    "pos": "n",
+    "ipa": "/ˈstrʌk.tʃɚ/",
+    "example": "The company's structure is quite flat.",
+    "meaning": "cấu trúc"
+  },
+  {
+    "id": 770,
+    "word": "submission",
+    "pos": "n",
+    "ipa": "/səbˈmɪʃ.ən/",
+    "example": "The deadline for submission is Friday.",
+    "meaning": "sự nộp"
+  },
+  {
+    "id": 771,
+    "word": "subscribe",
+    "pos": "v",
+    "ipa": "/səbˈskraɪb/",
+    "example": "Subscribe to our newsletter for updates.",
+    "meaning": "đăng ký (dài hạn)"
+  },
+  {
+    "id": 772,
+    "word": "subsequent",
+    "pos": "adj",
+    "ipa": "/ˈsʌb.sə.kwənt/",
+    "example": "Subsequent orders will receive a discount.",
+    "meaning": "tiếp theo, sau đó"
+  },
+  {
+    "id": 773,
+    "word": "substitute",
+    "pos": "n",
+    "ipa": "/ˈsʌb.stə.tuːt/",
+    "example": "There is no substitute for experience.",
+    "meaning": "người/vật thay thế"
+  },
+  {
+    "id": 774,
+    "word": "sufficient",
+    "pos": "adj",
+    "ipa": "/səˈfɪʃ.ənt/",
+    "example": "We have sufficient funds for the project.",
+    "meaning": "đủ"
+  },
+  {
+    "id": 775,
+    "word": "suggest",
+    "pos": "v",
+    "ipa": "/səɡˈdʒest/",
+    "example": "I suggest we postpone the launch.",
+    "meaning": "đề xuất"
+  },
+  {
+    "id": 776,
+    "word": "suitable",
+    "pos": "adj",
+    "ipa": "/ˈsuː.t̬ə.bəl/",
+    "example": "The candidate is suitable for the position.",
+    "meaning": "phù hợp"
+  },
+  {
+    "id": 777,
+    "word": "summarize",
+    "pos": "v",
+    "ipa": "/ˈsʌm.ɚ.aɪz/",
+    "example": "Please summarize the main points of the meeting.",
+    "meaning": "tóm tắt"
+  },
+  {
+    "id": 778,
+    "word": "superior",
+    "pos": "adj",
+    "ipa": "/səˈpɪr.i.ɚ/",
+    "example": "Our product is superior to the competition.",
+    "meaning": "vượt trội"
+  },
+  {
+    "id": 779,
+    "word": "supplement",
+    "pos": "n",
+    "ipa": "/ˈsʌp.lə.mənt/",
+    "example": "A supplement is included with the magazine.",
+    "meaning": "phụ trương, bổ sung"
+  },
+  {
+    "id": 780,
+    "word": "supply",
+    "pos": "n",
+    "ipa": "/səˈplaɪ/",
+    "example": "Office supplies are stored in the closet.",
+    "meaning": "nguồn cung"
+  },
+  {
+    "id": 781,
+    "word": "support",
+    "pos": "v",
+    "ipa": "/səˈpɔːrt/",
+    "example": "The firm supports local charities.",
+    "meaning": "hỗ trợ"
+  },
+  {
+    "id": 782,
+    "word": "suspend",
+    "pos": "v",
+    "ipa": "/səˈspend/",
+    "example": "Service has been suspended due to repairs.",
+    "meaning": "đình chỉ, tạm hoãn"
+  },
+  {
+    "id": 783,
+    "word": "sustain",
+    "pos": "v",
+    "ipa": "/səˈsteɪn/",
+    "example": "The business cannot sustain such heavy losses.",
+    "meaning": "duy trì"
+  },
+  {
+    "id": 784,
+    "word": "tailor",
+    "pos": "v",
+    "ipa": "/ˈteɪ.lɚ/",
+    "example": "We tailor our services to each client.",
+    "meaning": "điều chỉnh cho phù hợp"
+  },
+  {
+    "id": 785,
+    "word": "tangible",
+    "pos": "adj",
+    "ipa": "/ˈtæn.dʒə.bəl/",
+    "example": "The program produced tangible results.",
+    "meaning": "hữu hình, rõ ràng"
+  },
+  {
+    "id": 786,
+    "word": "tariff",
+    "pos": "n",
+    "ipa": "/ˈter.ɪf/",
+    "example": "The government raised tariffs on imported steel.",
+    "meaning": "thuế quan"
+  },
+  {
+    "id": 787,
+    "word": "technique",
+    "pos": "n",
+    "ipa": "/tekˈniːk/",
+    "example": "The firm uses advanced production techniques.",
+    "meaning": "kỹ thuật"
+  },
+  {
+    "id": 788,
+    "word": "technical",
+    "pos": "adj",
+    "ipa": "/ˈtek.nɪ.kəl/",
+    "example": "Call technical support for assistance.",
+    "meaning": "thuộc kỹ thuật"
+  },
+  {
+    "id": 789,
+    "word": "tend",
+    "pos": "v",
+    "ipa": "/tend/",
+    "example": "Prices tend to rise in summer.",
+    "meaning": "có xu hướng"
+  },
+  {
+    "id": 790,
+    "word": "term",
+    "pos": "n",
+    "ipa": "/tɝːm/",
+    "example": "Please read the terms and conditions.",
+    "meaning": "điều khoản; thời hạn"
+  },
+  {
+    "id": 791,
+    "word": "territory",
+    "pos": "n",
+    "ipa": "/ˈter.ə.tɔːr.i/",
+    "example": "The sales rep covers a large territory.",
+    "meaning": "khu vực, lãnh thổ"
+  },
+  {
+    "id": 792,
+    "word": "testimonial",
+    "pos": "n",
+    "ipa": "/ˌtes.təˈmoʊ.ni.əl/",
+    "example": "The website features customer testimonials.",
+    "meaning": "lời chứng thực"
+  },
+  {
+    "id": 793,
+    "word": "threshold",
+    "pos": "n",
+    "ipa": "/ˈθreʃ.hoʊld/",
+    "example": "Orders above the threshold ship for free.",
+    "meaning": "ngưỡng"
+  },
+  {
+    "id": 794,
+    "word": "tight",
+    "pos": "adj",
+    "ipa": "/taɪt/",
+    "example": "We are working with a tight budget.",
+    "meaning": "chặt chẽ, eo hẹp"
+  },
+  {
+    "id": 795,
+    "word": "timely",
+    "pos": "adj",
+    "ipa": "/ˈtaɪm.li/",
+    "example": "Thank you for your timely response.",
+    "meaning": "kịp thời"
+  },
+  {
+    "id": 796,
+    "word": "toll",
+    "pos": "n",
+    "ipa": "/toʊl/",
+    "example": "The highway charges a toll.",
+    "meaning": "phí cầu đường"
+  },
+  {
+    "id": 797,
+    "word": "trade",
+    "pos": "n",
+    "ipa": "/treɪd/",
+    "example": "The trade agreement boosted exports.",
+    "meaning": "thương mại"
+  },
+  {
+    "id": 798,
+    "word": "transit",
+    "pos": "n",
+    "ipa": "/ˈtræn.zɪt/",
+    "example": "The goods were damaged in transit.",
+    "meaning": "sự vận chuyển"
+  },
+  {
+    "id": 799,
+    "word": "transmit",
+    "pos": "v",
+    "ipa": "/trænzˈmɪt/",
+    "example": "The data is transmitted securely.",
+    "meaning": "truyền, gửi"
+  },
+  {
+    "id": 800,
+    "word": "transparent",
+    "pos": "adj",
+    "ipa": "/trænsˈper.ənt/",
+    "example": "The company's accounts are transparent.",
+    "meaning": "minh bạch"
+  },
+  {
+    "id": 801,
+    "word": "treat",
+    "pos": "v",
+    "ipa": "/triːt/",
+    "example": "All customers are treated with respect.",
+    "meaning": "đối xử; điều trị"
+  },
+  {
+    "id": 802,
+    "word": "tremendous",
+    "pos": "adj",
+    "ipa": "/trɪˈmen.dəs/",
+    "example": "The campaign was a tremendous success.",
+    "meaning": "to lớn"
+  },
+  {
+    "id": 803,
+    "word": "unanimous",
+    "pos": "adj",
+    "ipa": "/juːˈnæn.ə.məs/",
+    "example": "The board reached a unanimous decision.",
+    "meaning": "nhất trí"
+  },
+  {
+    "id": 804,
+    "word": "undergo",
+    "pos": "v",
+    "ipa": "/ˌʌn.dɚˈɡoʊ/",
+    "example": "All new employees undergo a medical check.",
+    "meaning": "trải qua"
+  },
+  {
+    "id": 805,
+    "word": "undertake",
+    "pos": "v",
+    "ipa": "/ˌʌn.dɚˈteɪk/",
+    "example": "The firm will undertake the renovation.",
+    "meaning": "đảm nhận"
+  },
+  {
+    "id": 806,
+    "word": "unique",
+    "pos": "adj",
+    "ipa": "/juːˈniːk/",
+    "example": "The shop sells unique handmade gifts.",
+    "meaning": "độc đáo"
+  },
+  {
+    "id": 807,
+    "word": "unit",
+    "pos": "n",
+    "ipa": "/ˈjuː.nɪt/",
+    "example": "Each unit costs twenty dollars.",
+    "meaning": "đơn vị"
+  },
+  {
+    "id": 808,
+    "word": "update",
+    "pos": "v",
+    "ipa": "/ʌpˈdeɪt/",
+    "example": "Please update your contact information.",
+    "meaning": "cập nhật"
+  },
+  {
+    "id": 809,
+    "word": "urgent",
+    "pos": "adj",
+    "ipa": "/ˈɝː.dʒənt/",
+    "example": "An urgent matter requires your attention.",
+    "meaning": "khẩn cấp"
+  },
+  {
+    "id": 810,
+    "word": "usage",
+    "pos": "n",
+    "ipa": "/ˈjuː.sɪdʒ/",
+    "example": "Water usage has fallen this year.",
+    "meaning": "việc sử dụng"
+  },
+  {
+    "id": 811,
+    "word": "utility",
+    "pos": "n",
+    "ipa": "/juːˈtɪl.ə.t̬i/",
+    "example": "The rent includes all utilities.",
+    "meaning": "tiện ích (điện nước)"
+  },
+  {
+    "id": 812,
+    "word": "utilize",
+    "pos": "v",
+    "ipa": "/ˈjuː.t̬əl.aɪz/",
+    "example": "We must utilize our resources wisely.",
+    "meaning": "tận dụng"
+  },
+  {
+    "id": 813,
+    "word": "valid",
+    "pos": "adj",
+    "ipa": "/ˈvæl.ɪd/",
+    "example": "The coupon is valid until December.",
+    "meaning": "có hiệu lực"
+  },
+  {
+    "id": 814,
+    "word": "valuable",
+    "pos": "adj",
+    "ipa": "/ˈvæl.jə.bəl/",
+    "example": "Her experience is valuable to the team.",
+    "meaning": "có giá trị"
+  },
+  {
+    "id": 815,
+    "word": "variety",
+    "pos": "n",
+    "ipa": "/vəˈraɪ.ə.t̬i/",
+    "example": "The store sells a variety of products.",
+    "meaning": "sự đa dạng"
+  },
+  {
+    "id": 816,
+    "word": "vehicle",
+    "pos": "n",
+    "ipa": "/ˈviː.ə.kəl/",
+    "example": "Company vehicles must be returned by Friday.",
+    "meaning": "phương tiện"
+  },
+  {
+    "id": 817,
+    "word": "vendor",
+    "pos": "n",
+    "ipa": "/ˈven.dɚ/",
+    "example": "We negotiated lower prices with the vendor.",
+    "meaning": "nhà cung cấp, người bán"
+  },
+  {
+    "id": 818,
+    "word": "venture",
+    "pos": "n",
+    "ipa": "/ˈven.tʃɚ/",
+    "example": "The joint venture will open next year.",
+    "meaning": "dự án kinh doanh"
+  },
+  {
+    "id": 819,
+    "word": "version",
+    "pos": "n",
+    "ipa": "/ˈvɝː.ʒən/",
+    "example": "Please download the latest version.",
+    "meaning": "phiên bản"
+  },
+  {
+    "id": 820,
+    "word": "viable",
+    "pos": "adj",
+    "ipa": "/ˈvaɪ.ə.bəl/",
+    "example": "It is not a viable business model.",
+    "meaning": "khả thi"
+  },
+  {
+    "id": 821,
+    "word": "violation",
+    "pos": "n",
+    "ipa": "/ˌvaɪ.əˈleɪ.ʃən/",
+    "example": "Parking here is a violation of the rules.",
+    "meaning": "sự vi phạm"
+  },
+  {
+    "id": 822,
+    "word": "visible",
+    "pos": "adj",
+    "ipa": "/ˈvɪz.ə.bəl/",
+    "example": "The sign should be clearly visible.",
+    "meaning": "có thể thấy"
+  },
+  {
+    "id": 823,
+    "word": "volume",
+    "pos": "n",
+    "ipa": "/ˈvɑːl.juːm/",
+    "example": "Sales volume doubled this year.",
+    "meaning": "khối lượng, số lượng"
+  },
+  {
+    "id": 824,
+    "word": "voluntary",
+    "pos": "adj",
+    "ipa": "/ˈvɑː.lən.ter.i/",
+    "example": "Attendance at the seminar is voluntary.",
+    "meaning": "tự nguyện"
+  },
+  {
+    "id": 825,
+    "word": "waive",
+    "pos": "v",
+    "ipa": "/weɪv/",
+    "example": "The bank waived the late fee.",
+    "meaning": "miễn, từ bỏ"
+  },
+  {
+    "id": 826,
+    "word": "warn",
+    "pos": "v",
+    "ipa": "/wɔːrn/",
+    "example": "Signs warn visitors of the danger.",
+    "meaning": "cảnh báo"
+  },
+  {
+    "id": 827,
+    "word": "welfare",
+    "pos": "n",
+    "ipa": "/ˈwel.fer/",
+    "example": "The firm cares about employee welfare.",
+    "meaning": "phúc lợi"
+  },
+  {
+    "id": 828,
+    "word": "widespread",
+    "pos": "adj",
+    "ipa": "/ˈwaɪd.spred/",
+    "example": "Widespread flooding disrupted deliveries.",
+    "meaning": "rộng khắp"
+  },
+  {
+    "id": 829,
+    "word": "withhold",
+    "pos": "v",
+    "ipa": "/wɪðˈhoʊld/",
+    "example": "Tax is withheld from your paycheck.",
+    "meaning": "giữ lại, khấu trừ"
+  },
+  {
+    "id": 830,
+    "word": "workshop",
+    "pos": "n",
+    "ipa": "/ˈwɝːk.ʃɑːp/",
+    "example": "The workshop covers customer service skills.",
+    "meaning": "hội thảo thực hành"
+  },
+  {
+    "id": 831,
+    "word": "worthwhile",
+    "pos": "adj",
+    "ipa": "/ˌwɝːθˈwaɪl/",
+    "example": "The investment proved worthwhile.",
+    "meaning": "đáng giá"
+  },
+  {
+    "id": 832,
+    "word": "yield",
+    "pos": "v",
+    "ipa": "/jiːld/",
+    "example": "The investment yielded high returns.",
+    "meaning": "mang lại"
+  }
+]
