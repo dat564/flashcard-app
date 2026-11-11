@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   BookOpen,
   Brain,
@@ -58,9 +58,16 @@ function dueAt(card) {
   return !card || !card.dueAt ? 0 : card.dueAt;
 }
 
-// Lịch ôn: "Chưa nhớ" -> hỏi lại sau 10 phút. "Đã nhớ" -> 1 ngày, 3 ngày, 7 ngày, rồi nhân ~2.2 mỗi lần (tối đa 180 ngày).
-const AGAIN_DAYS = 10 / 1440;
+// Lịch ôn (học 1 lần/ngày): thẻ đến hạn theo NGÀY, nên hôm đó học lúc nào cũng gặp lại.
+//   "Chưa nhớ" -> ôn lại vào ngày mai.
+//   "Đã nhớ"   -> 3 ngày, 7 ngày, 14 ngày, rồi nhân ~2.2 mỗi lần (tối đa 180 ngày).
+const AGAIN_DAYS = 1;
 const MAX_DAYS = 180;
+const startOfDay = (t) => {
+  const d = new Date(t);
+  d.setHours(0, 0, 0, 0);
+  return d.getTime();
+};
 function nextSchedule(card, rating) {
   const now = Date.now();
   const c = card || {};
@@ -69,7 +76,7 @@ function nextSchedule(card, rating) {
     lapses = c.lapses || 0;
   if (rating === "again") {
     return {
-      dueAt: now + AGAIN_DAYS * DAY,
+      dueAt: startOfDay(now + AGAIN_DAYS * DAY),
       reps: 0,
       interval: AGAIN_DAYS,
       ease: c.ease || 2.5,
@@ -79,15 +86,16 @@ function nextSchedule(card, rating) {
   }
   interval =
     reps === 0
-      ? 1
-      : reps === 1
       ? 3
-      : reps === 2
+      : reps === 1
       ? 7
-      : Math.min(MAX_DAYS, Math.max(7, interval) * 2.2);
+      : reps === 2
+      ? 14
+      : Math.min(MAX_DAYS, Math.max(14, interval) * 2.2);
+  interval = Math.round(interval);
   reps += 1;
   return {
-    dueAt: now + interval * DAY,
+    dueAt: startOfDay(now + interval * DAY),
     reps,
     interval,
     ease: c.ease || 2.5,
@@ -162,6 +170,7 @@ export default function App() {
   const [newLimit, setNewLimit] = useState(progress.settings?.newPerDay || 20);
   const [toast, setToast] = useState("");
   const today = todayKey();
+  const retried = useRef(new Set());
 
   useEffect(() => {
     localStorage.setItem(STORE, JSON.stringify(progress));
@@ -233,9 +242,11 @@ export default function App() {
         stats: st,
       };
     });
-    // thẻ "Quên" quay lại cuối phiên để ôn lại ngay
-    const queue = rating === "again" ? [...session, current.id] : session;
-    if (rating === "again") setSession(queue);
+    // thẻ "Chưa nhớ" được hỏi lại 1 lần ở cuối phiên (vẫn hẹn ôn lại ngày mai)
+    const requeue = rating === "again" && !retried.current.has(current.id);
+    if (requeue) retried.current.add(current.id);
+    const queue = requeue ? [...session, current.id] : session;
+    if (requeue) setSession(queue);
     const next = index + 1;
     if (next >= queue.length) {
       setSession([]);
@@ -249,6 +260,7 @@ export default function App() {
   };
 
   const startStudy = () => {
+    retried.current = new Set();
     setSession(dueQueue.map((w) => w.id));
     setIndex(0);
     setShowAnswer(false);
@@ -682,7 +694,7 @@ export default function App() {
                   className="range"
                   type="range"
                   min="5"
-                  max="50"
+                  max="100"
                   step="5"
                   value={newLimit}
                   onChange={(e) => {
