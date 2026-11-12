@@ -59,7 +59,7 @@ const STORE = "toeic-recall-v1";
 const VOICE_KEY = "toeic-recall-voice",
   RATE_KEY = "toeic-recall-rate",
   MODE_KEY = "toeic-recall-voice-mode",
-  AUTO_KEY = "toeic-recall-auto-speak",
+  AUTO_KEY = "toeic-recall-auto-speak-v2", // v2: mặc định BẬT (khóa cũ đã lỡ lưu "tắt")
   THEME_KEY = "toeic-recall-theme",
   AUDIO_STORE = "toeic-recall-audio-v1";
 const QUIZ_LEN = 10; // số câu mỗi lượt "điền từ"
@@ -501,7 +501,7 @@ export default function App() {
   const [lastSession, setLastSession] = useState(null); // {deckId, ids} để "học lại phiên vừa rồi"
   const [undo, setUndo] = useState(null); // trạng thái trước khi chấm thẻ gần nhất
   const [autoSpeak, setAutoSpeak] = useState(
-    () => localStorage.getItem(AUTO_KEY) === "1"
+    () => localStorage.getItem(AUTO_KEY) !== "0"
   );
   const [quiz, setQuiz] = useState(null); // lượt "điền từ vào câu"
   const [theme, setTheme] = useState(
