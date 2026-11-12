@@ -51,6 +51,8 @@ const VOICE_KEY = "toeic-recall-voice",
   MODE_KEY = "toeic-recall-voice-mode";
 const DAY = 86400000;
 const SWIPE_AT = 110; // kéo quá ngưỡng này (px) thì tính là đã chọn
+// Màn hình nhỏ thì ngưỡng thấp hơn (22% chiều rộng) để vuốt nhẹ tay cũng ăn
+const swipeAt = () => Math.min(SWIPE_AT, window.innerWidth * 0.22);
 const EASE_BACK = "transform .32s cubic-bezier(.2,.9,.3,1.15)";
 const EASE_OUT = "transform .24s cubic-bezier(.3,.7,.4,1)";
 const todayKey = () => new Date().toLocaleDateString("en-CA");
@@ -275,7 +277,6 @@ export default function App() {
   );
   const audioRef = useRef(null);
   const today = todayKey();
-  const retried = useRef(new Set());
 
   const progressRef = useRef(progress);
   useEffect(() => {
@@ -424,7 +425,7 @@ export default function App() {
     el.style.transform = `translate(${d}px, ${Math.abs(d) * 0.02}px) rotate(${
       d * 0.035
     }deg)`;
-    const p = Math.min(1, Math.abs(d) / SWIPE_AT);
+    const p = Math.min(1, Math.abs(d) / swipeAt());
     st.style.setProperty("--yes", d > 0 ? p : 0);
     st.style.setProperty("--no", d < 0 ? p : 0);
     st.style.setProperty("--lift", p);
@@ -471,13 +472,9 @@ export default function App() {
         stats: st,
       };
     });
-    // thẻ "Chưa nhớ" được hỏi lại 1 lần ở cuối phiên (vẫn hẹn ôn lại ngày mai)
-    const requeue = rating === "again" && !retried.current.has(current.id);
-    if (requeue) retried.current.add(current.id);
-    const queue = requeue ? [...session, current.id] : session;
-    if (requeue) setSession(queue);
+    // thẻ "Chưa nhớ" chỉ được hẹn ôn lại ngày mai, không hỏi lại trong phiên này
     const next = index + 1;
-    if (next >= queue.length) {
+    if (next >= session.length) {
       setSession([]);
       setIndex(0);
       setShowAnswer(false);
@@ -501,16 +498,30 @@ export default function App() {
   };
   const onPointerDown = (e) => {
     if (leavingRef.current || e.target.closest("button")) return;
-    dragRef.current = { x: e.clientX, moved: false };
+    dragRef.current = {
+      x: e.clientX,
+      moved: false,
+      lx: e.clientX,
+      lt: performance.now(),
+      v: 0,
+    };
     e.currentTarget.setPointerCapture?.(e.pointerId);
   };
   const onPointerMove = (e) => {
     const s = dragRef.current;
     if (!s) return;
     const d = e.clientX - s.x;
-    if (!s.moved && Math.abs(d) < 6) return;
+    if (!s.moved && Math.abs(d) < 8) return;
     s.moved = true;
     dxRef.current = d;
+    // vận tốc (px/ms) để nhận ra cú "búng" nhanh dù kéo chưa tới ngưỡng
+    const now = performance.now();
+    const dt = now - s.lt;
+    if (dt > 0) {
+      s.v = s.v * 0.6 + ((e.clientX - s.lx) / dt) * 0.4;
+      s.lx = e.clientX;
+      s.lt = now;
+    }
     if (!rafRef.current)
       rafRef.current = requestAnimationFrame(() => {
         rafRef.current = 0;
@@ -526,12 +537,15 @@ export default function App() {
     if (e.type === "pointercancel") return paint(0, EASE_BACK);
     if (!s.moved) return setShowAnswer((v) => !v); // chạm nhẹ = lật thẻ
     const d = dxRef.current;
-    if (Math.abs(d) >= SWIPE_AT) commit(d > 0 ? "good" : "again");
+    const fling =
+      Math.abs(s.v) > 0.5 &&
+      Math.abs(d) > 30 &&
+      Math.sign(s.v) === Math.sign(d);
+    if (Math.abs(d) >= swipeAt() || fling) commit(d > 0 ? "good" : "again");
     else paint(0, EASE_BACK);
   };
 
   const startStudy = (all = false) => {
-    retried.current = new Set();
     const ids = all
       ? shuffle(deck.map((w) => w.id))
       : dueQueue.map((w) => w.id);

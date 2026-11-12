@@ -871,7 +871,7 @@ kbd {
 .swipe {
   position: relative;
   z-index: 2;
-  touch-action: pan-y;
+  touch-action: none; /* chạm vào thẻ thì mọi cử chỉ do app xử lý: không bị nhầm với cuộn trang */
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
@@ -1169,7 +1169,10 @@ body {
     display: none;
   }
   .main {
-    padding: 14px 14px calc(28px + env(safe-area-inset-bottom));
+    /* chừa lề ≥ 22px để thẻ không bắt đầu sát mép (vùng cử chỉ "quay lại" của iOS) */
+    padding: 14px max(22px, env(safe-area-inset-right))
+      calc(28px + env(safe-area-inset-bottom))
+      max(22px, env(safe-area-inset-left));
   }
   .study {
     gap: 16px;
@@ -1240,5 +1243,42 @@ body {
 @media (hover: none) {
   .kb-hint {
     display: none;
+  }
+}
+
+/* ---------- mobile: nhãn dạng viên thuốc ở đỉnh thẻ, không đè lên chữ ---------- */
+@media (max-width: 760px) {
+  .glow {
+    width: 28vw;
+  }
+  .mark {
+    position: absolute;
+    top: 16px;
+    flex-direction: row;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: #fff;
+    border: 2px solid currentColor;
+    box-shadow: 0 8px 20px -10px rgba(23, 26, 46, 0.4);
+    text-shadow: none;
+    font-size: 15px;
+  }
+  .mark svg {
+    width: 20px;
+    height: 20px;
+  }
+  .mark.yes,
+  .mark.no {
+    left: 50%;
+    right: auto;
+  }
+  .mark.yes {
+    opacity: var(--yes);
+    transform: translateX(-50%) scale(calc(0.85 + 0.15 * var(--yes)));
+  }
+  .mark.no {
+    opacity: var(--no);
+    transform: translateX(-50%) scale(calc(0.85 + 0.15 * var(--no)));
   }
 }
