@@ -74,6 +74,7 @@ kbd {
 .app {
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   background: var(--bg);
@@ -240,7 +241,7 @@ kbd {
 /* the flashcard */
 .flip {
   perspective: 1600px;
-  cursor: pointer;
+  cursor: grab;
   height: clamp(360px, 54vh, 500px);
   outline-offset: 6px;
   border-radius: 32px;
@@ -858,4 +859,386 @@ kbd {
 }
 .more:hover {
   background: var(--accent-soft);
+}
+
+/* ---------- vuốt thẻ kiểu Tinder ---------- */
+.stage {
+  --yes: 0;
+  --no: 0;
+  --lift: 0;
+  position: relative;
+}
+.swipe {
+  position: relative;
+  z-index: 2;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  transform-origin: 50% 110%; /* xoay quanh phía dưới giống Tinder */
+  will-change: transform;
+  /* chỉ làm mờ dần, không đụng tới transform nên không đè lên lúc kéo */
+  animation: card-in 0.25s ease-out backwards;
+}
+/* thẻ kế tiếp nằm ngay sau, nhô lên theo độ kéo của thẻ trên */
+.swipe.behind {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  transform-origin: 50% 100%;
+  transform: translateY(calc(12px * (1 - var(--lift))))
+    scale(calc(0.95 + 0.05 * var(--lift)));
+  transition: transform 0.22s ease-out;
+}
+@keyframes card-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.swipe:active .flip {
+  cursor: grabbing;
+}
+
+/* bóng ở rìa màn hình (nằm SAU thẻ) */
+.glow {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 0;
+  width: min(26vw, 280px);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease-out;
+}
+.glow.yes {
+  right: 0;
+  opacity: var(--yes);
+  background: linear-gradient(
+    to left,
+    color-mix(in srgb, var(--easy) 34%, transparent),
+    transparent
+  );
+}
+.glow.no {
+  left: 0;
+  opacity: var(--no);
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--again) 34%, transparent),
+    transparent
+  );
+}
+/* chữ mờ ở rìa màn hình (nằm TRÊN thẻ, không bị thẻ che) */
+.mark {
+  position: fixed;
+  top: 50%;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+  white-space: nowrap;
+  font-weight: 800;
+  font-size: clamp(16px, 1.8vw, 28px);
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 14px rgba(255, 255, 255, 0.9);
+  opacity: 0;
+  transition: opacity 0.15s ease-out;
+}
+.mark.yes {
+  right: clamp(14px, 3vw, 56px);
+  color: var(--easy);
+  opacity: calc(var(--yes) * 0.85);
+  transform: translateY(-50%) scale(calc(0.85 + 0.15 * var(--yes)));
+}
+.mark.no {
+  left: clamp(14px, 3vw, 56px);
+  color: var(--again);
+  opacity: calc(var(--no) * 0.85);
+  transform: translateY(-50%) scale(calc(0.85 + 0.15 * var(--no)));
+}
+@media (prefers-reduced-motion: reduce) {
+  .swipe,
+  .swipe.behind {
+    animation: none;
+    transition: none;
+  }
+}
+
+.actions {
+  min-height: 0;
+}
+.rate small {
+  font-size: 12.5px;
+}
+.gesture-hint {
+  text-align: center;
+  margin: -6px 0 0;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+.gesture-hint .g {
+  color: var(--easy);
+}
+.gesture-hint .r {
+  color: var(--again);
+}
+
+/* ---------- chọn bộ từ ---------- */
+.decks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 14px;
+  max-width: 640px;
+}
+.deck-chip {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.deck-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.deck-chip.on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.deck-chip.add {
+  border-style: dashed;
+}
+.link-btn {
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 6px;
+  text-decoration: underline;
+}
+
+/* ---------- danh sách riêng ---------- */
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  padding: 34px 20px;
+  border: 2px dashed var(--line);
+  border-radius: 22px;
+  background: var(--surface-2);
+  color: var(--accent);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.dropzone:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.dropzone b {
+  color: var(--ink);
+  font-size: 16px;
+}
+.dropzone span {
+  color: var(--muted);
+  font-size: 13.5px;
+  max-width: 560px;
+  line-height: 1.5;
+}
+.list-card {
+  margin-top: 14px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 18px 22px;
+  flex-wrap: wrap;
+}
+.list-head b {
+  display: block;
+  font-size: 16px;
+}
+.list-head small {
+  color: var(--muted);
+  font-size: 13px;
+}
+.list-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.table.inner {
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* ---------- cài đặt giọng đọc ---------- */
+.panel.wide {
+  grid-column: 1 / -1;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13.5px;
+  color: var(--muted);
+  margin: 12px 0;
+}
+.field select {
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+}
+.solid {
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+}
+.solid:disabled {
+  opacity: 0.6;
+}
+@media (max-width: 760px) {
+  .glow {
+    width: 34vw;
+  }
+  .mark {
+    font-size: 13px;
+    gap: 6px;
+  }
+  .mark svg {
+    width: 26px;
+    height: 26px;
+  }
+  .tabs button {
+    padding: 9px 12px;
+  }
+}
+
+/* ---------- chống tràn ngang + cảm ứng ---------- */
+html {
+  overflow-x: hidden; /* chỉ đặt trên html để sticky nav vẫn hoạt động */
+  /* Khi kéo, thẻ xoay làm trang dài thêm vài px → thanh cuộn dọc hiện ra và đẩy cả trang lệch.
+     Chừa sẵn chỗ cho thanh cuộn thì trang đứng yên. */
+  scrollbar-gutter: stable;
+}
+html,
+body {
+  touch-action: pan-y pinch-zoom; /* trên cảm ứng, trang không bao giờ trượt ngang theo ngón tay */
+}
+body {
+  overscroll-behavior-x: none; /* tránh vuốt ngang bị hiểu là "quay lại trang" */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---------- mobile ---------- */
+@media (max-width: 760px) {
+  .nav-right {
+    display: none;
+  }
+  .main {
+    padding: 14px 14px calc(28px + env(safe-area-inset-bottom));
+  }
+  .study {
+    gap: 16px;
+    padding-top: 0;
+  }
+  .session-bar {
+    gap: 8px;
+  }
+  .count {
+    min-width: 44px;
+  }
+  .flip {
+    height: clamp(320px, 56dvh, 460px);
+    border-radius: 26px;
+  }
+  .face {
+    border-radius: 26px;
+    padding: 48px 20px 52px;
+    gap: 10px;
+  }
+  .badge {
+    top: 16px;
+    left: 18px;
+  }
+  .word {
+    font-size: clamp(38px, 12vw, 60px);
+  }
+  .word.vi {
+    font-size: clamp(28px, 8vw, 40px);
+  }
+  .meaning {
+    font-size: clamp(26px, 8vw, 38px);
+  }
+  .meta {
+    font-size: 16px;
+  }
+  .example {
+    font-size: 16px;
+  }
+  .rate {
+    padding: 16px 8px 14px;
+    border-radius: 16px;
+  }
+  .rate b {
+    font-size: 16px;
+  }
+  .gesture-hint {
+    font-size: 12.5px;
+  }
+  .start {
+    padding: 36px 18px 24px;
+    border-radius: 26px;
+  }
+  .start h2 {
+    font-size: 26px;
+  }
+  .mini-stats {
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .toast {
+    width: calc(100% - 28px);
+    justify-content: space-between;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+}
+@media (hover: none) {
+  .kb-hint {
+    display: none;
+  }
 }
