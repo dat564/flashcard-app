@@ -16,12 +16,22 @@ import {
   FolderOpen,
   Layers,
   Library,
+  Plus,
   RotateCcw,
   Search,
+  Shuffle,
   Trash2,
   Upload,
   Volume2,
   X,
+  Undo2,
+  Flame,
+  Target,
+  Pencil,
+  Sun,
+  Moon,
+  Monitor,
+  Download,
 } from "lucide-react";
 import { parseVocabFile } from "./vocabImport";
 import "./App.css";
@@ -48,8 +58,31 @@ const words = (() => {
 const STORE = "toeic-recall-v1";
 const VOICE_KEY = "toeic-recall-voice",
   RATE_KEY = "toeic-recall-rate",
-  MODE_KEY = "toeic-recall-voice-mode";
+  MODE_KEY = "toeic-recall-voice-mode",
+  AUTO_KEY = "toeic-recall-auto-speak",
+  THEME_KEY = "toeic-recall-theme",
+  AUDIO_STORE = "toeic-recall-audio-v1";
+const QUIZ_LEN = 10; // số câu mỗi lượt "điền từ"
+
+// Áp giao diện đã lưu ngay khi tải để không bị nháy sáng → tối
+try {
+  const t = localStorage.getItem(THEME_KEY);
+  if (t === "light" || t === "dark")
+    document.documentElement.setAttribute("data-theme", t);
+} catch {
+  /* bỏ qua */
+}
+function setMeta(name, content) {
+  let m = document.querySelector(`meta[name="${name}"]`);
+  if (!m) {
+    m = document.createElement("meta");
+    m.name = name;
+    document.head.appendChild(m);
+  }
+  m.content = content;
+}
 const DAY = 86400000;
+const PRACTICE_MAX = 50; // mỗi lượt "ôn ngẫu nhiên" tối đa bấy nhiêu thẻ
 const SWIPE_AT = 110; // kéo quá ngưỡng này (px) thì tính là đã chọn
 // Màn hình nhỏ thì ngưỡng thấp hơn (22% chiều rộng) để vuốt nhẹ tay cũng ăn
 const swipeAt = () => Math.min(SWIPE_AT, window.innerWidth * 0.22);
@@ -132,6 +165,76 @@ function nextSchedule(card, rating) {
     status: "review",
   };
 }
+// "Từ khó": từng bấm "Chưa nhớ" từ 3 lần trở lên và chưa nhớ liền 3 lần sau đó.
+// Khi nhớ liền 3 lần (reps ≥ 3) thì tự hết khó.
+const HARD_LAPSES = 3;
+const HARD_REPS = 3;
+const isHard = (c) =>
+  !!c && (c.lapses || 0) >= HARD_LAPSES && (c.reps || 0) < HARD_REPS;
+
+/* ---------- chuỗi ngày, bản đồ nhiệt, dự báo ---------- */
+const dayKeyOf = (d) => d.toLocaleDateString("en-CA");
+const activityOf = (s) => (s ? (s.reviewed || 0) + (s.practiced || 0) : 0);
+function calcStreaks(stats = {}) {
+  const keys = Object.keys(stats)
+    .filter((k) => activityOf(stats[k]) > 0)
+    .sort();
+  let best = 0,
+    run = 0,
+    prev = null;
+  for (const k of keys) {
+    run =
+      prev && Math.round((new Date(k) - new Date(prev)) / DAY) === 1
+        ? run + 1
+        : 1;
+    best = Math.max(best, run);
+    prev = k;
+  }
+  // chuỗi hiện tại: tính lùi từ hôm nay (hôm nay chưa học thì tính từ hôm qua, chưa mất chuỗi)
+  let cur = 0;
+  const d = new Date();
+  d.setHours(12, 0, 0, 0);
+  if (!activityOf(stats[dayKeyOf(d)])) d.setDate(d.getDate() - 1);
+  while (activityOf(stats[dayKeyOf(d)]) > 0) {
+    cur++;
+    d.setDate(d.getDate() - 1);
+  }
+  return { cur, best };
+}
+// 13 tuần gần nhất, mỗi cột một tuần (T2 → CN)
+function buildHeatmap(stats = {}, weeks = 13) {
+  const t = new Date();
+  t.setHours(12, 0, 0, 0);
+  const wd = (t.getDay() + 6) % 7;
+  const start = new Date(t);
+  start.setDate(t.getDate() - wd - 7 * (weeks - 1));
+  const out = [];
+  for (let i = 0; i < weeks * 7; i++) {
+    const d = new Date(start);
+    d.setDate(start.getDate() + i);
+    const key = dayKeyOf(d);
+    out.push({ key, n: d > t ? -1 : activityOf(stats[key]) });
+  }
+  return out;
+}
+const heatLevel = (n) =>
+  n < 0 ? "x" : n === 0 ? 0 : n < 10 ? 1 : n < 25 ? 2 : n < 50 ? 3 : 4;
+// Số thẻ đến hạn trong 7 ngày tới (hôm nay gồm cả thẻ quá hạn)
+function buildForecast(cards = {}, days = 7) {
+  const base = startOfDay(Date.now());
+  const out = Array.from({ length: days }, (_, i) => ({
+    i,
+    n: 0,
+    t: base + i * DAY,
+  }));
+  for (const c of Object.values(cards)) {
+    if (!c || !c.dueAt) continue;
+    const idx = Math.max(0, Math.round((c.dueAt - base) / DAY));
+    if (idx < days) out[idx].n++;
+  }
+  return out;
+}
+
 function fmtInterval(days) {
   const min = days * 1440;
   if (min < 60) return `${Math.max(1, Math.round(min))} phút`;
@@ -160,43 +263,174 @@ const pickVoice = (voices, saved) =>
   null;
 
 // Giọng người thật (cùng một file âm thanh trên mọi trình duyệt). Chỉ có cho từ đơn; thiếu thì dùng giọng trình duyệt.
-const audioCache = new Map();
+// URL âm thanh được nhớ trong localStorage nên lần sau không phải hỏi mạng nữa.
+const audioCache = new Map(); // từ -> url | null (null = từ điển không có)
+try {
+  for (const [k, v] of Object.entries(
+    JSON.parse(localStorage.getItem(AUDIO_STORE) || "{}")
+  ))
+    audioCache.set(k, v || null);
+} catch {
+  /* bỏ qua */
+}
+let audioSaveTimer = 0;
+const setAudioCache = (key, url) => {
+  audioCache.set(key, url);
+  clearTimeout(audioSaveTimer);
+  audioSaveTimer = setTimeout(() => {
+    try {
+      localStorage.setItem(
+        AUDIO_STORE,
+        JSON.stringify(
+          Object.fromEntries([...audioCache].map(([k, v]) => [k, v || ""]))
+        )
+      );
+    } catch {
+      /* đầy bộ nhớ thì thôi */
+    }
+  }, 1500);
+};
+const audioInflight = new Map();
 async function getHumanAudio(word) {
   const key = word.toLowerCase().trim();
   if (audioCache.has(key)) return audioCache.get(key);
   if (!/^[a-z'-]+$/i.test(key)) {
-    audioCache.set(key, null);
+    setAudioCache(key, null);
     return null;
   }
-  try {
-    const ctrl = new AbortController();
-    const t = setTimeout(() => ctrl.abort(), 3500);
-    const r = await fetch(
-      `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(
-        key
-      )}`,
-      { signal: ctrl.signal }
-    );
-    clearTimeout(t);
-    if (r.status === 404) {
-      audioCache.set(key, null);
+  if (audioInflight.has(key)) return audioInflight.get(key); // gộp các lần hỏi trùng
+  const job = (async () => {
+    try {
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 2500);
+      const r = await fetch(
+        `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(
+          key
+        )}`,
+        { signal: ctrl.signal }
+      );
+      clearTimeout(t);
+      if (r.status === 404) {
+        setAudioCache(key, null);
+        return null;
+      }
+      if (!r.ok) return null;
+      const auds = (await r.json())
+        .flatMap((e) => e.phonetics || [])
+        .map((p) => p.audio)
+        .filter(Boolean);
+      const url =
+        auds.find((a) => /-us\./i.test(a)) ||
+        auds.find((a) => /\bus\b/i.test(a)) ||
+        auds[0] ||
+        null;
+      setAudioCache(key, url);
+      return url;
+    } catch {
       return null;
     }
-    if (!r.ok) return null;
-    const auds = (await r.json())
-      .flatMap((e) => e.phonetics || [])
-      .map((p) => p.audio)
-      .filter(Boolean);
-    const url =
-      auds.find((a) => /-us\./i.test(a)) ||
-      auds.find((a) => /\bus\b/i.test(a)) ||
-      auds[0] ||
-      null;
-    audioCache.set(key, url);
-    return url;
-  } catch {
-    return null;
+  })();
+  audioInflight.set(key, job);
+  try {
+    return await job;
+  } finally {
+    audioInflight.delete(key);
   }
+}
+// Tải sẵn file âm thanh của các thẻ sắp tới để bấm/đọc là phát ngay, không chờ mạng
+const audioEls = new Map();
+function preloadAudio(word) {
+  if (!word) return;
+  const key = word.toLowerCase().trim();
+  if (audioEls.has(key)) return;
+  getHumanAudio(word).then((url) => {
+    if (!url || audioEls.has(key)) return;
+    const a = new Audio();
+    a.preload = "auto";
+    a.src = url;
+    audioEls.set(key, a);
+    if (audioEls.size > 40) audioEls.delete(audioEls.keys().next().value);
+  });
+}
+
+/* ---------- Điền từ vào câu ---------- */
+const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const pluralOf = (w) =>
+  /(s|x|z|ch|sh)$/.test(w)
+    ? w + "es"
+    : /[^aeiou]y$/.test(w)
+    ? w.slice(0, -1) + "ies"
+    : w + "s";
+const pastOf = (w) =>
+  /e$/.test(w)
+    ? w + "d"
+    : /[^aeiou]y$/.test(w)
+    ? w.slice(0, -1) + "ied"
+    : w + "ed";
+const ingOf = (w) =>
+  /ie$/.test(w)
+    ? w.slice(0, -2) + "ying"
+    : /[^e]e$/.test(w)
+    ? w.slice(0, -1) + "ing"
+    : w + "ing";
+const FORMS = { base: (w) => w, s: pluralOf, ed: pastOf, ing: ingOf };
+// từ tận cùng phụ-nguyên-phụ (plan, submit...) khi chia -ed/-ing phải nhân đôi phụ âm; không đoán được nên bỏ khỏi đáp án nhiễu
+const safeFor = (kind, w) =>
+  kind === "base" ||
+  kind === "s" ||
+  (!w.includes(" ") && !/[^aeiou][aeiou][^aeiouwxy]$/.test(w));
+// Tìm trong câu ví dụ đúng từ đó (hoặc dạng số nhiều / -ed / -ing) để khoét thành chỗ trống
+function makeBlank(w) {
+  const ex = w.example;
+  const base = (w.word || "").trim().toLowerCase();
+  if (!ex || !base || /[()/]/.test(base)) return null;
+  for (const kind of ["base", "s", "ed", "ing"]) {
+    if (kind !== "base" && base.includes(" ")) break;
+    const re = new RegExp(
+      "(^|[^A-Za-z])(" + escapeRe(FORMS[kind](base)) + ")(?![A-Za-z])",
+      "i"
+    );
+    const m = re.exec(ex);
+    if (m) {
+      const start = m.index + m[1].length;
+      return {
+        kind,
+        before: ex.slice(0, start),
+        after: ex.slice(start + m[2].length),
+        shown: m[2],
+      };
+    }
+  }
+  return null;
+}
+// 3 đáp án nhiễu: cùng từ loại, cùng số chữ, chia cùng dạng với đáp án
+function pickDistractors(answer, kind, pos, pool, sentenceLower) {
+  const wc = answer.trim().split(/\s+/).length;
+  const lower = answer.toLowerCase();
+  const cand = shuffle(
+    pool.filter((d) => {
+      const dw = (d.word || "").trim().toLowerCase();
+      return (
+        dw &&
+        dw !== lower &&
+        !/[()/]/.test(dw) &&
+        dw.split(/\s+/).length === wc &&
+        safeFor(kind, dw)
+      );
+    })
+  );
+  const same = cand.filter((d) => d.pos && d.pos === pos);
+  const rest = cand.filter((d) => !(d.pos && d.pos === pos));
+  const out = [];
+  const seen = new Set([lower]);
+  for (const d of [...same, ...rest]) {
+    const form = FORMS[kind](d.word.trim().toLowerCase());
+    if (seen.has(form) || sentenceLower.includes(form)) continue;
+    seen.add(form);
+    out.push(form);
+    if (out.length === 3) break;
+  }
+  return out;
 }
 
 const RATINGS = [
@@ -220,11 +454,17 @@ function mergeProgress(a, b) {
   for (const src of [a.stats || {}, b.stats || {}]) {
     for (const [d, s] of Object.entries(src)) {
       if (resetDay && d < resetDay) continue;
-      const m = stats[d] || { reviewed: 0, correct: 0, newLearned: 0 };
+      const m = stats[d] || {
+        reviewed: 0,
+        correct: 0,
+        newLearned: 0,
+        practiced: 0,
+      };
       stats[d] = {
         reviewed: Math.max(m.reviewed, s.reviewed || 0),
         correct: Math.max(m.correct, s.correct || 0),
         newLearned: Math.max(m.newLearned, s.newLearned || 0),
+        practiced: Math.max(m.practiced || 0, s.practiced || 0),
       };
     }
   }
@@ -257,6 +497,27 @@ export default function App() {
   const [uploadName, setUploadName] = useState("");
   const [uploading, setUploading] = useState(false);
   const [openList, setOpenList] = useState(null);
+  const [practice, setPractice] = useState(false); // luyện tập: không đổi lịch ôn
+  const [lastSession, setLastSession] = useState(null); // {deckId, ids} để "học lại phiên vừa rồi"
+  const [undo, setUndo] = useState(null); // trạng thái trước khi chấm thẻ gần nhất
+  const [autoSpeak, setAutoSpeak] = useState(
+    () => localStorage.getItem(AUTO_KEY) === "1"
+  );
+  const [quiz, setQuiz] = useState(null); // lượt "điền từ vào câu"
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem(THEME_KEY) || "auto"
+  );
+  const [sysDark, setSysDark] = useState(
+    () => !!window.matchMedia?.("(prefers-color-scheme: dark)").matches
+  );
+  const [installEvt, setInstallEvt] = useState(null);
+  const [installed, setInstalled] = useState(
+    () =>
+      !!window.matchMedia?.("(display-mode: standalone)").matches ||
+      navigator.standalone === true
+  );
+  const spokenRef = useRef(""); // thẻ đã tự đọc, để không đọc lặp
+  const speakSeq = useRef(0); // đánh số lần đọc để bỏ qua lần cũ đến muộn
   // vuốt thẻ (không dùng state: ghi thẳng vào DOM để không re-render khi kéo)
   const dragRef = useRef(null);
   const stageRef = useRef(null);
@@ -306,7 +567,69 @@ export default function App() {
     localStorage.setItem(VOICE_KEY, voiceURI);
     localStorage.setItem(RATE_KEY, String(rate));
     localStorage.setItem(MODE_KEY, voiceMode);
-  }, [voiceURI, rate, voiceMode]);
+    localStorage.setItem(AUTO_KEY, autoSpeak ? "1" : "0");
+  }, [voiceURI, rate, voiceMode, autoSpeak]);
+  // Giao diện sáng/tối
+  useEffect(() => {
+    localStorage.setItem(THEME_KEY, theme);
+    const root = document.documentElement;
+    if (theme === "auto") root.removeAttribute("data-theme");
+    else root.setAttribute("data-theme", theme);
+    const dark = theme === "dark" || (theme === "auto" && sysDark);
+    setMeta("theme-color", dark ? "#0f1120" : "#ffffff");
+  }, [theme, sysDark]);
+  useEffect(() => {
+    const mq = window.matchMedia?.("(prefers-color-scheme: dark)");
+    if (!mq) return;
+    const h = (e) => setSysDark(e.matches);
+    mq.addEventListener?.("change", h);
+    return () => mq.removeEventListener?.("change", h);
+  }, []);
+  // PWA: manifest, biểu tượng, service worker, nút cài đặt
+  useEffect(() => {
+    const addLink = (rel, href) => {
+      if (document.head.querySelector(`link[rel="${rel}"]`)) return;
+      const l = document.createElement("link");
+      l.rel = rel;
+      l.href = href;
+      document.head.appendChild(l);
+    };
+    addLink("manifest", "/manifest.webmanifest");
+    addLink("apple-touch-icon", "/apple-touch-icon.png");
+    setMeta("apple-mobile-web-app-capable", "yes");
+    setMeta("mobile-web-app-capable", "yes");
+    setMeta("apple-mobile-web-app-title", "TOEIC Recall");
+    setMeta("apple-mobile-web-app-status-bar-style", "default");
+    const vp = document.querySelector('meta[name="viewport"]');
+    if (vp && !/viewport-fit/.test(vp.content))
+      vp.content += ", viewport-fit=cover";
+    if ("serviceWorker" in navigator && import.meta.env.PROD)
+      navigator.serviceWorker.register("/sw.js").catch(() => {});
+    const onBip = (e) => {
+      e.preventDefault();
+      setInstallEvt(e);
+    };
+    const onInstalled = () => {
+      setInstalled(true);
+      setInstallEvt(null);
+    };
+    window.addEventListener("beforeinstallprompt", onBip);
+    window.addEventListener("appinstalled", onInstalled);
+    return () => {
+      window.removeEventListener("beforeinstallprompt", onBip);
+      window.removeEventListener("appinstalled", onInstalled);
+    };
+  }, []);
+  const installApp = async () => {
+    if (!installEvt) return;
+    installEvt.prompt();
+    await installEvt.userChoice;
+    setInstallEvt(null);
+  };
+  const isIOS =
+    /iphone|ipad|ipod/i.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
   useEffect(() => {
     if (!toast) return;
     const t = setTimeout(() => setToast(""), 2600);
@@ -339,24 +662,34 @@ export default function App() {
     u.rate = rate;
     sy.speak(u);
   };
-  const speak = async (text) => {
+  // Phát ngay nếu âm thanh đã được tải sẵn; chưa có thì hỏi từ điển (kết quả được nhớ lại)
+  const speak = (text) => {
+    const seq = ++speakSeq.current;
     audioRef.current?.pause();
     window.speechSynthesis?.cancel();
-    if (voiceMode === "human") {
-      const url = await getHumanAudio(text);
-      if (url) {
-        try {
-          const a = new Audio(url);
-          a.playbackRate = rate;
-          audioRef.current = a;
-          await a.play();
-          return;
-        } catch {
-          /* dùng giọng trình duyệt */
-        }
+    if (voiceMode !== "human") return speakBrowser(text);
+    const key = text.toLowerCase().trim();
+    const play = (a) => {
+      try {
+        a.currentTime = 0;
+      } catch {
+        /* chưa tải xong metadata */
       }
-    }
-    speakBrowser(text);
+      a.playbackRate = rate;
+      audioRef.current = a;
+      a.play().catch(() => {
+        if (seq === speakSeq.current) speakBrowser(text);
+      });
+    };
+    const el = audioEls.get(key);
+    if (el) return play(el);
+    getHumanAudio(text).then((url) => {
+      if (seq !== speakSeq.current) return; // đã có lần đọc mới hơn
+      if (!url) return speakBrowser(text);
+      const a = new Audio(url);
+      audioEls.set(key, a);
+      play(a);
+    });
   };
 
   /* ---------- dữ liệu của bộ từ đang học ---------- */
@@ -393,6 +726,28 @@ export default function App() {
   const current = session[index] ? wordById.get(session[index]) : null;
   const dueCount = dueWords.length;
   const deckLearned = deck.filter(isLearned).length;
+  const practiceCount = deck.reduce((n, w) => n + (cards[w.id] ? 1 : 0), 0);
+  const lastIds =
+    lastSession && lastSession.deckId === deckId
+      ? lastSession.ids.filter((id) => wordById.has(id))
+      : [];
+  const hardIds = deck.filter((w) => isHard(cards[w.id])).map((w) => w.id);
+  const streak = useMemo(() => calcStreaks(progress.stats), [progress.stats]);
+  const heat = useMemo(
+    () => (tab === "stats" ? buildHeatmap(progress.stats) : []),
+    [tab, progress.stats]
+  );
+  const forecast = useMemo(
+    () => (tab === "stats" ? buildForecast(progress.cards) : []),
+    [tab, progress.cards]
+  );
+  const fcMax = Math.max(1, ...forecast.map((f) => f.n));
+  const hardTotal =
+    tab === "stats" ? Object.values(cards).filter(isHard).length : 0;
+  const blankPool = useMemo(
+    () => deck.map((w) => ({ w, b: makeBlank(w) })).filter((x) => x.b),
+    [deck]
+  );
   const progressPct = Math.round((learnedCount / words.length) * 100);
   const accuracy = todayStats.reviewed
     ? Math.round((todayStats.correct / todayStats.reviewed) * 100)
@@ -410,6 +765,7 @@ export default function App() {
         );
       if (!match) return false;
       const c = cards[w.id];
+      if (filter === "hard") return isHard(c);
       const status = !c ? "new" : dueAt(c) <= now ? "due" : "learning";
       return filter === "all" || status === filter;
     });
@@ -454,11 +810,27 @@ export default function App() {
     if (!current) return;
     const old = cards[current.id];
     const scheduled = nextSchedule(old, rating);
+    // chụp lại trạng thái trước khi chấm để có thể hoàn tác
+    setUndo({
+      session,
+      index,
+      id: current.id,
+      old,
+      day: progress.stats?.[today],
+      today,
+      practice,
+    });
     setProgress((p) => {
       const st = { ...(p.stats || {}) };
       const day = {
         ...(st[today] || { reviewed: 0, correct: 0, newLearned: 0 }),
       };
+      if (practice) {
+        // luyện tập: chỉ ghi nhận hoạt động (để tính chuỗi ngày), không đổi lịch ôn
+        day.practiced = (day.practiced || 0) + 1;
+        st[today] = day;
+        return { ...p, stats: st };
+      }
       day.reviewed += 1;
       if (rating !== "again") day.correct += 1;
       if (!old && typeof current.id === "number") day.newLearned += 1; // chỉ từ kho chung tính vào hạn mức từ mới/ngày
@@ -484,6 +856,27 @@ export default function App() {
       setShowAnswer(false);
     }
   };
+  // Hoàn tác thẻ vừa chấm: trả lại lịch ôn, thống kê và vị trí trong phiên
+  const undoLast = () => {
+    if (!undo || leavingRef.current) return;
+    const u = undo;
+    setProgress((p) => {
+      const st = { ...(p.stats || {}) };
+      if (u.day) st[u.today] = u.day;
+      else delete st[u.today];
+      if (u.practice) return { ...p, stats: st };
+      const cs = { ...(p.cards || {}) };
+      if (u.old) cs[u.id] = u.old;
+      else delete cs[u.id];
+      return { ...p, cards: cs, stats: st };
+    });
+    setUndo(null);
+    setSession(u.session);
+    setIndex(u.index);
+    setShowAnswer(false);
+    setTab("study");
+    setToast("Đã hoàn tác thẻ vừa rồi");
+  };
   // Bay thẻ ra khỏi màn hình (thẻ kế tiếp nhô lên cùng lúc) rồi mới ghi kết quả
   const commit = (rating) => {
     if (leavingRef.current || !current) return;
@@ -494,6 +887,15 @@ export default function App() {
       (rating === "good" ? 1 : -1) * Math.max(700, window.innerWidth),
       EASE_OUT
     );
+    // Thẻ kế tiếp đã hiện sẵn phía sau: đọc luôn ngay lúc vuốt, không đợi thẻ bay xong
+    if (autoSpeak && enVi) {
+      const nid = session[index + 1];
+      const nw = nid != null ? wordById.get(nid) : null;
+      if (nw) {
+        spokenRef.current = `${nid}-${index + 1}`;
+        speak(nw.word);
+      }
+    }
     setTimeout(() => setRating(rating), 240);
   };
   const onPointerDown = (e) => {
@@ -545,10 +947,31 @@ export default function App() {
     else paint(0, EASE_BACK);
   };
 
-  const startStudy = (all = false) => {
-    const ids = all
-      ? shuffle(deck.map((w) => w.id))
-      : dueQueue.map((w) => w.id);
+  // mode: "due" (hôm nay) | "more" (học thêm từ mới) | "learned" (ôn ngẫu nhiên từ đã học)
+  //       | "last" (học lại phiên vừa rồi) | "all" (ôn cả danh sách)
+  // "due" và "more" tính vào lịch ôn; các chế độ còn lại chỉ là luyện tập, không đổi lịch.
+  const startStudy = (mode = "due") => {
+    let ids;
+    if (mode === "more")
+      ids = newWords
+        .slice(0, Math.min(newLimit, newWords.length))
+        .map((w) => w.id);
+    else if (mode === "learned")
+      ids = shuffle(deck.filter((w) => cards[w.id]).map((w) => w.id)).slice(
+        0,
+        PRACTICE_MAX
+      );
+    else if (mode === "last") ids = shuffle(lastIds);
+    else if (mode === "all") ids = shuffle(deck.map((w) => w.id));
+    else if (mode === "hard") ids = shuffle(hardIds);
+    else ids = dueQueue.map((w) => w.id);
+    if (!ids.length) return;
+    if (mode !== "last") setLastSession({ deckId, ids });
+    setUndo(null);
+    spokenRef.current = "";
+    setPractice(
+      mode === "learned" || mode === "last" || mode === "all" || mode === "hard"
+    );
     setSession(ids);
     setIndex(0);
     setShowAnswer(false);
@@ -556,6 +979,8 @@ export default function App() {
     setTab("study");
   };
   const endSession = () => {
+    setUndo(null);
+    setQuiz(null);
     setSession([]);
     setIndex(0);
     setShowAnswer(false);
@@ -566,6 +991,96 @@ export default function App() {
     setProgress((p) => ({ ...p, settings: { ...p.settings, activeDeck: id } }));
     endSession();
   };
+
+  /* ---------- điền từ vào câu ---------- */
+  const startQuiz = () => {
+    if (!blankPool.length) {
+      setToast("Bộ từ này chưa có câu ví dụ chứa từ để điền chỗ trống.");
+      return;
+    }
+    // ưu tiên từ đã học, thiếu thì lấy thêm từ chưa học
+    const learned = shuffle(blankPool.filter((x) => cards[x.w.id]));
+    const fresh = shuffle(blankPool.filter((x) => !cards[x.w.id]));
+    const pool = deck.length >= 30 ? deck : [...deck, ...words];
+    const items = [];
+    for (const { w, b } of [...learned, ...fresh]) {
+      const cap = /^[A-Z]/.test(b.shown);
+      const fix = (s) => (cap ? s.charAt(0).toUpperCase() + s.slice(1) : s);
+      const ds = pickDistractors(
+        b.shown,
+        b.kind,
+        w.pos,
+        pool,
+        (b.before + b.after).toLowerCase()
+      );
+      if (ds.length < 2) continue;
+      items.push({
+        id: w.id,
+        w,
+        before: b.before,
+        after: b.after,
+        answer: b.shown,
+        options: shuffle([b.shown, ...ds.map(fix)]),
+      });
+      if (items.length >= QUIZ_LEN) break;
+    }
+    if (!items.length) {
+      setToast("Chưa tạo được câu hỏi cho bộ từ này.");
+      return;
+    }
+    endSession();
+    setQuiz({ items, i: 0, picked: null, score: 0, wrong: [] });
+    setTab("study");
+  };
+  const pickOption = (k) => {
+    if (!quiz || quiz.picked != null) return;
+    const it = quiz.items[quiz.i];
+    const ok = it.options[k] === it.answer;
+    setQuiz((q) => ({
+      ...q,
+      picked: k,
+      score: q.score + (ok ? 1 : 0),
+      wrong: ok ? q.wrong : [...q.wrong, it],
+    }));
+    // ghi nhận hoạt động trong ngày (tính vào chuỗi ngày), không đổi lịch ôn
+    setProgress((p) => {
+      const st = { ...(p.stats || {}) };
+      const day = {
+        ...(st[today] || { reviewed: 0, correct: 0, newLearned: 0 }),
+      };
+      day.practiced = (day.practiced || 0) + 1;
+      st[today] = day;
+      return { ...p, stats: st };
+    });
+    if (autoSpeak) speak(it.w.word);
+  };
+  const nextQuiz = () =>
+    setQuiz((q) =>
+      q.i + 1 >= q.items.length
+        ? { ...q, done: true }
+        : { ...q, i: q.i + 1, picked: null }
+    );
+  const endQuiz = () => setQuiz(null);
+  useEffect(() => {
+    if (!quiz || quiz.done || tab !== "study") return;
+    const onKey = (e) => {
+      if (e.target.matches?.("input, select, textarea")) return;
+      const it = quiz.items[quiz.i];
+      if (quiz.picked == null) {
+        const n = parseInt(e.key, 10);
+        if (n >= 1 && n <= it.options.length) pickOption(n - 1);
+      } else if (
+        e.key === "Enter" ||
+        e.code === "Space" ||
+        e.key === "ArrowRight"
+      ) {
+        e.preventDefault();
+        nextQuiz();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [quiz, tab]);
 
   /* ---------- dữ liệu / sao lưu ---------- */
   const resetProgress = () => {
@@ -681,6 +1196,7 @@ export default function App() {
       if (e.key === "ArrowLeft" || e.key === "1") commit("again");
       if (e.key === "ArrowRight" || e.key === "2") commit("good");
       if (e.key === "p" || e.key === "P") speak(current.word);
+      if (e.key === "z" || e.key === "Z") undoLast();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -695,12 +1211,31 @@ export default function App() {
     voiceURI,
     rate,
     voiceMode,
+    undo,
   ]);
+  // Tải sẵn âm thanh của thẻ hiện tại + 3 thẻ kế tiếp (chưa vào phiên thì tải đầu hàng đợi)
   useEffect(() => {
-    if (current && voiceMode === "human") getHumanAudio(current.word);
-  }, [current?.id, voiceMode]); // tải trước âm thanh
+    if (voiceMode !== "human") return;
+    if (current)
+      for (let k = 0; k <= 3; k++)
+        preloadAudio(wordById.get(session[index + k])?.word);
+    else dueQueue.slice(0, 3).forEach((w) => preloadAudio(w.word));
+  }, [current?.id, index, voiceMode]);
 
   const enVi = direction === "en-vi";
+  // Tự đọc: Anh → Việt đọc ngay khi thẻ hiện; Việt → Anh đọc khi lật ra đáp án
+  useEffect(() => {
+    if (!autoSpeak || tab !== "study" || !current || !enVi) return;
+    const key = `${current.id}-${index}`;
+    if (spokenRef.current === key) return; // đã đọc lúc vuốt
+    spokenRef.current = key;
+    speak(current.word);
+  }, [current?.id, index, autoSpeak, enVi, tab]);
+  useEffect(() => {
+    if (!autoSpeak || tab !== "study" || !current || enVi || !showAnswer)
+      return;
+    speak(current.word);
+  }, [showAnswer]);
   const sessionPct = session.length
     ? Math.round((index / session.length) * 100)
     : 0;
@@ -745,6 +1280,131 @@ export default function App() {
       </>
     );
 
+  const qi = quiz && !quiz.done ? quiz.items[quiz.i] : null;
+  const qAnswered = !!qi && quiz.picked != null;
+  const qRight = qAnswered && qi.options[quiz.picked] === qi.answer;
+  const quizView =
+    quiz &&
+    (quiz.done ? (
+      <div className="start">
+        <div className="start-icon">
+          <Check size={30} />
+        </div>
+        <h2>
+          {quiz.score}/{quiz.items.length} câu đúng
+        </h2>
+        <p>
+          {quiz.score === quiz.items.length
+            ? "Tuyệt vời! Bạn làm đúng hết."
+            : "Xem lại các câu sai bên dưới rồi thử lượt khác nhé."}
+        </p>
+        {quiz.wrong.length > 0 && (
+          <div className="q-wrong">
+            {quiz.wrong.map((it) => (
+              <div className="q-wrong-item" key={it.id}>
+                <div className="q-sent">
+                  {it.before}
+                  <b>{it.answer}</b>
+                  {it.after}
+                </div>
+                <small>
+                  {it.w.word} · {it.w.meaning}
+                </small>
+              </div>
+            ))}
+          </div>
+        )}
+        <button className="primary" onClick={startQuiz}>
+          Làm lượt khác
+        </button>
+        <button className="link-btn" onClick={endQuiz}>
+          Về trang chính
+        </button>
+      </div>
+    ) : (
+      <>
+        <div className="session-bar">
+          <div className="track">
+            <i
+              style={{
+                width: `${Math.round((quiz.i / quiz.items.length) * 100)}%`,
+              }}
+            />
+          </div>
+          <span className="count">
+            {quiz.i + 1} / {quiz.items.length}
+          </span>
+          <span className="chip">{quiz.score} đúng</span>
+          <button className="icon-btn sm" title="Kết thúc" onClick={endQuiz}>
+            <X size={16} />
+          </button>
+        </div>
+        <div className="q-card">
+          <span className="q-tag">Điền từ vào chỗ trống</span>
+          <p className="q-sent">
+            {qi.before}
+            <span className={`blank ${qAnswered ? "filled" : ""}`}>
+              {qAnswered ? qi.answer : "\u00a0"}
+            </span>
+            {qi.after}
+          </p>
+          <div className="q-opts">
+            {qi.options.map((o, k) => {
+              const state = !qAnswered
+                ? ""
+                : o === qi.answer
+                ? "right"
+                : k === quiz.picked
+                ? "wrong"
+                : "dim";
+              return (
+                <button
+                  key={k}
+                  className={`opt ${state}`}
+                  onClick={() => pickOption(k)}
+                  disabled={qAnswered}
+                >
+                  <kbd>{k + 1}</kbd>
+                  {o}
+                </button>
+              );
+            })}
+          </div>
+          {qAnswered && (
+            <div className={`q-fb ${qRight ? "ok" : "no"}`}>
+              <b>{qRight ? "Chính xác!" : "Chưa đúng."}</b>
+              <div>
+                <strong>{qi.w.word}</strong>
+                {metaOf(qi.w) ? `  ·  ${metaOf(qi.w)}` : ""} — {qi.w.meaning}
+              </div>
+              <div className="q-fb-actions">
+                <button
+                  className="sound"
+                  onClick={() => speakBrowser(qi.before + qi.answer + qi.after)}
+                >
+                  <Volume2 size={16} /> Nghe câu
+                </button>
+                <button className="sound" onClick={() => speak(qi.w.word)}>
+                  <Volume2 size={16} /> Nghe từ
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="actions">
+          {qAnswered ? (
+            <button className="primary q-next" onClick={nextQuiz}>
+              {quiz.i + 1 >= quiz.items.length ? "Xem kết quả" : "Câu tiếp"}
+            </button>
+          ) : (
+            <p className="gesture-hint" style={{ margin: 0 }}>
+              Chọn đáp án (hoặc bấm phím 1–4)
+            </p>
+          )}
+        </div>
+      </>
+    ));
+
   return (
     <div className="app">
       <header className="nav">
@@ -784,13 +1444,35 @@ export default function App() {
             <span>Thống kê</span>
           </button>
         </nav>
-        <div className="nav-right" />
+        <div className="nav-right">
+          <button
+            className="icon-btn"
+            title={`Giao diện: ${
+              theme === "auto" ? "tự động" : theme === "light" ? "sáng" : "tối"
+            } (bấm để đổi)`}
+            onClick={() =>
+              setTheme((t) =>
+                t === "auto" ? "light" : t === "light" ? "dark" : "auto"
+              )
+            }
+          >
+            {theme === "dark" ? (
+              <Moon size={18} />
+            ) : theme === "light" ? (
+              <Sun size={18} />
+            ) : (
+              <Monitor size={18} />
+            )}
+          </button>
+        </div>
       </header>
 
       <main className="main">
         {tab === "study" && (
           <section className="study">
-            {session.length > 0 && current ? (
+            {quiz ? (
+              quizView
+            ) : session.length > 0 && current ? (
               <>
                 <div className="session-bar">
                   <div className="track">
@@ -811,6 +1493,14 @@ export default function App() {
                   </button>
                   <button
                     className="icon-btn sm"
+                    title="Hoàn tác thẻ vừa rồi (Z)"
+                    onClick={undoLast}
+                    disabled={!undo}
+                  >
+                    <Undo2 size={16} />
+                  </button>
+                  <button
+                    className="icon-btn sm"
                     title="Kết thúc phiên"
                     onClick={endSession}
                   >
@@ -826,8 +1516,21 @@ export default function App() {
                       const w = wordById.get(session[i]);
                       if (!w) return null;
                       const top = i === index;
-                      const badge = cards[w.id] ? "review" : "new";
-                      const label = cards[w.id] ? "Ôn tập" : "Từ mới";
+                      const hard = isHard(cards[w.id]);
+                      const badge = hard
+                        ? "hard"
+                        : practice
+                        ? "practice"
+                        : cards[w.id]
+                        ? "review"
+                        : "new";
+                      const label = hard
+                        ? "Từ khó"
+                        : practice
+                        ? "Luyện tập"
+                        : cards[w.id]
+                        ? "Ôn tập"
+                        : "Từ mới";
                       return (
                         <div
                           key={`${session[i]}-${i}`}
@@ -889,10 +1592,12 @@ export default function App() {
                         </b>
                         <small>
                           {r.key === "again" ? "← " : ""}
-                          {fmtInterval(
-                            nextSchedule(cards[current.id], r.key).interval
-                          )}{" "}
-                          nữa{r.key === "good" ? " →" : ""}
+                          {practice
+                            ? "Không đổi lịch ôn"
+                            : `${fmtInterval(
+                                nextSchedule(cards[current.id], r.key).interval
+                              )} nữa`}
+                          {r.key === "good" ? " →" : ""}
                         </small>
                       </button>
                     ))}
@@ -939,7 +1644,7 @@ export default function App() {
                 </h2>
                 <p>
                   {dueQueue.length === 0
-                    ? "Không còn thẻ nào đến hạn. Quay lại vào ngày mai để ôn tiếp."
+                    ? "Không còn thẻ nào đến hạn. Quay lại ngày mai để ôn tiếp, hoặc học thêm ngay bên dưới nếu bạn còn hứng."
                     : `${dueCount} thẻ đến hạn và ${Math.min(
                         remainingNew,
                         newWords.length
@@ -952,12 +1657,83 @@ export default function App() {
                 >
                   {dueQueue.length === 0 ? "Đã hoàn thành" : "Bắt đầu học"}
                 </button>
-                {!isMain && (
-                  <button className="link-btn" onClick={() => startStudy(true)}>
-                    Ôn lại cả danh sách ({deck.length} từ)
+                {blankPool.length > 0 && (
+                  <button className="mode-btn" onClick={startQuiz}>
+                    <Pencil size={16} /> Điền từ vào câu (kiểu Part 5)
+                  </button>
+                )}
+                {((dueQueue.length === 0 && newWords.length > 0) ||
+                  lastIds.length > 0 ||
+                  practiceCount > 0 ||
+                  !isMain) && (
+                  <div className="more-box">
+                    <div className="more-title">
+                      {dueQueue.length === 0
+                        ? "Muốn học thêm?"
+                        : "Hoặc luyện tập thêm"}
+                    </div>
+                    <div className="more-actions">
+                      {dueQueue.length === 0 && newWords.length > 0 && (
+                        <button
+                          className="more-btn strong"
+                          onClick={() => startStudy("more")}
+                        >
+                          <Plus size={16} /> Học thêm{" "}
+                          {Math.min(newLimit, newWords.length)} từ mới
+                        </button>
+                      )}
+                      {hardIds.length > 0 && (
+                        <button
+                          className="more-btn hard"
+                          onClick={() => startStudy("hard")}
+                        >
+                          <Target size={15} /> Ôn {hardIds.length} từ khó
+                        </button>
+                      )}
+                      {lastIds.length > 0 && (
+                        <button
+                          className="more-btn"
+                          onClick={() => startStudy("last")}
+                        >
+                          <RotateCcw size={15} /> Học lại phiên vừa rồi ·{" "}
+                          {lastIds.length} thẻ
+                        </button>
+                      )}
+                      {practiceCount > 0 && (
+                        <button
+                          className="more-btn"
+                          onClick={() => startStudy("learned")}
+                        >
+                          <Shuffle size={15} /> Ôn ngẫu nhiên{" "}
+                          {Math.min(PRACTICE_MAX, practiceCount)} từ đã học
+                        </button>
+                      )}
+                      {!isMain && (
+                        <button
+                          className="more-btn"
+                          onClick={() => startStudy("all")}
+                        >
+                          <Library size={15} /> Ôn lại cả danh sách ·{" "}
+                          {deck.length} từ
+                        </button>
+                      )}
+                    </div>
+                    <div className="more-note">
+                      “Học thêm từ mới” được tính vào lịch ôn. Các chế độ còn
+                      lại chỉ để luyện tập, không làm thay đổi lịch ôn.
+                    </div>
+                  </div>
+                )}
+                {undo && (
+                  <button className="link-btn" onClick={undoLast}>
+                    <Undo2 size={14} /> Hoàn tác thẻ vừa rồi
                   </button>
                 )}
                 <div className="mini-stats">
+                  <div>
+                    <strong>{streak.cur}</strong>
+                    <span>Ngày liên tiếp</span>
+                  </div>
                   <div>
                     <strong>{dueCount}</strong>
                     <span>Đến hạn</span>
@@ -1004,6 +1780,7 @@ export default function App() {
                 <option value="new">Chưa học</option>
                 <option value="due">Đến hạn ôn</option>
                 <option value="learning">Đã lên lịch</option>
+                <option value="hard">Từ khó</option>
               </select>
             </div>
             <div className="table">
@@ -1020,7 +1797,10 @@ export default function App() {
                 return (
                   <div className="row" key={w.id}>
                     <div className="row-word">
-                      <b>{w.word}</b>
+                      <b>
+                        {w.word}
+                        {isHard(c) && <em className="hard-tag">khó</em>}
+                      </b>
                       <small>{metaOf(w)}</small>
                     </div>
                     <span className="row-mean">{w.meaning}</span>
@@ -1214,6 +1994,11 @@ export default function App() {
                 <strong>{todayStats.reviewed || 0}</strong>
                 <span>Lượt ôn hôm nay</span>
               </div>
+              <div className="stat">
+                <Target size={18} />
+                <strong>{hardTotal}</strong>
+                <span>Từ khó</span>
+              </div>
             </div>
             <div className="panels">
               <div className="panel">
@@ -1248,6 +2033,18 @@ export default function App() {
               </div>
               <div className="panel">
                 <h3>Giọng đọc</h3>
+                <label className="switch-row">
+                  <input
+                    type="checkbox"
+                    checked={autoSpeak}
+                    onChange={(e) => setAutoSpeak(e.target.checked)}
+                  />
+                  <span>Tự đọc từ khi hiện thẻ</span>
+                </label>
+                <p className="muted">
+                  Một số trình duyệt (nhất là trên iPhone) chỉ cho tự phát âm
+                  sau khi bạn đã chạm vào trang.
+                </p>
                 <label className="field">
                   Nguồn phát âm
                   <select
@@ -1313,6 +2110,108 @@ export default function App() {
                   dùng “Google US English”. Hai trình duyệt có bộ giọng khác
                   nhau nên chế độ “người thật” là cách để nghe giống nhau ở cả
                   hai.
+                </p>
+              </div>
+              <div className="panel wide">
+                <h3>Giao diện</h3>
+                <div className="seg">
+                  {[
+                    ["auto", "Tự động", Monitor],
+                    ["light", "Sáng", Sun],
+                    ["dark", "Tối", Moon],
+                  ].map(([k, label, Ic]) => (
+                    <button
+                      key={k}
+                      className={theme === k ? "on" : ""}
+                      onClick={() => setTheme(k)}
+                    >
+                      <Ic size={15} /> {label}
+                    </button>
+                  ))}
+                </div>
+                <p className="muted">
+                  “Tự động” theo cài đặt sáng/tối của thiết bị.
+                </p>
+                <h3>Cài thành ứng dụng</h3>
+                {installed ? (
+                  <p className="muted">
+                    Bạn đang dùng bản đã cài. Dữ liệu học vẫn nằm trên máy này
+                    nên mở được cả khi mất mạng.
+                  </p>
+                ) : installEvt ? (
+                  <button className="solid" onClick={installApp}>
+                    <Download size={15} /> Cài ứng dụng
+                  </button>
+                ) : isIOS ? (
+                  <p className="muted">
+                    Trên iPhone/iPad: mở bằng Safari, bấm nút Chia sẻ (ô vuông
+                    có mũi tên) rồi chọn “Thêm vào Màn hình chính”. Mở từ biểu
+                    tượng đó, app chạy toàn màn hình, không còn thanh Safari và
+                    không bị vuốt-quay-lại.
+                  </p>
+                ) : (
+                  <p className="muted">
+                    Trên Chrome/Edge: bấm biểu tượng cài đặt ở cuối thanh địa
+                    chỉ, hoặc menu ⋮ → “Cài đặt ứng dụng”. (Nút cài chỉ hiện
+                    trên bản đã deploy, không hiện khi chạy dev.)
+                  </p>
+                )}
+              </div>
+              <div className="panel wide">
+                <div className="streak-head">
+                  <div className="streak-big">
+                    <Flame size={22} />
+                    <strong>{streak.cur}</strong> ngày liên tiếp
+                  </div>
+                  <span className="muted">Dài nhất: {streak.best} ngày</span>
+                </div>
+                <div className="heat-wrap">
+                  <div className="heat-days" aria-hidden>
+                    <span>T2</span>
+                    <span />
+                    <span>T4</span>
+                    <span />
+                    <span>T6</span>
+                    <span />
+                    <span>CN</span>
+                  </div>
+                  <div className="heat">
+                    {heat.map((c) => (
+                      <i
+                        key={c.key}
+                        className={`cell l${heatLevel(c.n)}`}
+                        title={c.n < 0 ? "" : `${c.key}: ${c.n} lượt`}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <h3>Dự báo 7 ngày tới</h3>
+                <div className="forecast">
+                  {forecast.map((f) => (
+                    <div className="fc" key={f.i}>
+                      <span className="fc-n">{f.n}</span>
+                      <div className="fc-bar">
+                        <i
+                          style={{
+                            height: `${Math.max(4, (f.n / fcMax) * 100)}%`,
+                          }}
+                        />
+                      </div>
+                      <small>
+                        {f.i === 0
+                          ? "Hôm nay"
+                          : f.i === 1
+                          ? "Mai"
+                          : new Date(f.t).toLocaleDateString("vi-VN", {
+                              weekday: "short",
+                            })}
+                      </small>
+                    </div>
+                  ))}
+                </div>
+                <p className="muted">
+                  Hôm nay gồm cả thẻ đã quá hạn. Tính trên toàn bộ kho chung và
+                  các danh sách riêng.
                 </p>
               </div>
               <div className="panel wide">
