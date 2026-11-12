@@ -1,0 +1,74 @@
+/* Service worker của TOEIC Recall.
+   - Điều hướng: ưu tiên mạng (luôn lấy bản mới), mất mạng thì dùng bản đã lưu.
+   - File tĩnh cùng origin + Google Fonts: trả bản đã lưu ngay, đồng thời cập nhật ngầm.
+   - API từ điển và file âm thanh đi thẳng mạng (app tự nhớ link âm thanh, thiếu thì dùng giọng trình duyệt).
+   Khi sửa file này hoặc muốn ép mọi máy tải lại, đổi VERSION. */
+const VERSION = "v1";
+const SHELL = `toeic-recall-shell-${VERSION}`;
+const RUNTIME = `toeic-recall-runtime-${VERSION}`;
+const SHELL_URLS = [
+  "/",
+  "/manifest.webmanifest",
+  "/icon-192.png",
+  "/icon-512.png",
+  "/apple-touch-icon.png",
+];
+
+self.addEventListener("install", (e) => {
+  e.waitUntil(
+    caches
+      .open(SHELL)
+      .then((c) => c.addAll(SHELL_URLS))
+      .then(() => self.skipWaiting())
+  );
+});
+
+self.addEventListener("activate", (e) => {
+  e.waitUntil(
+    caches
+      .keys()
+      .then((keys) =>
+        Promise.all(
+          keys.filter((k) => k !== SHELL && k !== RUNTIME).map((k) => caches.delete(k))
+        )
+      )
+      .then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener("fetch", (e) => {
+  const req = e.request;
+  if (req.method !== "GET") return;
+  const url = new URL(req.url);
+
+  if (req.mode === "navigate") {
+    e.respondWith(
+      fetch(req)
+        .then((res) => {
+          const copy = res.clone();
+          caches.open(SHELL).then((c) => c.put("/", copy));
+          return res;
+        })
+        .catch(() => caches.match("/"))
+    );
+    return;
+  }
+
+  const sameOrigin = url.origin === self.location.origin;
+  const isFont =
+    url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com";
+  if ((!sameOrigin && !isFont) || url.pathname === "/sw.js") return;
+
+  e.respondWith(
+    caches.open(RUNTIME).then(async (cache) => {
+      const cached = await cache.match(req);
+      const network = fetch(req)
+        .then((res) => {
+          if (res && (res.ok || res.type === "opaque")) cache.put(req, res.clone());
+          return res;
+        })
+        .catch(() => cached || Response.error());
+      return cached || network;
+    })
+  );
+});
