@@ -1823,3 +1823,122 @@ html {
     grid-template-columns: repeat(7, minmax(0, 1fr));
   }
 }
+
+/* ==========================================================
+   MOBILE: thanh điều hướng nổi ở đáy, kính mờ trong suốt
+   (đặt cuối file để ghi đè các rule mobile ở trên)
+   ========================================================== */
+@media (max-width: 760px) {
+  .nav {
+    position: fixed;
+    top: auto;
+    left: max(14px, env(safe-area-inset-left));
+    right: max(14px, env(safe-area-inset-right));
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    z-index: 40;
+    display: block;
+    padding: 6px;
+    border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+    border-radius: 26px;
+    background: color-mix(in srgb, var(--bg) 62%, transparent);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    backdrop-filter: blur(22px) saturate(180%);
+    box-shadow: 0 10px 34px -10px rgba(23, 26, 46, 0.28),
+      0 1px 0 rgba(255, 255, 255, 0.35) inset;
+  }
+  :root[data-theme="dark"] .nav {
+    box-shadow: 0 10px 34px -10px rgba(0, 0, 0, 0.7),
+      0 1px 0 rgba(255, 255, 255, 0.06) inset;
+  }
+
+  /* bỏ header: logo + nút đổi giao diện (đã có trong tab Thống kê) */
+  .nav .brand,
+  .nav .brand *,
+  .nav .logo,
+  .nav .nav-right {
+    display: none !important;
+  }
+
+  /* bỏ biểu tượng tròn (dấu tick xanh) ở đầu thẻ bắt đầu học */
+  .start-icon {
+    display: none;
+  }
+
+  .tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    width: 100%;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+  }
+  .tabs button {
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+    padding: 8px 4px 7px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--muted);
+    min-width: 0;
+  }
+  .tabs button span {
+    display: block; /* hiện lại nhãn chữ dưới icon */
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .tabs button svg {
+    width: 22px;
+    height: 22px;
+  }
+  .tabs button.on {
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    color: var(--accent);
+  }
+
+  /* chừa chỗ để nội dung không bị thanh điều hướng che */
+  .main {
+    padding-top: max(6px, env(safe-area-inset-top));
+    /* nav cao ~72px + khoảng nổi 10px + dư 28px để không che nội dung */
+    padding-bottom: calc(110px + env(safe-area-inset-bottom));
+  }
+  /* cuộn tới đâu cũng chừa chỗ phía dưới */
+  html {
+    scroll-padding-bottom: calc(110px + env(safe-area-inset-bottom));
+  }
+
+  /* kéo nội dung lên sát trên hơn, không canh giữa theo chiều dọc để khỏi bị đẩy xuống thanh điều hướng */
+  .study {
+    justify-content: flex-start;
+    padding-top: 0;
+  }
+  .start {
+    min-height: 0;
+    padding: 20px 18px 22px;
+    justify-content: flex-start;
+  }
+  .mini-stats {
+    margin-top: 18px;
+    padding-top: 16px;
+  }
+
+  /* toast nổi lên phía trên thanh điều hướng */
+  .toast {
+    bottom: calc(88px + env(safe-area-inset-bottom));
+  }
+}
+
+/* trình duyệt không hỗ trợ blur thì dùng nền đặc hơn cho dễ đọc */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  @media (max-width: 760px) {
+    .nav {
+      background: var(--surface);
+    }
+  }
+}
