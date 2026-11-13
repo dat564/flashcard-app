@@ -2161,7 +2161,7 @@ html {
     );
     border-color: color-mix(in srgb, var(--accent) 14%, var(--line));
   }
-  .face > * {
+  .face > :not(.badge):not(.flip-hint) {
     position: relative; /* nằm trên quầng sáng */
   }
   .badge {

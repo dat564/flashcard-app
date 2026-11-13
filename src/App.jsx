@@ -292,8 +292,15 @@ const setAudioCache = (key, url) => {
   }, 1500);
 };
 const audioInflight = new Map();
+const audioSlug = (s) =>
+  s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+const localAudio = new Set(words.map((w) => w.word.trim().toLowerCase()));
 async function getHumanAudio(word) {
   const key = word.toLowerCase().trim();
+  if (localAudio.has(key)) return `/audio/${audioSlug(key)}.mp3`;
   if (audioCache.has(key)) return audioCache.get(key);
   if (!/^[a-z'-]+$/i.test(key)) {
     setAudioCache(key, null);
@@ -352,6 +359,29 @@ function preloadAudio(word) {
     audioEls.set(key, a);
     if (audioEls.size > 40) audioEls.delete(audioEls.keys().next().value);
   });
+}
+// "Mở khóa" âm thanh ở lần chạm đầu tiên: trình duyệt (nhất là iOS Safari) chỉ cho tự phát tiếng
+// sau khi người dùng đã tương tác, nên phát thử một đoạn im lặng ngay trong cú chạm.
+let audioUnlocked = false;
+function unlockAudio() {
+  if (audioUnlocked) return;
+  audioUnlocked = true;
+  try {
+    const a = new Audio(
+      "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA="
+    );
+    a.volume = 0;
+    a.play().catch(() => (audioUnlocked = false));
+  } catch {
+    audioUnlocked = false;
+  }
+  try {
+    const u = new SpeechSynthesisUtterance("");
+    u.volume = 0;
+    window.speechSynthesis?.speak(u);
+  } catch {
+    /* bỏ qua */
+  }
 }
 
 /* ---------- Điền từ vào câu ---------- */
@@ -570,6 +600,16 @@ export default function App() {
     localStorage.setItem(MODE_KEY, voiceMode);
     localStorage.setItem(AUTO_KEY, autoSpeak ? "1" : "0");
   }, [voiceURI, rate, voiceMode, autoSpeak]);
+  // Mở khóa âm thanh ở lần chạm / phím đầu tiên trên trang
+  useEffect(() => {
+    const h = () => unlockAudio();
+    window.addEventListener("pointerdown", h, { once: true });
+    window.addEventListener("keydown", h, { once: true });
+    return () => {
+      window.removeEventListener("pointerdown", h);
+      window.removeEventListener("keydown", h);
+    };
+  }, []);
   // Giao diện sáng/tối
   useEffect(() => {
     localStorage.setItem(THEME_KEY, theme);
@@ -663,7 +703,8 @@ export default function App() {
     u.rate = rate;
     sy.speak(u);
   };
-  // Phát ngay nếu âm thanh đã được tải sẵn; chưa có thì hỏi từ điển (kết quả được nhớ lại)
+  // Phát ngay nếu âm thanh đã được tải sẵn; chưa có thì hỏi từ điển (kết quả được nhớ lại).
+  // Chờ quá 0,8 giây thì đọc tạm bằng giọng trình duyệt (file vẫn tải ngầm để lần sau phát ngay).
   const speak = (text) => {
     const seq = ++speakSeq.current;
     audioRef.current?.pause();
@@ -684,9 +725,12 @@ export default function App() {
     };
     const el = audioEls.get(key);
     if (el) return play(el);
-    getHumanAudio(text).then((url) => {
+    Promise.race([
+      getHumanAudio(text),
+      new Promise((r) => setTimeout(() => r("__slow__"), 800)),
+    ]).then((url) => {
       if (seq !== speakSeq.current) return; // đã có lần đọc mới hơn
-      if (!url) return speakBrowser(text);
+      if (!url || url === "__slow__") return speakBrowser(text);
       const a = new Audio(url);
       audioEls.set(key, a);
       play(a);
@@ -967,9 +1011,18 @@ export default function App() {
     else if (mode === "hard") ids = shuffle(hardIds);
     else ids = dueQueue.map((w) => w.id);
     if (!ids.length) return;
+    // Đang trong cú chạm của người dùng: mở khóa âm thanh và tải sẵn vài từ đầu
+    unlockAudio();
+    ids.slice(0, 3).forEach((id) => preloadAudio(wordById.get(id)?.word));
     if (mode !== "last") setLastSession({ deckId, ids });
     setUndo(null);
     spokenRef.current = "";
+    // Đọc luôn từ đầu tiên ngay trong cú chạm (iOS chỉ cho phát tiếng ở đây)
+    const first = wordById.get(ids[0]);
+    if (autoSpeak && direction === "en-vi" && first) {
+      spokenRef.current = `${ids[0]}-0`;
+      speak(first.word);
+    }
     setPractice(
       mode === "learned" || mode === "last" || mode === "all" || mode === "hard"
     );
@@ -995,6 +1048,7 @@ export default function App() {
 
   /* ---------- điền từ vào câu ---------- */
   const startQuiz = () => {
+    unlockAudio();
     if (!blankPool.length) {
       setToast("Bộ từ này chưa có câu ví dụ chứa từ để điền chỗ trống.");
       return;
@@ -1228,7 +1282,7 @@ export default function App() {
   useEffect(() => {
     if (!autoSpeak || tab !== "study" || !current || !enVi) return;
     const key = `${current.id}-${index}`;
-    if (spokenRef.current === key) return; // đã đọc lúc vuốt
+    if (spokenRef.current === key) return; // đã đọc lúc vuốt / lúc bấm bắt đầu
     spokenRef.current = key;
     speak(current.word);
   }, [current?.id, index, autoSpeak, enVi, tab]);
