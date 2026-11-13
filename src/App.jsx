@@ -12,6 +12,7 @@ import {
   Brain,
   CalendarDays,
   Check,
+  ChevronDown,
   Clock3,
   FolderOpen,
   Layers,
@@ -1611,52 +1612,68 @@ export default function App() {
               </>
             ) : (
               <div className="start">
-                <div className="decks">
-                  <button
-                    className={`deck-chip ${isMain ? "on" : ""}`}
-                    onClick={() => chooseDeck("main")}
+                <div className="start-brand">
+                  <span className="logo">
+                    <Brain size={20} />
+                  </span>
+                  <b>TOEIC Recall</b>
+                </div>
+                <div className="deck-select">
+                  <select
+                    aria-label="Chọn bộ từ"
+                    value={deckId}
+                    onChange={(e) =>
+                      e.target.value === "__add__"
+                        ? setTab("mine")
+                        : chooseDeck(e.target.value)
+                    }
                   >
-                    Kho chung · {words.length}
-                  </button>
-                  {lists.map((l) => (
-                    <button
-                      key={l.id}
-                      className={`deck-chip ${deckId === l.id ? "on" : ""}`}
-                      onClick={() => chooseDeck(l.id)}
-                    >
-                      {l.name} · {l.words.length}
-                    </button>
-                  ))}
+                    <option value="main">Kho chung · {words.length} từ</option>
+                    {lists.map((l) => (
+                      <option key={l.id} value={l.id}>
+                        {l.name} · {l.words.length} từ
+                      </option>
+                    ))}
+                    <option value="__add__">＋ Thêm danh sách mới…</option>
+                  </select>
+                  <ChevronDown size={18} />
+                </div>
+                <div className="hero">
+                  <div className="start-icon">
+                    <Check size={30} />
+                  </div>
+                  <h2>
+                    {dueQueue.length === 0
+                      ? "Hôm nay bạn đã xong!"
+                      : "Sẵn sàng học chưa?"}
+                  </h2>
+                  {dueQueue.length === 0 ? (
+                    <p>
+                      Không còn thẻ nào đến hạn. Quay lại ngày mai để ôn tiếp,
+                      hoặc học thêm ngay bên dưới nếu bạn còn hứng.
+                    </p>
+                  ) : (
+                    <div className="hero-nums">
+                      <div>
+                        <strong>{dueCount}</strong>
+                        <span>thẻ đến hạn</span>
+                      </div>
+                      <div>
+                        <strong>
+                          {Math.min(remainingNew, newWords.length)}
+                        </strong>
+                        <span>từ mới</span>
+                      </div>
+                    </div>
+                  )}
                   <button
-                    className="deck-chip add"
-                    onClick={() => setTab("mine")}
+                    className="primary"
+                    onClick={() => startStudy()}
+                    disabled={dueQueue.length === 0}
                   >
-                    <Upload size={14} /> Thêm danh sách
+                    {dueQueue.length === 0 ? "Đã hoàn thành" : "Bắt đầu học"}
                   </button>
                 </div>
-                <div className="start-icon">
-                  <Check size={30} />
-                </div>
-                <h2>
-                  {dueQueue.length === 0
-                    ? "Hôm nay bạn đã xong!"
-                    : "Sẵn sàng học chưa?"}
-                </h2>
-                <p>
-                  {dueQueue.length === 0
-                    ? "Không còn thẻ nào đến hạn. Quay lại ngày mai để ôn tiếp, hoặc học thêm ngay bên dưới nếu bạn còn hứng."
-                    : `${dueCount} thẻ đến hạn và ${Math.min(
-                        remainingNew,
-                        newWords.length
-                      )} từ mới đang chờ bạn.`}
-                </p>
-                <button
-                  className="primary"
-                  onClick={() => startStudy()}
-                  disabled={dueQueue.length === 0}
-                >
-                  {dueQueue.length === 0 ? "Đã hoàn thành" : "Bắt đầu học"}
-                </button>
                 {blankPool.length > 0 && (
                   <button className="mode-btn" onClick={startQuiz}>
                     <Pencil size={16} /> Điền từ vào câu (kiểu Part 5)

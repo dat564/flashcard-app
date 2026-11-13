@@ -98,6 +98,7 @@ kbd {
   display: flex;
   align-items: center;
   gap: 10px;
+  padding: 15px !important;
   font-size: 17px;
   letter-spacing: -0.01em;
 }
@@ -990,39 +991,6 @@ kbd {
   color: var(--again);
 }
 
-/* ---------- chọn bộ từ ---------- */
-.decks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-  margin-bottom: 14px;
-  max-width: 640px;
-}
-.deck-chip {
-  padding: 8px 14px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  font-weight: 600;
-  font-size: 13.5px;
-  color: var(--muted);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.deck-chip:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-.deck-chip.on {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-}
-.deck-chip.add {
-  border-style: dashed;
-}
 .link-btn {
   display: inline-flex;
   align-items: center;
@@ -1034,6 +1002,157 @@ kbd {
   font-size: 14px;
   margin-top: 6px;
   text-decoration: underline;
+}
+
+/* ---------- chọn bộ từ (dạng select) ---------- */
+.deck-select {
+  position: relative;
+  flex: none;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto 14px;
+}
+.deck-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 48px;
+  padding: 0 46px 0 18px;
+  border-radius: 16px;
+  border: 1.5px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 8px 22px -14px rgba(23, 26, 46, 0.35);
+  transition: border-color 0.15s;
+}
+.deck-select select:hover,
+.deck-select select:focus,
+.deck-select select:focus-visible {
+  border-color: var(--accent);
+  outline: none; /* bỏ viền outline mặc định, chỉ đổi màu viền */
+}
+/* danh sách lựa chọn: kiểu cơ bản (mọi trình duyệt) */
+.deck-select option {
+  background: var(--surface);
+  color: var(--ink);
+  padding: 10px 14px;
+  font-weight: 600;
+}
+
+/* Trình duyệt hỗ trợ tạo kiểu cho danh sách (Chrome/Edge mới): menu bo góc, hover/được chọn đẹp */
+@supports (appearance: base-select) {
+  .deck-select select,
+  .deck-select select::picker(select) {
+    appearance: base-select;
+  }
+  .deck-select select {
+    display: flex;
+    align-items: center; /* chữ nằm giữa ô theo chiều dọc */
+    line-height: 1.2;
+  }
+  .deck-select select selectedcontent {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .deck-select select::picker-icon {
+    display: none; /* đã có mũi tên riêng */
+  }
+  .deck-select select::picker(select) {
+    box-sizing: border-box;
+    width: anchor-size(width);
+    margin-top: 8px;
+    padding: 6px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--surface);
+    box-shadow: 0 18px 40px -16px rgba(23, 26, 46, 0.35);
+    max-height: 50vh;
+  }
+  .deck-select option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: 14.5px;
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .deck-select option:hover,
+  .deck-select option:focus-visible {
+    background: var(--accent-soft);
+    outline: none;
+  }
+  .deck-select option:checked {
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .deck-select option::checkmark {
+    order: 1;
+    margin-left: auto;
+    color: var(--accent);
+  }
+  .deck-select option:last-child {
+    color: var(--accent);
+  }
+}
+
+.deck-select svg {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent);
+  pointer-events: none;
+}
+
+/* logo + tên app ở đầu tab Học (chỉ mobile, vì desktop đã có header) */
+.start-brand {
+  display: none;
+}
+
+/* ---------- khối chính của màn hình bắt đầu ---------- */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+.hero-nums {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  max-width: 360px;
+}
+.hero-nums div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 12px 8px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.hero-nums strong {
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
+.hero-nums span {
+  font-size: 12.5px;
+  color: var(--muted);
 }
 
 /* ---------- danh sách riêng ---------- */
@@ -1826,7 +1945,6 @@ html {
 
 /* ==========================================================
    MOBILE: thanh điều hướng nổi ở đáy, kính mờ trong suốt
-   (đặt cuối file để ghi đè các rule mobile ở trên)
    ========================================================== */
 @media (max-width: 760px) {
   .nav {
@@ -1902,32 +2020,6 @@ html {
     color: var(--accent);
   }
 
-  /* chừa chỗ để nội dung không bị thanh điều hướng che */
-  .main {
-    padding-top: max(6px, env(safe-area-inset-top));
-    /* nav cao ~72px + khoảng nổi 10px + dư 28px để không che nội dung */
-    padding-bottom: calc(110px + env(safe-area-inset-bottom));
-  }
-  /* cuộn tới đâu cũng chừa chỗ phía dưới */
-  html {
-    scroll-padding-bottom: calc(110px + env(safe-area-inset-bottom));
-  }
-
-  /* kéo nội dung lên sát trên hơn, không canh giữa theo chiều dọc để khỏi bị đẩy xuống thanh điều hướng */
-  .study {
-    justify-content: flex-start;
-    padding-top: 0;
-  }
-  .start {
-    min-height: 0;
-    padding: 20px 18px 22px;
-    justify-content: flex-start;
-  }
-  .mini-stats {
-    margin-top: 18px;
-    padding-top: 16px;
-  }
-
   /* toast nổi lên phía trên thanh điều hướng */
   .toast {
     bottom: calc(88px + env(safe-area-inset-bottom));
@@ -1935,10 +2027,540 @@ html {
 }
 
 /* trình duyệt không hỗ trợ blur thì dùng nền đặc hơn cho dễ đọc */
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+@supports not (
+  (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
+) {
   @media (max-width: 760px) {
     .nav {
       background: var(--surface);
     }
+  }
+}
+
+/* ==========================================================
+   MOBILE "1 MÀN HÌNH": vừa khít giữa đầu trang và thanh nav nổi
+   - App cao đúng 100dvh, không cuộn cả trang
+   - Tab Học vừa một màn; các tab khác cuộn bên trong .main
+   ========================================================== */
+@media (max-width: 760px) {
+  :root {
+    --nav-h: 64px; /* chiều cao thanh điều hướng nổi */
+    --nav-space: calc(var(--nav-h) + 10px + 12px + env(safe-area-inset-bottom));
+  }
+
+  /* khóa cuộn cả trang */
+  html,
+  body,
+  #root {
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+    scrollbar-gutter: auto;
+  }
+  .app {
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  /* vùng nội dung = phần còn lại phía trên thanh nav.
+     Chỗ chừa cho nav nằm ở padding của .page / .study (không dựa vào padding của khung cuộn) */
+  .main {
+    flex: 1;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: max(10px, env(safe-area-inset-top))
+      max(18px, env(safe-area-inset-right)) 12px
+      max(18px, env(safe-area-inset-left));
+  }
+  html {
+    scroll-padding-bottom: calc(var(--nav-space) + 8px);
+  }
+
+  /* tab dạng trang (Kho từ, Từ của tôi, Thống kê) */
+  .page {
+    flex-shrink: 0;
+    padding-top: 0;
+    padding-bottom: calc(var(--nav-space) + 8px);
+  }
+  .page h1 {
+    font-size: 24px;
+    margin: 2px 0 14px;
+  }
+
+  /* ---------- TAB HỌC: bố cục cột, thẻ giãn vừa khít ---------- */
+  .study {
+    flex: 1;
+    min-height: 0;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 0 0 var(--nav-space);
+  }
+  .session-bar {
+    flex: none;
+  }
+  .stage {
+    flex: 1;
+    min-height: 260px;
+  }
+  .swipe,
+  .swipe.top {
+    height: 100%;
+  }
+  .flip {
+    height: 100%;
+    border-radius: 28px;
+  }
+  .actions {
+    flex: none;
+    min-height: 0;
+  }
+  .gesture-hint {
+    flex: none;
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  /* ---------- THẺ ĐẸP HƠN ---------- */
+  .face {
+    border-radius: 28px;
+    padding: 56px 22px 52px;
+    gap: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(23, 26, 46, 0.05),
+      0 22px 44px -22px rgba(23, 26, 46, 0.35);
+  }
+  /* quầng sáng trang trí ở góc thẻ */
+  .face::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(
+      120% 55% at 100% 0%,
+      color-mix(in srgb, var(--accent) 14%, transparent),
+      transparent 62%
+    );
+  }
+  .face.back::before {
+    background: radial-gradient(
+      120% 55% at 100% 0%,
+      rgba(255, 255, 255, 0.22),
+      transparent 62%
+    );
+  }
+  .face.front {
+    background: linear-gradient(
+      180deg,
+      var(--card-front) 0%,
+      color-mix(in srgb, var(--accent) 4%, var(--card-front)) 100%
+    );
+    border-color: color-mix(in srgb, var(--accent) 14%, var(--line));
+  }
+  .face > * {
+    position: relative; /* nằm trên quầng sáng */
+  }
+  .badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-size: 11.5px;
+    padding: 5px 11px;
+    letter-spacing: 0.02em;
+  }
+  .word {
+    font-size: clamp(38px, 12.5vw, 62px);
+  }
+  .word.vi {
+    font-size: clamp(28px, 8vw, 40px);
+  }
+  .meaning {
+    font-size: clamp(26px, 8vw, 38px);
+  }
+  .meta {
+    font-size: 15px;
+  }
+  .example {
+    font-size: 15px;
+    line-height: 1.55;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.12);
+    font-style: normal;
+  }
+  .front .example {
+    background: var(--surface-2);
+  }
+  .sound {
+    margin-top: 10px;
+    padding: 9px 16px;
+    font-size: 13.5px;
+    box-shadow: 0 6px 16px -10px rgba(23, 26, 46, 0.35);
+  }
+  .flip-hint {
+    bottom: 16px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ---------- NÚT CHẤM ĐIỂM gọn ---------- */
+  .rating {
+    gap: 10px;
+  }
+  .rate {
+    padding: 11px 8px 10px;
+    border-radius: 18px;
+    gap: 2px;
+  }
+  .rate b {
+    font-size: 15.5px;
+  }
+  .rate small {
+    font-size: 11px;
+  }
+
+  /* ---------- MÀN HÌNH BẮT ĐẦU: bố cục trang chủ, vừa 1 màn ---------- */
+  .start {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 12px;
+    padding: 0 0 4px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  .start .deck-select {
+    max-width: none;
+    margin: 0;
+  }
+  /* thẻ chính: số liệu hôm nay + nút bắt đầu */
+  .hero {
+    gap: 12px;
+    padding: 22px 18px 18px;
+    border-radius: 26px;
+    border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--line));
+    background: linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--accent) 12%, var(--surface)) 0%,
+      var(--surface) 70%
+    );
+    box-shadow: 0 18px 40px -26px color-mix(in srgb, var(--accent) 55%, transparent);
+  }
+  .hero h2 {
+    font-size: 24px;
+  }
+  .hero p,
+  .start p {
+    font-size: 14px;
+    max-width: 320px;
+  }
+  .hero-nums {
+    max-width: none;
+  }
+  .hero .primary {
+    width: 100%;
+    max-width: none;
+    margin-top: 4px;
+    padding: 15px 24px;
+    font-size: 16px;
+  }
+  .mode-btn {
+    width: 100%;
+    justify-content: center;
+    margin: 0;
+    padding: 14px 20px;
+    background: var(--surface);
+  }
+
+  /* luyện tập thêm: danh sách nút full-width, dễ bấm */
+  .more-box {
+    align-items: stretch;
+    margin: 0;
+    padding: 0;
+    border-top: 0;
+    gap: 8px;
+  }
+  .more-title {
+    text-align: left;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding-left: 4px;
+  }
+  .more-actions {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+  .more-btn {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 13px 16px;
+    font-size: 14px;
+    background: var(--surface);
+  }
+  .more-btn.strong {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  }
+  .more-note {
+    max-width: none;
+    text-align: left;
+    padding-left: 4px;
+    font-size: 11.5px;
+  }
+  .start .link-btn {
+    align-self: center;
+  }
+
+  /* thống kê nhanh: dính xuống đáy, ngay trên thanh nav */
+  .mini-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+    margin-top: 6px;
+    padding-top: 0;
+    border-top: 0;
+  }
+  .mini-stats div {
+    align-items: center;
+    text-align: center;
+    padding: 10px 4px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+  .mini-stats strong {
+    font-size: 18px;
+  }
+  .mini-stats span {
+    font-size: 10.5px;
+    line-height: 1.25;
+  }
+
+  /* màn kết quả quiz (cũng dùng .start): canh giữa theo chiều dọc */
+  .start > .start-icon + h2 {
+    margin-top: auto;
+    font-size: 24px;
+  }
+  .start > .primary {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .start > .link-btn:last-child {
+    margin-bottom: auto;
+  }
+
+  /* cả cụm nội dung canh giữa theo chiều dọc (an toàn khi nội dung dài: vẫn cuộn được, không bị cắt phần đầu) */
+  .start > .start-brand + * {
+    margin-top: auto;
+  }
+  .start > .start-brand {
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 10px;
+    flex: none;
+    margin: 0;
+    padding: 2px 4px;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+  }
+  .start > :last-child {
+    margin-bottom: auto;
+  }
+
+  /* ---------- QUIZ điền từ: vừa 1 màn ---------- */
+  .q-card {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 50px 16px 16px;
+    gap: 14px;
+    border-radius: 26px;
+  }
+  .q-sent {
+    font-size: clamp(18px, 5.2vw, 22px);
+    line-height: 1.6;
+  }
+  .q-opts {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .opt {
+    padding: 12px 14px;
+    font-size: 15.5px;
+    border-radius: 14px;
+  }
+  .q-next {
+    max-width: none;
+  }
+
+  /* toast nằm trên thanh nav */
+  .toast {
+    bottom: calc(var(--nav-h) + 22px + env(safe-area-inset-bottom));
+  }
+}
+
+/* màn hình thấp (iPhone SE, điện thoại nhỏ): thu gọn thêm */
+@media (max-width: 760px) and (max-height: 700px) {
+  .study {
+    gap: 8px;
+  }
+  .stage {
+    min-height: 220px;
+  }
+  .face {
+    padding: 48px 18px 44px;
+  }
+  .word {
+    font-size: clamp(32px, 11vw, 48px);
+  }
+  .meaning {
+    font-size: clamp(22px, 7vw, 30px);
+  }
+  .rate {
+    padding: 9px 6px 8px;
+  }
+  .gesture-hint {
+    display: none;
+  }
+  .hero {
+    padding: 16px 14px 14px;
+  }
+}
+
+/* ==========================================================
+   DESKTOP: vừa đúng 1 màn hình (100vh), không cuộn cả trang
+   - Tab Học co gọn theo chiều cao cửa sổ
+   - Kho từ / Từ của tôi / Thống kê cuộn bên trong vùng nội dung
+   ========================================================== */
+@media (min-width: 761px) {
+  html,
+  body,
+  #root {
+    height: 100%;
+    overflow: hidden;
+    scrollbar-gutter: auto;
+  }
+  .app {
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .nav {
+    flex: none;
+    padding: 10px 28px;
+  }
+  .main {
+    flex: 1;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 16px 20px 20px;
+  }
+  .page {
+    flex-shrink: 0;
+  }
+
+  /* tab Học */
+  .study {
+    flex: 1;
+    min-height: 0;
+    gap: 16px;
+    padding-top: 0;
+  }
+  .session-bar,
+  .actions {
+    flex: none;
+  }
+  .flip {
+    height: clamp(300px, calc(100dvh - 400px), 500px);
+  }
+  .q-card {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  /* màn hình bắt đầu: co theo chiều cao, tràn thì cuộn bên trong thẻ */
+  .start {
+    min-height: 0;
+    max-height: 100%;
+    overflow-y: auto;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: clamp(18px, 3.5vh, 40px) 32px clamp(16px, 3vh, 32px);
+  }
+  .start > .start-brand + *,
+  .start > .start-icon + h2 {
+    margin-top: auto;
+  }
+  .start > :last-child {
+    margin-bottom: auto;
+  }
+  .deck-select {
+    margin-bottom: 4px;
+  }
+  .start-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 18px;
+    margin-bottom: 0;
+  }
+  .start h2 {
+    font-size: clamp(26px, 3.6vh, 32px);
+  }
+  .more-box {
+    margin-top: 8px;
+    padding-top: 12px;
+  }
+  .mini-stats {
+    margin-top: 12px;
+    padding-top: 14px;
+  }
+}
+
+/* cửa sổ thấp (laptop nhỏ): thu gọn thêm */
+@media (min-width: 761px) and (max-height: 760px) {
+  .start-icon {
+    display: none;
+  }
+  .more-note {
+    display: none;
+  }
+  .mini-stats strong {
+    font-size: 20px;
+  }
+}
+
+/* ---------- header desktop: logo + tên app canh giữa theo chiều dọc ---------- */
+@media (min-width: 761px) {
+  .nav {
+    align-items: center;
+  }
+  .nav > .brand,
+  .nav > .tabs,
+  .nav > .nav-right {
+    align-self: center;
+    margin: 0;
+  }
+  .nav > .brand {
+    height: auto;
+    line-height: 1;
+  }
+  .nav > .brand .logo {
+    flex: none;
+    margin: 0;
+    padding: 0;
   }
 }
