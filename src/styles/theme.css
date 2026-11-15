@@ -1,0 +1,26 @@
+/* Giao diện tối + bộ chọn giao diện */
+:root[data-theme="dark"] {
+  --bg: #0f1120; --surface: #171a2e; --surface-2: #1e2238;
+  --ink: #eceefb; --muted: #9aa0c0; --line: #2a2f4a;
+  --accent: #6d63f5; --accent-2: #8b82ff; --accent-soft: #25254a;
+  --again: #ff6b70; --hard: #f5a524; --good: #6c8cff; --easy: #35c88c;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 14px 40px -14px rgba(0, 0, 0, 0.6);
+  --card-front: #171a2e; --halo: rgba(15, 17, 32, 0.9);
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1120; --surface: #171a2e; --surface-2: #1e2238;
+    --ink: #eceefb; --muted: #9aa0c0; --line: #2a2f4a;
+    --accent: #6d63f5; --accent-2: #8b82ff; --accent-soft: #25254a;
+    --again: #ff6b70; --hard: #f5a524; --good: #6c8cff; --easy: #35c88c;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 14px 40px -14px rgba(0, 0, 0, 0.6);
+    --card-front: #171a2e; --halo: rgba(15, 17, 32, 0.9);
+    color-scheme: dark;
+  }
+}
+html { background: var(--bg); }
+
+.seg { display: inline-flex; gap: 4px; padding: 4px; margin-top: 8px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; }
+.seg button { display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; padding: 8px 16px; border-radius: 999px; font-weight: 600; font-size: 14px; color: var(--muted); }
+.seg button.on { background: var(--accent); color: #fff; }

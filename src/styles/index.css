@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+/* THỨ TỰ IMPORT = THỨ TỰ CASCADE. Đừng đổi thứ tự nếu chưa kiểm tra lại giao diện. */
+@import "./base.css";
+@import "./study.css";
+@import "./pages.css";
+@import "./swipe.css";
+@import "./start.css";
+@import "./touch.css";
+@import "./practice.css";
+@import "./theme.css";
+@import "./quiz.css";
+@import "./fixes.css";
+@import "./mobile.css";
+@import "./desktop.css";

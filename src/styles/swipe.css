@@ -1,0 +1,49 @@
+/* Vuốt thẻ kiểu Tinder + nút link */
+.stage { --yes: 0; --no: 0; --lift: 0; position: relative; }
+.swipe {
+  position: relative; z-index: 2;
+  touch-action: none; /* chạm vào thẻ thì mọi cử chỉ do app xử lý */
+  user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+  transform-origin: 50% 110%; /* xoay quanh phía dưới giống Tinder */
+  will-change: transform;
+  animation: card-in 0.25s ease-out backwards; /* chỉ làm mờ dần, không đụng transform */
+}
+/* thẻ kế tiếp nằm ngay sau, nhô lên theo độ kéo của thẻ trên */
+.swipe.behind {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  transform-origin: 50% 100%;
+  transform: translateY(calc(12px * (1 - var(--lift)))) scale(calc(0.95 + 0.05 * var(--lift)));
+  transition: transform 0.22s ease-out;
+}
+@keyframes card-in { from { opacity: 0; } to { opacity: 1; } }
+.swipe:active .flip { cursor: grabbing; }
+
+/* bóng ở rìa màn hình (nằm SAU thẻ) */
+.glow { position: fixed; top: 0; bottom: 0; z-index: 0; width: min(26vw, 280px); pointer-events: none; opacity: 0; transition: opacity 0.15s ease-out; }
+.glow.yes { right: 0; opacity: var(--yes); background: linear-gradient(to left, color-mix(in srgb, var(--easy) 34%, transparent), transparent); }
+.glow.no { left: 0; opacity: var(--no); background: linear-gradient(to right, color-mix(in srgb, var(--again) 34%, transparent), transparent); }
+/* chữ mờ ở rìa màn hình (nằm TRÊN thẻ) */
+.mark {
+  position: fixed; top: 50%; z-index: 5;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  pointer-events: none; white-space: nowrap; font-weight: 800;
+  font-size: clamp(16px, 1.8vw, 28px); letter-spacing: 0.06em;
+  text-shadow: 0 0 14px var(--halo);
+  opacity: 0; transition: opacity 0.15s ease-out;
+}
+.mark.yes { right: clamp(14px, 3vw, 56px); color: var(--easy); opacity: calc(var(--yes) * 0.85); transform: translateY(-50%) scale(calc(0.85 + 0.15 * var(--yes))); }
+.mark.no { left: clamp(14px, 3vw, 56px); color: var(--again); opacity: calc(var(--no) * 0.85); transform: translateY(-50%) scale(calc(0.85 + 0.15 * var(--no))); }
+@media (prefers-reduced-motion: reduce) {
+  .swipe, .swipe.behind { animation: none; transition: none; }
+}
+
+.actions { min-height: 0; }
+.rate small { font-size: 12.5px; }
+.gesture-hint { text-align: center; margin: -6px 0 0; font-size: 13.5px; color: var(--muted); }
+.gesture-hint .g { color: var(--easy); }
+.gesture-hint .r { color: var(--again); }
+
+.link-btn {
+  display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent;
+  color: var(--accent); font-weight: 600; font-size: 14px; margin-top: 6px; text-decoration: underline;
+}

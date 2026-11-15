@@ -1,0 +1,101 @@
+/* Biến màu, reset, khung app, thanh điều hướng, vùng nội dung */
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f6f7fb;
+  --ink: #171a2e;
+  --muted: #6a6f8a;
+  --line: #e6e8f2;
+  --accent: #4f46e5;
+  --accent-2: #6d63f5;
+  --accent-soft: #eeedff;
+  --again: #e5484d;
+  --hard: #e8890c;
+  --good: #3b6df0;
+  --easy: #1ea56f;
+  --shadow: 0 1px 2px rgba(23, 26, 46, 0.04),
+    0 14px 40px -14px rgba(23, 26, 46, 0.18);
+  --card-front: #ffffff;
+  --card-back: linear-gradient(155deg, #4f46e5 0%, #6d63f5 100%);
+  --halo: rgba(255, 255, 255, 0.9);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { min-height: 100%; margin: 0; }
+/* reset các style mặc định của template Vite làm co hẹp giao diện */
+body { display: block !important; place-items: unset !important; min-width: 0 !important; }
+#root { width: 100% !important; max-width: none !important; margin: 0 !important; padding: 0 !important; text-align: left !important; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+kbd {
+  font: 600 11px/1 inherit;
+  padding: 4px 7px;
+  border-radius: 6px;
+  background: rgba(127, 127, 160, 0.18);
+  border: 1px solid rgba(127, 127, 160, 0.25);
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* ---------- top navigation ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 20;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  padding: 14px 28px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 10px; padding: 15px !important; font-size: 17px; letter-spacing: -0.01em; }
+.logo {
+  width: 34px; height: 34px; border-radius: 11px;
+  display: grid; place-items: center; color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+}
+.tabs { display: flex; gap: 4px; padding: 4px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; }
+.tabs button {
+  display: flex; align-items: center; gap: 7px;
+  border: 0; background: transparent; padding: 8px 16px; border-radius: 999px;
+  font-weight: 600; font-size: 14px; color: var(--muted);
+  transition: background 0.15s, color 0.15s;
+}
+.tabs button:hover { color: var(--ink); }
+.tabs button.on { background: var(--accent); color: #fff; }
+.nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 12px; border-radius: 999px; font-size: 13px; font-weight: 600;
+  background: var(--surface); border: 1px solid var(--line); color: var(--ink);
+}
+.chip.btn { cursor: pointer; transition: border-color 0.15s; }
+.chip.btn:hover { border-color: var(--accent); }
+.icon-btn {
+  width: 38px; height: 38px; display: grid; place-items: center;
+  border-radius: 12px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--muted);
+  transition: color 0.15s, border-color 0.15s;
+}
+.icon-btn:hover { color: var(--accent); border-color: var(--accent); }
+.icon-btn.sm { width: 32px; height: 32px; border-radius: 10px; }
+
+.main {
+  flex: 1; width: 100%;
+  display: flex; flex-direction: column;
+  padding: 24px 20px 40px;
+  background: var(--bg);
+}

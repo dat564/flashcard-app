@@ -1,0 +1,56 @@
+/* Các khung cài đặt luôn lấy màu nền theo giao diện (phòng khi có CSS khác đặt .panel màu trắng) */
+.panel {
+  background: var(--surface) !important;
+  color: var(--ink);
+}
+
+/* Sửa lệch/tràn ngang ở trang Thống kê trên mobile:
+   cột lưới "1fr" không co nhỏ hơn nội dung nên đẩy khung ra ngoài; minmax(0, 1fr) cho phép co lại. */
+.panels,
+.stat-grid,
+.panel,
+.stat,
+.page {
+  min-width: 0;
+}
+.panel select,
+.panel input[type="range"] {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+.panel .muted,
+.panel h3 {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 760px) {
+  .panels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .panel {
+    padding: 18px;
+  }
+  .seg {
+    display: flex;
+    width: 100%;
+  }
+  .seg button {
+    flex: 1;
+    justify-content: center;
+    padding: 9px 6px;
+  }
+  .data-actions > * {
+    flex: 1 1 100%;
+  }
+  .forecast {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+}
+
+/* Tab Học: không cho .main cuộn, tránh thanh cuộn hiện lên khi thẻ xoay lúc kéo */
+.main.main-study {
+  overflow: hidden;
+}

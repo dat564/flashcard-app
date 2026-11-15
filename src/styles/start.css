@@ -1,0 +1,73 @@
+/* Chọn bộ từ, khối hero, danh sách riêng, cài đặt giọng đọc */
+.deck-select { position: relative; flex: none; width: 100%; max-width: 380px; margin: 0 auto 14px; }
+.deck-select select {
+  appearance: none; -webkit-appearance: none;
+  width: 100%; height: 48px; padding: 0 46px 0 18px; border-radius: 16px;
+  border: 1.5px solid var(--line); background: var(--surface); color: var(--ink);
+  font-weight: 700; font-size: 15px; text-overflow: ellipsis; white-space: nowrap; cursor: pointer;
+  box-shadow: 0 8px 22px -14px rgba(23, 26, 46, 0.35); transition: border-color 0.15s;
+}
+.deck-select select:hover, .deck-select select:focus, .deck-select select:focus-visible { border-color: var(--accent); outline: none; }
+.deck-select option { background: var(--surface); color: var(--ink); padding: 10px 14px; font-weight: 600; }
+
+/* Trình duyệt hỗ trợ tạo kiểu cho danh sách (Chrome/Edge mới) */
+@supports (appearance: base-select) {
+  .deck-select select, .deck-select select::picker(select) { appearance: base-select; }
+  .deck-select select { display: flex; align-items: center; line-height: 1.2; }
+  .deck-select select selectedcontent { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .deck-select select::picker-icon { display: none; }
+  .deck-select select::picker(select) {
+    box-sizing: border-box; width: anchor-size(width); margin-top: 8px; padding: 6px;
+    border: 1px solid var(--line); border-radius: 18px; background: var(--surface);
+    box-shadow: 0 18px 40px -16px rgba(23, 26, 46, 0.35); max-height: 50vh;
+  }
+  .deck-select option { display: flex; align-items: center; gap: 8px; padding: 12px 14px; border-radius: 12px; font-size: 14.5px; cursor: pointer; transition: background 0.12s; }
+  .deck-select option:hover, .deck-select option:focus-visible { background: var(--accent-soft); outline: none; }
+  .deck-select option:checked { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+  .deck-select option::checkmark { order: 1; margin-left: auto; color: var(--accent); }
+  .deck-select option:last-child { color: var(--accent); }
+}
+.deck-select svg { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--accent); pointer-events: none; }
+
+/* logo + tên app ở đầu tab Học (chỉ mobile) */
+.start-brand { display: none; }
+
+/* ---------- khối chính của màn hình bắt đầu ---------- */
+.hero { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
+.hero-nums { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; max-width: 360px; }
+.hero-nums div {
+  display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 8px;
+  border-radius: 16px; background: var(--surface); border: 1px solid var(--line);
+}
+.hero-nums strong { font-size: 30px; line-height: 1.1; letter-spacing: -0.02em; color: var(--accent); }
+.hero-nums span { font-size: 12.5px; color: var(--muted); }
+
+/* ---------- danh sách riêng ---------- */
+.dropzone {
+  display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center;
+  padding: 34px 20px; border: 2px dashed var(--line); border-radius: 22px;
+  background: var(--surface-2); color: var(--accent); cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.dropzone:hover { border-color: var(--accent); background: var(--accent-soft); }
+.dropzone b { color: var(--ink); font-size: 16px; }
+.dropzone span { color: var(--muted); font-size: 13.5px; max-width: 560px; line-height: 1.5; }
+.list-card { margin-top: 14px; border: 1px solid var(--line); border-radius: 22px; background: var(--surface); box-shadow: var(--shadow); overflow: hidden; }
+.list-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 18px 22px; flex-wrap: wrap; }
+.list-head b { display: block; font-size: 16px; }
+.list-head small { color: var(--muted); font-size: 13px; }
+.list-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.table.inner { border: 0; border-top: 1px solid var(--line); border-radius: 0; box-shadow: none; }
+
+/* ---------- cài đặt giọng đọc ---------- */
+.panel.wide { grid-column: 1 / -1; }
+.field { display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; color: var(--muted); margin: 12px 0; }
+.field select { height: 44px; padding: 0 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.solid { padding: 12px 22px; border: 0; border-radius: 14px; font-weight: 700; font-size: 14px; color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+.solid:disabled { opacity: 0.6; }
+@media (max-width: 760px) {
+  .glow { width: 34vw; }
+  .mark { font-size: 13px; gap: 6px; }
+  .mark svg { width: 26px; height: 26px; }
+  .tabs button { padding: 9px 12px; }
+}
