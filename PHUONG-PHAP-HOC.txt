@@ -1,0 +1,256 @@
+================================================================
+  TOEIC RECALL — PHƯƠNG PHÁP VÀ CÁCH HỌC CỦA ỨNG DỤNG
+================================================================
+
+Tài liệu này giải thích ứng dụng dạy từ vựng TOEIC theo phương pháp
+nào, vì sao phương pháp đó hiệu quả, và cách dùng nó mỗi ngày để
+nhớ lâu với ít thời gian nhất.
+
+
+----------------------------------------------------------------
+1. MỤC TIÊU
+----------------------------------------------------------------
+
+- Giúp bạn NHỚ LÂU (không chỉ "đã gặp") khoảng 3.500 từ và cụm từ
+  TOEIC, kèm phiên âm, loại từ, nghĩa tiếng Việt và câu ví dụ.
+- Mỗi ngày chỉ ôn đúng những từ SẮP QUÊN, không ôn thừa từ đã chắc
+  và không bỏ sót từ sắp mất.
+- Học đều đặn, ngắn (khoảng 10–20 phút/ngày), chạy được trên điện
+  thoại và cả khi mất mạng.
+
+
+----------------------------------------------------------------
+2. BỐN NGUYÊN LÝ CỦA ỨNG DỤNG
+----------------------------------------------------------------
+
+2.1  Chủ động nhớ lại (active recall)
+     Ứng dụng không cho bạn "đọc lại" danh sách từ. Thẻ chỉ hiện một
+     mặt (từ tiếng Anh, hoặc nghĩa tiếng Việt); bạn phải TỰ NHỚ mặt
+     còn lại TRƯỚC KHI lật thẻ. Việc cố nhớ lại chính là lúc trí nhớ
+     được củng cố mạnh nhất. Đọc đi đọc lại cho cảm giác "quen mắt"
+     nhưng nhớ kém hơn nhiều.
+
+2.2  Lặp lại ngắt quãng (spaced repetition)
+     Trí nhớ bị quên dần theo thời gian (đường cong quên lãng). Mỗi
+     lần bạn nhớ lại thành công đúng lúc sắp quên, trí nhớ về từ đó
+     bền hơn và khoảng cách đến lần ôn kế tiếp dài ra: vài ngày, rồi
+     vài tuần, rồi vài tháng. Từ khó, hay quên thì được ôn dày hơn.
+
+2.3  Học trong ngữ cảnh
+     Mỗi từ đi kèm một câu ví dụ kiểu công sở/TOEIC. Từ được nhớ
+     cùng cách dùng thật (đi với giới từ nào, vị trí trong câu), rất
+     sát với dạng bài Part 5, 6 và 7. Chế độ Quiz bắt bạn điền đúng
+     từ vào chỗ trống của chính các câu đó.
+
+2.4  Đa giác quan
+     Mỗi từ có file âm thanh giọng người (Aria, tiếng Anh Mỹ). Bạn
+     vừa nhìn vừa nghe, và nên đọc to theo. Nếu một từ chưa có file
+     âm thanh, ứng dụng dùng giọng đọc của trình duyệt thay thế.
+
+
+----------------------------------------------------------------
+3. THUẬT TOÁN LÊN LỊCH: FSRS
+----------------------------------------------------------------
+
+Ứng dụng dùng FSRS (Free Spaced Repetition Scheduler), thuật toán
+lặp lại ngắt quãng hiện đại, được xây dựng từ dữ liệu ôn tập của
+hàng trăm triệu lượt học và hiện có trong Anki. App dùng thư viện
+ts-fsrs với bộ tham số mặc định.
+
+FSRS theo dõi ba đại lượng cho MỖI từ:
+
+  * Độ khó (difficulty): từ này khó nhớ với bạn đến mức nào.
+  * Độ bền (stability): số ngày để xác suất bạn còn nhớ rớt xuống
+    mức mục tiêu (mặc định 90%). Độ bền càng cao thì lịch càng thưa.
+  * Xác suất nhớ (retrievability): ước tính bạn còn nhớ từ đó bao
+    nhiêu phần trăm ở thời điểm hiện tại. Giảm dần theo thời gian
+    kể từ lần ôn cuối.
+
+Khi bạn chấm một thẻ:
+
+  "Đã nhớ"   → độ bền tăng, độ khó giảm nhẹ. Khoảng ôn kế tiếp dài
+                hơn lần trước. Nhớ khi đã quá hạn lâu thì độ bền tăng
+                nhiều hơn nhớ đúng hạn (vì bạn nhớ được dù đã lâu).
+  "Chưa nhớ" → độ bền giảm mạnh, độ khó tăng. Từ đó luôn quay lại
+                vào NGÀY MAI (xem mục 4), rồi lịch giãn ra dần lại.
+
+Ví dụ khoảng ôn (số ngày), nếu một từ được chấm "Đã nhớ" liên tục:
+
+  Mức nhớ mục tiêu 90%:  3 → 14 → 57 → 196 → 365
+  Mức nhớ mục tiêu 95%:  3 → 6 → 15 → 34 → 72 → 143
+
+Nếu quên ở lần thứ 3 (mục tiêu 90%): 3 → 14 → 1 → 4 → 10 → 23.
+Đây là ví dụ minh họa; số thực tế phụ thuộc vào độ khó của từng từ
+và việc bạn ôn đúng hạn hay trễ.
+
+Lịch tính theo NGÀY dương lịch: từ đến hạn vào ngày nào thì xuất hiện
+từ 0 giờ ngày đó, và vẫn xuất hiện nếu bạn trễ vài ngày. Khoảng ôn
+tối đa là 365 ngày.
+
+Mức nhớ mục tiêu chỉnh được ở Thống kê → "Mức nhớ mục tiêu" (80–97%):
+  - Cao hơn: nhớ chắc hơn nhưng phải ôn nhiều thẻ hơn mỗi ngày.
+  - Thấp hơn: ôn ít hơn nhưng quên nhiều hơn.
+  - Gợi ý: 90% khi học thong thả; 93–95% khi sắp thi (và cũng nên
+    dùng mức này vì app chỉ có hai nút chấm, xem mục 9).
+
+Thẻ cũ từ các phiên bản trước (lịch 1-3-7-14 ngày nhân hệ số) được
+chuyển sang FSRS tự động: độ bền suy ra từ khoảng ôn đã hẹn, độ
+khó suy ra từ hệ số "ease" cũ. Không cần làm gì và không mất tiến
+độ.
+
+
+----------------------------------------------------------------
+4. QUY TRÌNH MỘT NGÀY HỌC
+----------------------------------------------------------------
+
+Bước 1. Mở tab "Học". Màn hình cho biết hôm nay có bao nhiêu thẻ
+        ĐẾN HẠN ôn và bao nhiêu TỪ MỚI.
+
+Bước 2. Bấm "Bắt đầu". Phiên học gồm:
+          a) Thẻ đến hạn, xếp theo xác suất nhớ thấp nhất trước (từ
+             sắp quên nhất học đầu tiên, lúc đầu óc còn tỉnh).
+          b) Từ mới của hôm nay (mặc định 20 từ/ngày, chỉnh 5–100).
+             Từ mới được trộn ngẫu nhiên nhưng cố định theo từng từ,
+             nên các từ cùng gốc (như abandon, abandoned) không bị
+             xếp liền nhau gây nhầm lẫn.
+
+Bước 3. Với từng thẻ:
+          1) Nhìn mặt trước và TỰ NHỚ câu trả lời (nói thầm hoặc nói
+             to). Đừng lật vội.
+          2) Chạm để lật thẻ, đối chiếu nghĩa, ví dụ, phiên âm.
+          3) Chấm thật thà:
+               "Đã nhớ"   — bạn nhớ ra đúng, không cần đoán.
+               "Chưa nhớ" — bạn không nhớ, nhớ sai, hoặc phải đoán
+                            mà không chắc.
+          4) Nghe phát âm và đọc theo (nút loa hoặc phím P).
+
+Bước 4. Khi bấm "Chưa nhớ", thẻ được HỎI LẠI ĐÚNG MỘT LẦN trong cùng
+        phiên, sau khoảng 3 thẻ khác (hoặc ở cuối phiên nếu còn ít
+        thẻ). Lần hỏi lại này chỉ để bạn gặp lại từ vừa quên khi trí
+        nhớ còn nóng. Dù lần hai bạn nhớ hay không, lịch vẫn đặt vào
+        ngày mai, và không tính thêm vào thống kê hay số lần quên.
+        Từ đó sẽ lại hiện ngày mai để kiểm tra xem bạn có thật sự
+        nhớ không.
+
+Bước 5. Hết phiên, ứng dụng ghi lại tiến độ, chuỗi ngày và thống kê.
+
+Chấm nhầm thì bấm Z (hoặc nút Hoàn tác) để quay lại thẻ trước.
+
+Phím tắt:  Space = lật thẻ   ← hoặc 1 = Chưa nhớ   → hoặc 2 = Đã nhớ
+           P = phát âm       Z = hoàn tác
+
+
+----------------------------------------------------------------
+5. CÁC CHẾ ĐỘ HỌC
+----------------------------------------------------------------
+
+Chế độ CÓ tính vào lịch ôn:
+  * Phiên học hằng ngày (thẻ đến hạn + từ mới).
+  * "Học thêm từ mới": khi đã xong bài hôm nay mà muốn học nữa. Từ
+    mới học thêm vẫn được lên lịch ôn như bình thường.
+
+Chế độ chỉ để LUYỆN TẬP (không đổi lịch ôn, không tăng số lần quên):
+  * "Ôn từ khó": các từ bạn hay quên (bấm "Chưa nhớ" từ 3 lần trở
+    lên và chưa nhớ liền 3 lần gần đây).
+  * "Học lại phiên vừa rồi".
+  * "Ôn ngẫu nhiên" tối đa 50 từ đã học.
+  * "Ôn lại cả danh sách" (với danh sách riêng).
+  * Quiz điền từ vào câu (kiểu TOEIC Part 5): chọn đáp án đúng cho
+    chỗ trống; luyện cách dùng từ trong câu. Quiz chỉ được tính là
+    hoạt động trong ngày (giữ chuỗi ngày), không đổi lịch ôn.
+
+Hai chiều của thẻ (đổi trong màn hình học):
+  * Anh → Việt: thấy từ tiếng Anh (có phiên âm, loa), nhớ nghĩa.
+    Dễ hơn, tốt để nhận ra từ khi đọc/nghe.
+  * Việt → Anh: thấy nghĩa, phải nhớ từ tiếng Anh. Khó hơn, tốt để
+    dùng từ khi viết/nói. Nên xen kẽ cho các từ đã khá chắc.
+
+Danh sách riêng ("Từ của tôi"): bạn tự nhập từ từ file Word (.docx),
+CSV, TSV hoặc TXT. Các từ này học và ôn bằng cùng thuật toán, và
+không bị giới hạn số từ mới mỗi ngày.
+
+
+----------------------------------------------------------------
+6. ĐỌC HIỂU TAB THỐNG KÊ
+----------------------------------------------------------------
+
+  * Đã học: số từ bạn đã gặp ít nhất một lần.
+  * Đến hạn ôn: số thẻ cần ôn hôm nay.
+  * Lượt ôn hôm nay: số lần bạn đã chấm thẻ (không tính lượt hỏi
+    lại trong phiên).
+  * Độ nhớ ước tính: trung bình xác suất nhớ (FSRS) của các từ đã
+    học, tại thời điểm hiện tại. Đây là ước lượng của thuật toán,
+    không phải điểm kiểm tra thật. Con số hợp lý thường quanh mức
+    nhớ mục tiêu hoặc cao hơn nếu bạn ôn đều.
+  * Từ khó: số từ đang bị quên lặp đi lặp lại.
+  * Chuỗi ngày và bản đồ nhiệt: các ngày bạn có học (ôn thẻ, luyện
+    tập hoặc làm quiz).
+  * Dự báo 7 ngày: số thẻ sẽ đến hạn mỗi ngày, để bạn biết trước
+    khối lượng.
+
+
+----------------------------------------------------------------
+7. LỜI KHUYÊN ĐỂ HỌC HIỆU QUẢ
+----------------------------------------------------------------
+
+ 1. Chấm thật thà. Chấm "Đã nhớ" khi chưa chắc chắn làm lịch giãn
+    quá nhanh và bạn sẽ quên từ đó đúng lúc cần dùng. Phân vân thì
+    bấm "Chưa nhớ".
+ 2. Học ĐỀU mỗi ngày, ít mà đều tốt hơn nhiều so với dồn một lần.
+    Nếu bỏ vài ngày, cứ quay lại: thẻ quá hạn vẫn còn đó và được
+    xếp ưu tiên. Đừng học thêm từ mới cho tới khi hết thẻ đến hạn.
+ 3. Đừng đặt số từ mới quá cao. 15–25 từ mới/ngày là hợp lý cho đa
+    số người; mỗi từ mới sẽ kéo theo nhiều lượt ôn trong các tuần
+    sau. Nếu thẻ đến hạn dồn lại nhiều, hãy giảm từ mới.
+ 4. Nói to từ và câu ví dụ. Có thể tự đặt thêm một câu của riêng
+    bạn gắn với công việc.
+ 5. Chú ý loại từ và giới từ đi kèm (depend on, interested in...).
+    Đó là điểm TOEIC hay hỏi.
+ 6. Học vào một khung giờ cố định (ví dụ sau bữa sáng) để thành
+    thói quen.
+ 7. Sắp thi: tăng "mức nhớ mục tiêu" lên 93–95% trước kỳ thi vài
+    tuần, và dùng chế độ "Ôn từ khó" cùng Quiz.
+ 8. Sao lưu tiến độ định kỳ (xem mục 8).
+
+
+----------------------------------------------------------------
+8. DỮ LIỆU, SAO LƯU, OFFLINE
+----------------------------------------------------------------
+
+  * Tiến độ học được lưu TRONG TRÌNH DUYỆT của thiết bị bạn
+    (localStorage), không gửi lên máy chủ nào. Vì vậy: xóa dữ liệu
+    trang, đổi trình duyệt hoặc đổi máy sẽ mất tiến độ nếu chưa
+    sao lưu.
+  * Thống kê → Sao lưu: xuất file JSON, và nhập lại trên máy khác.
+    Khi nhập, ứng dụng gộp theo từng từ (giữ lần ôn mới hơn), không
+    ghi đè mù quáng. Hãy xuất file định kỳ, ví dụ mỗi tuần.
+  * Có thể cài lên màn hình chính (PWA) và học khi mất mạng. Âm
+    thanh được lưu dần trên máy sau khi nghe lần đầu.
+
+
+----------------------------------------------------------------
+9. HẠN CHẾ CẦN BIẾT
+----------------------------------------------------------------
+
+  * Chỉ có hai nút chấm ("Chưa nhớ" / "Đã nhớ"). FSRS thiết kế cho
+    bốn mức (Quên / Khó / Tốt / Dễ). Với hai nút, mọi lần nhớ đều
+    được coi như "Tốt", kể cả khi bạn nhớ rất vất vả, nên lịch có
+    thể giãn hơi nhanh. Cách giảm: chấm "Chưa nhớ" khi phân vân,
+    và/hoặc tăng "mức nhớ mục tiêu" lên 93–95%.
+  * FSRS đang dùng bộ tham số mặc định chung, chưa được tối ưu hóa
+    riêng cho lịch sử học của bạn.
+  * "Độ nhớ ước tính" là mô hình dự đoán, có thể lệch với thực tế.
+  * Ứng dụng giúp ghi nhớ TỪ VỰNG; nó không thay thế luyện đề, nghe
+    và đọc theo cấu trúc TOEIC thật.
+  * Một số dữ liệu nguồn (nghĩa, phiên âm) có thể còn sai sót nhỏ.
+    Nếu thấy lỗi, sửa trong src/data/words/words-01.json.
+
+
+----------------------------------------------------------------
+10. TÓM TẮT NHANH
+----------------------------------------------------------------
+
+  Nhìn → tự nhớ → lật → chấm thật thà → nghe/đọc to → ôn đúng lúc
+  sắp quên. Mỗi ngày: xong thẻ đến hạn, rồi mới học từ mới.
+
+================================================================

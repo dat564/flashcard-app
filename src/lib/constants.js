@@ -13,9 +13,12 @@ export const SWIPE_AT = 110; // kéo quá ngưỡng này (px) thì tính là đ�
 export const EASE_BACK = "transform .32s cubic-bezier(.2,.9,.3,1.15)";
 export const EASE_OUT = "transform .24s cubic-bezier(.3,.7,.4,1)";
 
-// Lịch ôn
-export const AGAIN_DAYS = 1;
-export const MAX_DAYS = 180;
+// Lịch ôn — thuật toán FSRS (thư viện ts-fsrs)
+export const FSRS_RETENTION = 0.9; // xác suất nhớ mục tiêu lúc đến hạn ôn
+export const RETENTION_MIN = 0.8;
+export const RETENTION_MAX = 0.97;
+export const MAX_DAYS = 365; // khoảng ôn tối đa
+export const RELEARN_GAP = 3; // thẻ "Chưa nhớ" được hỏi lại 1 lần sau chừng này thẻ trong cùng phiên
 // "Từ khó"
 export const HARD_LAPSES = 3;
 export const HARD_REPS = 3;

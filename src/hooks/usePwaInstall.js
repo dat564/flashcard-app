@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { setMeta } from "../lib/utils";
 
-// PWA: manifest, biểu tượng, service worker, nút cài đặt
+// PWA: đăng ký service worker (offline) và nút cài đặt.
+// manifest/biểu tượng/meta đã khai báo trong index.html.
 export function usePwaInstall() {
   const [installEvt, setInstallEvt] = useState(null);
   const [installed, setInstalled] = useState(
@@ -11,24 +11,10 @@ export function usePwaInstall() {
   );
 
   useEffect(() => {
-    const addLink = (rel, href) => {
-      if (document.head.querySelector(`link[rel="${rel}"]`)) return;
-      const l = document.createElement("link");
-      l.rel = rel;
-      l.href = href;
-      document.head.appendChild(l);
-    };
-    addLink("manifest", "/manifest.webmanifest");
-    addLink("apple-touch-icon", "/apple-touch-icon.png");
-    setMeta("apple-mobile-web-app-capable", "yes");
-    setMeta("mobile-web-app-capable", "yes");
-    setMeta("apple-mobile-web-app-title", "TOEIC Recall");
-    setMeta("apple-mobile-web-app-status-bar-style", "default");
-    const vp = document.querySelector('meta[name="viewport"]');
-    if (vp && !/viewport-fit/.test(vp.content))
-      vp.content += ", viewport-fit=cover";
     if ("serviceWorker" in navigator && import.meta.env.PROD)
-      navigator.serviceWorker.register("/sw.js").catch(() => {});
+      navigator.serviceWorker
+        .register(`${import.meta.env.BASE_URL}sw.js`)
+        .catch(() => {});
 
     const onBip = (e) => {
       e.preventDefault();

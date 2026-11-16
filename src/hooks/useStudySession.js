@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { PRACTICE_MAX } from "../lib/constants";
-import { nextSchedule } from "../lib/srs";
+import { nextSchedule, insertRelearn } from "../lib/srs";
 import { shuffle } from "../lib/utils";
 import { preloadAudio, unlockAudio } from "../lib/audio";
 import { useSwipe } from "./useSwipe";
@@ -28,6 +28,7 @@ export function useStudySession({
   const [practice, setPractice] = useState(false); // luyện tập: không đổi lịch ôn
   const [lastSession, setLastSession] = useState(null); // {deckId, ids}
   const [undo, setUndo] = useState(null); // trạng thái trước khi chấm thẻ gần nhất
+  const [relearn, setRelearn] = useState([]); // id thẻ vừa bấm "Chưa nhớ", đang được hỏi lại trong phiên
   const spokenRef = useRef(""); // thẻ đã tự đọc, để không đọc lặp
 
   const enVi = direction === "en-vi";
@@ -36,6 +37,7 @@ export function useStudySession({
     lastSession && lastSession.deckId === deckId
       ? lastSession.ids.filter((id) => wordById.has(id))
       : [];
+  const relearning = !practice && !!current && relearn.includes(current.id);
   const sessionPct = session.length
     ? Math.round((index / session.length) * 100)
     : 0;
@@ -51,6 +53,10 @@ export function useStudySession({
   function setRating(rating) {
     if (!current) return;
     const old = cards[current.id];
+    const again = rating === "again";
+    // Lượt hỏi lại (lần thứ hai trong phiên): KHÔNG đổi lịch ôn / thống kê
+    // (lần "Chưa nhớ" đầu tiên đã tính rồi)
+    const isRelearnPass = !practice && relearn.includes(current.id);
     const scheduled = nextSchedule(old, rating);
     setUndo({
       session,
@@ -60,39 +66,52 @@ export function useStudySession({
       day: progress.stats?.[today],
       today,
       practice,
+      relearn,
     });
-    setProgress((p) => {
-      const st = { ...(p.stats || {}) };
-      const day = {
-        ...(st[today] || { reviewed: 0, correct: 0, newLearned: 0 }),
-      };
-      if (practice) {
-        // luyện tập: chỉ ghi nhận hoạt động (tính chuỗi ngày), không đổi lịch ôn
-        day.practiced = (day.practiced || 0) + 1;
+    if (!isRelearnPass) {
+      setProgress((p) => {
+        const st = { ...(p.stats || {}) };
+        const day = {
+          ...(st[today] || { reviewed: 0, correct: 0, newLearned: 0 }),
+        };
+        if (practice) {
+          // luyện tập: chỉ ghi nhận hoạt động (tính chuỗi ngày), không đổi lịch ôn
+          day.practiced = (day.practiced || 0) + 1;
+          st[today] = day;
+          return { ...p, stats: st };
+        }
+        day.reviewed += 1;
+        if (!again) day.correct += 1;
+        if (!old && typeof current.id === "number") day.newLearned += 1; // chỉ kho chung tính vào hạn mức từ mới/ngày
         st[today] = day;
-        return { ...p, stats: st };
-      }
-      day.reviewed += 1;
-      if (rating !== "again") day.correct += 1;
-      if (!old && typeof current.id === "number") day.newLearned += 1; // chỉ kho chung tính vào hạn mức từ mới/ngày
-      st[today] = day;
-      return {
-        ...p,
-        cards: {
-          ...(p.cards || {}),
-          [current.id]: { ...scheduled, lastReviewed: Date.now() },
-        },
-        stats: st,
-      };
-    });
-    // thẻ "Chưa nhớ" chỉ hẹn ôn lại ngày mai, không hỏi lại trong phiên này
+        return {
+          ...p,
+          cards: {
+            ...(p.cards || {}),
+            [current.id]: { ...scheduled, lastReviewed: Date.now() },
+          },
+          stats: st,
+        };
+      });
+    }
+    // Thẻ "Chưa nhớ" (không phải luyện tập) được hỏi lại ĐÚNG 1 LẦN sau vài thẻ.
+    // Lượt hỏi lại chỉ để ôn thêm: dù nhớ hay không, lịch vẫn là ngày mai (đã hẹn từ lần sai đầu).
+    let nextSession = session;
+    if (!practice && again && !isRelearnPass) {
+      nextSession = insertRelearn(session, index, current.id);
+      setRelearn((r) => [...r, current.id]);
+    } else if (isRelearnPass) {
+      setRelearn((r) => r.filter((id) => id !== current.id));
+    }
     const next = index + 1;
-    if (next >= session.length) {
+    if (next >= nextSession.length) {
       setSession([]);
       setIndex(0);
       setShowAnswer(false);
+      setRelearn([]);
       setToast("Hoàn thành lượt học! 🎉");
     } else {
+      setSession(nextSession);
       setIndex(next);
       setShowAnswer(false);
     }
@@ -129,6 +148,7 @@ export function useStudySession({
       return { ...p, cards: cs, stats: st };
     });
     setUndo(null);
+    setRelearn(u.relearn || []);
     setSession(u.session);
     setIndex(u.index);
     setShowAnswer(false);
@@ -159,6 +179,7 @@ export function useStudySession({
     ids.slice(0, 3).forEach((id) => preloadAudio(wordById.get(id)?.word));
     if (mode !== "last") setLastSession({ deckId, ids });
     setUndo(null);
+    setRelearn([]);
     spokenRef.current = "";
     // Đọc luôn từ đầu tiên ngay trong cú chạm (iOS chỉ cho phát tiếng ở đây)
     const first = wordById.get(ids[0]);
@@ -176,6 +197,7 @@ export function useStudySession({
 
   function endSession() {
     setUndo(null);
+    setRelearn([]);
     setSession([]);
     setIndex(0);
     setShowAnswer(false);
@@ -242,6 +264,7 @@ export function useStudySession({
     showAnswer,
     enVi,
     practice,
+    relearning,
     undo,
     lastIds,
     sessionPct,

@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import { calcStreaks } from "./lib/stats";
+import { configureSrs } from "./lib/srs";
 import { todayKey } from "./lib/utils";
 import { useProgress } from "./hooks/useProgress";
 import { useTheme } from "./hooks/useTheme";
@@ -28,6 +29,9 @@ export default function App() {
   const [newLimit, setNewLimit] = useState(progress.settings?.newPerDay || 20);
   const [deckId, setDeckId] = useState(progress.settings?.activeDeck || "main");
   const today = todayKey();
+  // Mức nhớ mục tiêu của FSRS (cài đặt). Gọi ngay trong lúc render để số ngày hiện
+  // dưới nút luôn khớp; hàm không làm gì nếu giá trị không đổi.
+  configureSrs({ retention: progress.settings?.retention });
 
   const data = useDeck({ progress, deckId, newLimit, today });
   const study = useStudySession({

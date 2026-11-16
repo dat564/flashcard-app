@@ -53,11 +53,17 @@ const audioSlug = (s) =>
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "_")
     .replace(/^_+|_+$/g, "");
-const localAudio = new Set(words.map((w) => w.word.trim().toLowerCase()));
+// Tập từ có file mp3 dựng sẵn; tạo khi dùng lần đầu (words được nạp lazy)
+let localAudio = null;
+const hasLocalAudio = (key) => {
+  if (!localAudio || localAudio.size !== words.length)
+    localAudio = new Set(words.map((w) => w.word.trim().toLowerCase()));
+  return localAudio.has(key);
+};
 
 export async function getHumanAudio(word) {
   const key = word.toLowerCase().trim();
-  if (localAudio.has(key)) return `/audio/${audioSlug(key)}.mp3`;
+  if (hasLocalAudio(key)) return `${import.meta.env.BASE_URL}audio/${audioSlug(key)}.mp3`;
   if (audioCache.has(key)) return audioCache.get(key);
   if (!/^[a-z'-]+$/i.test(key)) {
     setAudioCache(key, null);

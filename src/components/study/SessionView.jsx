@@ -17,6 +17,7 @@ export default function SessionView({ study, data, speech }) {
     showAnswer,
     enVi,
     practice,
+    relearning,
     undo,
     sessionPct,
     swipe,
@@ -97,6 +98,7 @@ export default function SessionView({ study, data, speech }) {
       <RatingBar
         card={cards[current.id]}
         practice={practice}
+        relearning={relearning}
         onRate={study.commit}
       />
       <p className="gesture-hint">

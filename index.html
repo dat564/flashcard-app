@@ -2,25 +2,21 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f7f8fc" />
-    <title>TOEIC Recall — Flashcards</title>
-    <!-- TÙY CHỌN: App.jsx đã tự thêm các thẻ này khi chạy. Nếu muốn khai báo thẳng trong index.html
-     (iOS đọc được ngay từ đầu, chắc ăn hơn) thì dán vào <head> của index.html: -->
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <meta name="theme-color" content="#ffffff" />
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <title>TOEIC Recall — Flashcards</title>
+    <link rel="manifest" href="%BASE_URL%manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="%BASE_URL%apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="TOEIC Recall" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root" style="padding:32px;text-align:center;font-family:system-ui,sans-serif;color:#667">Đang tải…</div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

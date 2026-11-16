@@ -22,7 +22,7 @@
 .status.learning { background: rgba(30, 165, 111, 0.15); color: var(--easy); }
 .no-results { padding: 40px; text-align: center; color: var(--muted); }
 
-.stat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 18px; }
+.stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 18px; }
 .stat {
   background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 18px 20px;
   display: flex; flex-direction: column; gap: 4px; color: var(--accent);

@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 import { words } from "../lib/words";
-import { dueAt, isHard } from "../lib/srs";
+import { dueAt, isHard, retrievability } from "../lib/srs";
 import { buildBlankPool } from "../lib/quiz";
+import { mixKey } from "../lib/utils";
 
 // Dữ liệu dẫn xuất của bộ từ đang học (kho chung hoặc danh sách riêng)
 export function useDeck({ progress, deckId, newLimit, today }) {
@@ -27,10 +28,17 @@ export function useDeck({ progress, deckId, newLimit, today }) {
   const learnedCount = words.reduce((n, w) => n + (isLearned(w) ? 1 : 0), 0);
 
   const nowMs = Date.now();
-  const dueWords = deck.filter(
-    (w) => cards[w.id] && dueAt(cards[w.id]) <= nowMs
-  );
-  const newWords = deck.filter((w) => !cards[w.id]);
+  // Thẻ đến hạn: từ sắp quên nhất (xác suất nhớ thấp nhất) học trước
+  const dueWords = deck
+    .filter((w) => cards[w.id] && dueAt(cards[w.id]) <= nowMs)
+    .map((w) => ({ w, r: retrievability(cards[w.id], nowMs) }))
+    .sort((a, b) => a.r - b.r)
+    .map((x) => x.w);
+  const unseen = deck.filter((w) => !cards[w.id]);
+  // Kho chung: trộn ổn định để không học liền các từ cùng gốc; danh sách riêng giữ thứ tự người dùng
+  const newWords = isMain
+    ? [...unseen].sort((a, b) => mixKey(a.id) - mixKey(b.id))
+    : unseen;
   const remainingNew = isMain
     ? Math.max(0, newLimit - (todayStats.newLearned || 0))
     : Infinity; // danh sách riêng: học hết, không giới hạn

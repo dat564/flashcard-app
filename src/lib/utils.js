@@ -28,3 +28,12 @@ export function setMeta(name, content) {
   }
   m.content = content;
 }
+
+// Khóa trộn ổn định theo id: cùng id luôn ra cùng thứ tự, nhưng các từ liền kề
+// trong bảng chữ cái (abandon / abandoned / ability...) không còn đứng sát nhau.
+export const mixKey = (id) => {
+  let x = ((Number(id) || 0) + 0x9e3779b9) | 0;
+  x = Math.imul(x ^ (x >>> 16), 0x85ebca6b);
+  x = Math.imul(x ^ (x >>> 13), 0xc2b2ae35);
+  return (x ^ (x >>> 16)) >>> 0;
+};
