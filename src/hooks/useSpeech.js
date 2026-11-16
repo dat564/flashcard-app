@@ -75,35 +75,50 @@ export function useSpeech() {
 
   // Phát ngay nếu âm thanh đã tải sẵn; chưa có thì hỏi từ điển.
   // Chờ quá 0,8 giây thì đọc tạm bằng giọng trình duyệt.
+  // Mỗi lần đọc dùng MỘT phần tử Audio mới (phần tử tải sẵn chỉ dùng một lần): tái sử dụng phần tử đã
+  // phát xong hoặc đã lỗi khiến từ lặp lại (thẻ hỏi lại, từ gặp lại) im lặng trên một số trình duyệt.
+  // Nếu file lỗi hoặc không bắt đầu phát trong ~1,5 giây thì tự chuyển sang giọng trình duyệt.
   const speak = (text) => {
     const seq = ++speakSeq.current;
     audioRef.current?.pause();
     window.speechSynthesis?.cancel();
     if (voiceMode !== "human") return speakBrowser(text);
     const key = text.toLowerCase().trim();
+    const current = () => seq === speakSeq.current;
     const play = (a) => {
-      try {
-        a.currentTime = 0;
-      } catch {
-        /* chưa tải xong metadata */
-      }
+      let started = false;
+      const timer = setTimeout(() => {
+        if (started || !current()) return;
+        a.pause();
+        speakBrowser(text);
+      }, 1500);
+      const giveUp = () => {
+        clearTimeout(timer);
+        if (!started && current()) speakBrowser(text);
+      };
       a.playbackRate = rate;
+      a.onplaying = () => {
+        started = true;
+        clearTimeout(timer);
+      };
+      a.onerror = giveUp;
       audioRef.current = a;
-      a.play().catch(() => {
-        if (seq === speakSeq.current) speakBrowser(text);
-      });
+      try {
+        a.play().catch(giveUp);
+      } catch {
+        giveUp();
+      }
     };
-    const el = audioEls.get(key);
-    if (el) return play(el);
+    const pre = audioEls.get(key);
+    audioEls.delete(key); // đã dùng: lần sau (từ lặp lại) sẽ tạo phần tử mới
+    if (pre && !pre.error) return play(pre);
     Promise.race([
       getHumanAudio(text),
       new Promise((r) => setTimeout(() => r("__slow__"), 800)),
     ]).then((url) => {
-      if (seq !== speakSeq.current) return;
+      if (!current()) return;
       if (!url || url === "__slow__") return speakBrowser(text);
-      const a = new Audio(url);
-      audioEls.set(key, a);
-      play(a);
+      play(new Audio(url));
     });
   };
 

@@ -1,4 +1,4 @@
-import { fsrs, generatorParameters, createEmptyCard, Rating, State } from "ts-fsrs";
+import { fsrs, generatorParameters, createEmptyCard, Rating, State, default_w } from "ts-fsrs";
 import {
   DAY,
   MAX_DAYS,
@@ -23,9 +23,11 @@ const clamp = (x, lo, hi) => Math.min(hi, Math.max(lo, x));
  * Không dùng fuzz để số ngày hiện dưới nút luôn đúng với kết quả thật.
  */
 let retention = FSRS_RETENTION;
+let weights = null; // null = tham số mặc định; mảng 21 số = tham số đã tối ưu cho người dùng
 const build = () =>
   fsrs(
     generatorParameters({
+      ...(weights ? { w: weights } : {}),
       request_retention: retention,
       maximum_interval: MAX_DAYS,
       enable_fuzz: false,
@@ -34,14 +36,25 @@ const build = () =>
   );
 let scheduler = build();
 
-// Đổi mức nhớ mục tiêu (0,80 – 0,97). Gọi lại với cùng giá trị thì không làm gì.
-export function configureSrs({ retention: r } = {}) {
+// Tham số tối ưu hợp lệ: đúng 21 số hữu hạn
+export const validWeights = (w) =>
+  Array.isArray(w) && w.length === default_w.length && w.every((x) => Number.isFinite(x));
+
+// Đổi mức nhớ mục tiêu (0,80 – 0,97) và/hoặc tham số FSRS cá nhân (`weights`; null/không hợp lệ = mặc định).
+// Gọi lại với cùng giá trị thì không làm gì.
+export function configureSrs({ retention: r, weights: w } = {}) {
   const v = clamp(Number(r) || FSRS_RETENTION, RETENTION_MIN, RETENTION_MAX);
-  if (v === retention) return;
+  const nw = validWeights(w) ? w.map(Number) : null;
+  const same =
+    v === retention &&
+    (nw === null ? weights === null : weights !== null && nw.every((x, i) => x === weights[i]));
+  if (same) return;
   retention = v;
+  weights = nw;
   scheduler = build();
 }
 export const getRetention = () => retention;
+export const getWeights = () => (weights ? [...weights] : null);
 
 // Thẻ cũ (lịch kiểu SM-2: interval + ease) chưa có stability/difficulty:
 // stability ≈ khoảng ôn đã hẹn (FSRS định nghĩa đó là số ngày để xác suất nhớ còn 90%),

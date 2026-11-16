@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { PRACTICE_MAX } from "../lib/constants";
 import { nextSchedule, insertRelearn } from "../lib/srs";
+import { logReview, removeReview } from "../lib/storage";
 import { shuffle } from "../lib/utils";
 import { preloadAudio, unlockAudio } from "../lib/audio";
 import { useSwipe } from "./useSwipe";
@@ -58,7 +59,11 @@ export function useStudySession({
     // (lần "Chưa nhớ" đầu tiên đã tính rồi)
     const isRelearnPass = !practice && relearn.includes(current.id);
     const scheduled = nextSchedule(old, rating);
+    // Ghi nhật ký lượt ôn thật (dùng để tối ưu tham số FSRS); luyện tập và lượt hỏi lại không tính
+    const logT = !practice && !isRelearnPass ? Date.now() : null;
+    if (logT) logReview({ c: current.id, t: logT, g: again ? 1 : 3 });
     setUndo({
+      logT,
       session,
       index,
       id: current.id,
@@ -137,6 +142,7 @@ export function useStudySession({
   function undoLast() {
     if (!undo || swipe.leavingRef.current) return;
     const u = undo;
+    if (u.logT) removeReview(u.id, u.logT); // bỏ dòng nhật ký của lượt vừa hoàn tác
     setProgress((p) => {
       const st = { ...(p.stats || {}) };
       if (u.day) st[u.today] = u.day;

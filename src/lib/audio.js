@@ -119,6 +119,7 @@ export function preloadAudio(word) {
     if (!url || audioEls.has(key)) return;
     const a = new Audio();
     a.preload = "auto";
+    a.addEventListener?.("error", () => audioEls.get(key) === a && audioEls.delete(key));
     a.src = url;
     audioEls.set(key, a);
     if (audioEls.size > 40) audioEls.delete(audioEls.keys().next().value);

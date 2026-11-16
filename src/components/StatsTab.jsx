@@ -15,6 +15,7 @@ import Forecast from "./stats/Forecast";
 import VoiceSettings from "./stats/VoiceSettings";
 import ThemePanel from "./stats/ThemePanel";
 import DataBackup from "./stats/DataBackup";
+import FsrsTuner from "./stats/FsrsTuner";
 
 export default function StatsTab({
   progress,
@@ -152,6 +153,12 @@ export default function StatsTab({
           <Heatmap streak={streak} heat={heat} />
           <Forecast forecast={forecast} />
         </div>
+
+        <FsrsTuner
+          progress={progress}
+          setProgress={setProgress}
+          setToast={setToast}
+        />
 
         <DataBackup
           progress={progress}

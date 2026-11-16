@@ -98,6 +98,38 @@ chuyển sang FSRS tự động: độ bền suy ra từ khoảng ôn đã hẹn
 khó suy ra từ hệ số "ease" cũ. Không cần làm gì và không mất tiến
 độ.
 
+3.1  Tối ưu tham số theo từng người
+     FSRS có 21 tham số điều khiển tốc độ quên và tốc độ nhớ bền
+     hơn. Mặc định là giá trị trung bình của rất nhiều người học.
+     Mỗi người quên nhanh hay chậm khác nhau, nên khi đã có đủ lịch
+     sử, app có thể tinh chỉnh các tham số này riêng cho bạn.
+
+     Cách hoạt động:
+       - Mỗi lần bạn chấm một thẻ thật (không tính luyện tập, quiz
+         và lượt hỏi lại trong phiên), app ghi một dòng nhật ký:
+         thẻ nào, lúc nào, "Chưa nhớ" hay "Đã nhớ".
+       - Khi có ít nhất 1000 lượt ôn và 30 lần "Chưa nhớ" ở các lượt
+         ôn lại, nút "Tối ưu theo lịch sử của tôi" (Thống kê) được
+         mở. Với khoảng 2.000 lượt ôn, quá trình mất vài giây; với
+         khoảng 10.000 lượt thì cỡ chục giây, chạy nền nên không
+         làm đơ app.
+       - Thuật toán chọn tham số sao cho dự đoán xác suất nhớ khớp
+         nhất với kết quả thật bạn đã trải qua (cực tiểu hóa sai số
+         log-loss), có kèm một lực kéo nhẹ về giá trị mặc định để
+         không "học vẹt" khi dữ liệu còn ít.
+       - Để tránh tự đánh lừa mình, app giữ riêng khoảng 20% số thẻ
+         làm tập kiểm tra (không dùng để huấn luyện). Chỉ khi tham số
+         mới dự đoán tốt hơn rõ rệt trên tập này thì app mới đề nghị
+         áp dụng. Nếu không, app báo tham số mặc định đã phù hợp.
+       - Bạn tự quyết định có áp dụng hay không, và có thể quay về
+         tham số mặc định bất cứ lúc nào. Áp dụng chỉ ảnh hưởng đến
+         lịch của các lần ôn sau, không đổi lịch đã hẹn.
+       - Mọi tính toán diễn ra trên máy bạn; dữ liệu không gửi đi.
+
+     Nên tối ưu lại sau mỗi vài tháng khi nhật ký đã dài hơn.
+     Lưu ý: nhật ký chỉ ghi từ phiên bản có tính năng này, nên người
+     đã học từ trước cần học thêm một thời gian mới đủ dữ liệu.
+
 
 ----------------------------------------------------------------
 4. QUY TRÌNH MỘT NGÀY HỌC
@@ -217,15 +249,24 @@ không bị giới hạn số từ mới mỗi ngày.
 8. DỮ LIỆU, SAO LƯU, OFFLINE
 ----------------------------------------------------------------
 
-  * Tiến độ học được lưu TRONG TRÌNH DUYỆT của thiết bị bạn
-    (localStorage), không gửi lên máy chủ nào. Vì vậy: xóa dữ liệu
-    trang, đổi trình duyệt hoặc đổi máy sẽ mất tiến độ nếu chưa
-    sao lưu.
-  * Thống kê → Sao lưu: xuất file JSON, và nhập lại trên máy khác.
-    Khi nhập, ứng dụng gộp theo từng từ (giữ lần ôn mới hơn), không
-    ghi đè mù quáng. Hãy xuất file định kỳ, ví dụ mỗi tuần.
+  * Tiến độ học, nhật ký ôn và danh sách từ riêng được lưu TRONG
+    TRÌNH DUYỆT của thiết bị bạn bằng IndexedDB (nếu trình duyệt
+    không hỗ trợ thì dùng localStorage), không gửi lên máy chủ nào.
+    Mỗi lần chấm thẻ chỉ ghi thẻ vừa thay đổi nên rất nhanh. Dữ liệu
+    của bản cũ (localStorage) được chuyển sang tự động ở lần mở đầu
+    tiên và chỉ bị xóa sau khi đã kiểm tra chép đủ.
+    Vì dữ liệu nằm trên thiết bị: xóa dữ liệu trang, đổi trình duyệt,
+    dùng chế độ ẩn danh hoặc đổi máy sẽ mất tiến độ nếu chưa sao lưu.
+  * Thống kê → Sao lưu: xuất file JSON (gồm cả nhật ký ôn và tham số
+    FSRS cá nhân), và nhập lại trên máy khác. Khi nhập, ứng dụng gộp
+    theo từng từ (giữ lần ôn mới hơn), không ghi đè mù quáng.
+  * App nhắc sao lưu khi bạn đã học từ 30 từ trở lên mà chưa sao lưu
+    lần nào hoặc đã quá 7 ngày. Hãy xuất file định kỳ.
   * Có thể cài lên màn hình chính (PWA) và học khi mất mạng. Âm
     thanh được lưu dần trên máy sau khi nghe lần đầu.
+  * Phát âm: mỗi lần đọc dùng một phần tử âm thanh mới. Nếu file
+    âm thanh của một từ bị lỗi hoặc không phát được trong khoảng
+    1,5 giây, app tự chuyển sang giọng đọc của trình duyệt.
 
 
 ----------------------------------------------------------------
@@ -237,8 +278,12 @@ không bị giới hạn số từ mới mỗi ngày.
     được coi như "Tốt", kể cả khi bạn nhớ rất vất vả, nên lịch có
     thể giãn hơi nhanh. Cách giảm: chấm "Chưa nhớ" khi phân vân,
     và/hoặc tăng "mức nhớ mục tiêu" lên 93–95%.
-  * FSRS đang dùng bộ tham số mặc định chung, chưa được tối ưu hóa
-    riêng cho lịch sử học của bạn.
+  * Ban đầu FSRS dùng bộ tham số mặc định chung. Tối ưu theo từng
+    người (mục 3.1) cần đủ lịch sử ôn; khi dữ liệu còn ít, kết quả
+    tối ưu có thể chưa ổn định, vì vậy app chỉ đề nghị áp dụng khi
+    có cải thiện rõ trên tập kiểm tra. Bộ tối ưu này do ứng dụng tự
+    cài đặt (không phải bộ tối ưu chính thức của dự án FSRS), nên
+    mức cải thiện thường nhỏ hơn.
   * "Độ nhớ ước tính" là mô hình dự đoán, có thể lệch với thực tế.
   * Ứng dụng giúp ghi nhớ TỪ VỰNG; nó không thay thế luyện đề, nghe
     và đọc theo cấu trúc TOEIC thật.

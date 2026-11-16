@@ -8,9 +8,12 @@ import {
   retrievability,
   configureSrs,
   getRetention,
+  getWeights,
+  validWeights,
 } from "../src/lib/srs";
 import { DAY, MAX_DAYS, FSRS_RETENTION } from "../src/lib/constants";
 import { startOfDay } from "../src/lib/utils";
+import { default_w } from "ts-fsrs";
 
 const NOW = new Date(2026, 5, 10, 15, 30).getTime(); // 10/06/2026 15:30 giờ máy
 const days = (n) => startOfDay(NOW + n * DAY);
@@ -31,7 +34,7 @@ function run(ratings, start) {
 beforeEach(() => {
   vi.useFakeTimers();
   vi.setSystemTime(NOW);
-  configureSrs({ retention: FSRS_RETENTION });
+  configureSrs({ retention: FSRS_RETENTION, weights: null });
 });
 afterEach(() => vi.useRealTimers());
 
@@ -164,6 +167,41 @@ describe("mức nhớ mục tiêu & retrievability", () => {
     const later = retrievability(c, c.lastReviewed + (c.interval + 30) * DAY);
     expect(later).toBeLessThan(onDue);
     expect(retrievability(undefined)).toBe(0);
+  });
+});
+
+describe("tham số FSRS cá nhân", () => {
+  const custom = () => {
+    const w = Array.from(default_w);
+    w[2] = 5; // nhớ lần đầu: độ bền ban đầu cao hơn mặc định
+    return w;
+  };
+
+  it("áp dụng tham số riêng thì lịch thay đổi, bỏ đi thì trở lại mặc định", () => {
+    const base = nextSchedule(undefined, "good", NOW).interval;
+    configureSrs({ weights: custom() });
+    expect(getWeights()).toEqual(custom());
+    const mine = nextSchedule(undefined, "good", NOW).interval;
+    expect(mine).toBeGreaterThan(base);
+    configureSrs({ weights: null });
+    expect(getWeights()).toBeNull();
+    expect(nextSchedule(undefined, "good", NOW).interval).toBe(base);
+  });
+
+  it("tham số không hợp lệ bị bỏ qua (dùng mặc định)", () => {
+    expect(validWeights([1, 2, 3])).toBe(false);
+    expect(validWeights(Array(21).fill(NaN))).toBe(false);
+    expect(validWeights(null)).toBe(false);
+    expect(validWeights(custom())).toBe(true);
+    configureSrs({ weights: [1, 2, 3] });
+    expect(getWeights()).toBeNull();
+  });
+
+  it("đổi mức nhớ mục tiêu vẫn giữ tham số riêng", () => {
+    configureSrs({ retention: 0.9, weights: custom() });
+    configureSrs({ retention: 0.95, weights: custom() });
+    expect(getWeights()).toEqual(custom());
+    expect(getRetention()).toBe(0.95);
   });
 });
 

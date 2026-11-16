@@ -2,12 +2,13 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import "./styles.css";
 import { loadWords } from "./lib/words";
+import { initStorage } from "./lib/storage";
 
 const root = document.getElementById("root");
 
-// Nạp dữ liệu từ vựng và mã giao diện song song, rồi mới hiển thị app
+// Nạp dữ liệu từ vựng, tiến độ (IndexedDB) và mã giao diện song song, rồi mới hiển thị app
 function start() {
-  return Promise.all([loadWords(), import("./App.jsx")]).then(([, { default: App }]) => {
+  return Promise.all([loadWords(), initStorage(), import("./App.jsx")]).then(([, , { default: App }]) => {
     createRoot(root).render(
       <React.StrictMode>
         <App />

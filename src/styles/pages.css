@@ -78,3 +78,7 @@
 .panel .muted + .muted { margin-top: 10px; }
 .more { display: block; width: 100%; padding: 16px; border: 0; border-top: 1px solid var(--line); background: var(--surface-2); color: var(--accent); font-weight: 700; }
 .more:hover { background: var(--accent-soft); }
+.warn { margin: 8px 0 0; padding: 10px 12px; border-radius: 10px; font-size: 14px; line-height: 1.5; color: var(--ink); background: color-mix(in srgb, var(--again) 10%, var(--surface)); border: 1px solid color-mix(in srgb, var(--again) 35%, var(--line)); }
+.backup-nag { display: block; width: 100%; margin: 10px 0 0; padding: 10px 12px; border-radius: 10px; font-size: 13.5px; line-height: 1.45; text-align: left; color: var(--ink); background: color-mix(in srgb, var(--again) 10%, var(--surface)); border: 1px solid color-mix(in srgb, var(--again) 35%, var(--line)); cursor: pointer; }
+.note { margin: 8px 0 0; padding: 10px 12px; border-radius: 10px; font-size: 14px; line-height: 1.5; color: var(--ink); background: color-mix(in srgb, var(--accent) 8%, var(--surface)); border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line)); }
+.panel h3 svg { vertical-align: -2px; margin-right: 4px; }

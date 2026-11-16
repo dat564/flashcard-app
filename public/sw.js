@@ -4,9 +4,9 @@
  *  - Audio: lưu dần khi nghe (cache-first), có hỗ trợ Range cho Safari.
  * Đổi VERSION để buộc người dùng tải lại bản mới.
  */
-const VERSION = "v3";
+const VERSION = "v4";
 const SHELL = `toeic-shell-${VERSION}`;
-const AUDIO = "toeic-audio-v1"; // giữ qua các phiên bản để khỏi tải lại âm thanh
+const AUDIO = "toeic-audio-v2"; // v2: bỏ cache cũ có thể chứa phản hồi không phải audio
 const SCOPE = self.registration.scope;
 
 self.addEventListener("install", (e) => {
@@ -56,16 +56,36 @@ async function rangeFrom(res, rangeHeader) {
   });
 }
 
+// Chỉ coi là audio hợp lệ khi thành công, đúng loại nội dung và không rỗng
+// (một số host trả trang HTML với mã 200 cho file không tồn tại; không được cache thứ đó)
+const isAudio = (res) =>
+  !!res &&
+  res.ok &&
+  /^(audio\/|application\/octet-stream)/i.test(res.headers.get("Content-Type") || "") &&
+  Number(res.headers.get("Content-Length") || 1000) > 500;
+
 async function audioFetch(req) {
   const cache = await caches.open(AUDIO);
   const key = new Request(req.url); // bỏ header Range khi tra cache
   let res = await cache.match(key);
+  if (res && !isAudio(res)) {
+    await cache.delete(key); // bản lưu hỏng: bỏ và tải lại
+    res = undefined;
+  }
   if (!res) {
-    res = await fetch(key); // luôn tải đủ file để lưu
-    if (res.ok) cache.put(key, res.clone());
+    try {
+      res = await fetch(key); // luôn tải đủ file để lưu
+    } catch {
+      return Response.error();
+    }
+    if (!isAudio(res)) {
+      // Trả lỗi 404 để phần tử audio báo lỗi ngay (app sẽ chuyển sang giọng trình duyệt)
+      return new Response(null, { status: 404, statusText: "Not Found" });
+    }
+    cache.put(key, res.clone());
   }
   const range = req.headers.get("range");
-  return range && res.ok ? rangeFrom(res, range) : res;
+  return range ? rangeFrom(res, range) : res;
 }
 
 async function pageFetch(req) {

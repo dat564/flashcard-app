@@ -31,7 +31,16 @@ export default function App() {
   const today = todayKey();
   // Mức nhớ mục tiêu của FSRS (cài đặt). Gọi ngay trong lúc render để số ngày hiện
   // dưới nút luôn khớp; hàm không làm gì nếu giá trị không đổi.
-  configureSrs({ retention: progress.settings?.retention });
+  configureSrs({
+    retention: progress.settings?.retention,
+    weights: progress.settings?.fsrsWeights,
+  });
+
+  // Nhắc sao lưu: đã học ≥ 30 từ mà chưa xuất file lần nào hoặc đã quá 7 ngày
+  const backupStale =
+    Object.keys(progress.cards || {}).length >= 30 &&
+    (!progress.lastExportAt ||
+      Date.now() - progress.lastExportAt > 7 * 24 * 3600 * 1000);
 
   const data = useDeck({ progress, deckId, newLimit, today });
   const study = useStudySession({
@@ -87,6 +96,7 @@ export default function App() {
             setTab={setTab}
             newLimit={newLimit}
             streak={streak}
+            backupStale={backupStale}
           />
         )}
         {tab === "library" && (

@@ -22,6 +22,7 @@ export default function StartScreen({
   setTab,
   newLimit,
   streak,
+  backupStale,
 }) {
   const {
     lists,
@@ -100,6 +101,12 @@ export default function StartScreen({
           {nothingDue ? "Đã hoàn thành" : "Bắt đầu học"}
         </button>
       </div>
+
+      {backupStale && (
+        <button className="backup-nag" onClick={() => setTab("stats")}>
+          ⚠ Bạn chưa sao lưu tiến độ trong 7 ngày qua. Bấm để sao lưu.
+        </button>
+      )}
 
       {blankPool.length > 0 && (
         <button className="mode-btn" onClick={quizApi.startQuiz}>
