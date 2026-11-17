@@ -266,7 +266,9 @@ không bị giới hạn số từ mới mỗi ngày.
     thanh được lưu dần trên máy sau khi nghe lần đầu.
   * Phát âm: mỗi lần đọc dùng một phần tử âm thanh mới. Nếu file
     âm thanh của một từ bị lỗi hoặc không phát được trong khoảng
-    1,5 giây, app tự chuyển sang giọng đọc của trình duyệt.
+    1,5 giây, app tự chuyển sang giọng đọc của trình duyệt. Mỗi
+    lần bấm chỉ nghe MỘT nguồn: hoặc giọng người (mp3) hoặc giọng
+    trình duyệt, không bao giờ cả hai cùng lúc.
 
 
 ----------------------------------------------------------------

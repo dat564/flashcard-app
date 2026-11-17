@@ -24,11 +24,16 @@ class FakeAudio {
     plays.push(this.src);
     if (behavior === "reject") return Promise.reject(new Error("NotSupportedError"));
     if (behavior === "hang") return new Promise(() => {});
+    if (behavior === "abortable")
+      // đúng như trình duyệt thật: pause() khi play() chưa bắt đầu → AbortError
+      return new Promise((_, rej) => (this._abort = () => rej(new DOMException("aborted", "AbortError"))));
     queueMicrotask(() => this.onplaying?.());
     return Promise.resolve();
   }
   pause() {
     this.paused = true;
+    this._abort?.();
+    this._abort = null;
   }
   load() {}
 }
@@ -179,5 +184,90 @@ describe("phát âm khi thẻ lặp lại (hỏi lại)", () => {
     expect(spoken).not.toContain(w);
     act(() => a.onerror());
     expect(spoken).toContain(w);
+  });
+});
+
+// ---------- Bất biến "một lần đọc = một giọng" ----------
+describe("mỗi lần bấm chỉ được nghe MỘT giọng", () => {
+  // Phát bằng Audio giả có thể điều khiển từng sự kiện; trả về {spoken, el}
+  async function speakWord(idx, drive, mode = "hang") {
+    const { result } = setup();
+    await flush();
+    audioEls.clear();
+    spoken.length = 0;
+    made.length = 0;
+    plays.length = 0;
+    behavior = mode; // play() không tự phát: test tự bắn sự kiện
+    const w = WORDS[idx].word;
+    act(() => result.current.speech.speak(w));
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(50);
+    });
+    const el = made.find((a) => a.src.includes("/" + w + ".mp3") && a.onerror);
+    expect(el).toBeTruthy();
+    await drive(el);
+    return { w, el };
+  }
+
+  it("lỗi tải: cả sự kiện error lẫn play() bị từ chối → giọng trình duyệt chỉ đọc 1 lần", async () => {
+    const { w } = await speakWord(0, async (el) => {
+      act(() => el.onerror());
+      act(() => el.onerror());
+    });
+    expect(spoken.filter((t) => t === w)).toHaveLength(1);
+  });
+
+  it("quá 1,5 giây: chuyển giọng trình duyệt đúng 1 lần dù pause() làm play() bị từ chối", async () => {
+    const { w, el } = await speakWord(1, async () => {}, "abortable");
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(2000);
+    });
+    expect(spoken.filter((t) => t === w)).toHaveLength(1);
+    expect(el.paused).toBe(true);
+  });
+
+  it("mp3 đến muộn sau khi đã đọc bằng giọng trình duyệt: mp3 bị chặn, không chồng giọng", async () => {
+    const { w, el } = await speakWord(2, async () => {
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(1600); // hết 1,5 giây → giọng trình duyệt
+      });
+    });
+    expect(spoken.filter((t) => t === w)).toHaveLength(1);
+    el.paused = false;
+    act(() => el.onplaying()); // mp3 cuối cùng cũng bắt đầu
+    expect(el.paused).toBe(true); // bị dừng lại ngay
+    expect(spoken.filter((t) => t === w)).toHaveLength(1);
+  });
+
+  it("mp3 đã phát: không bao giờ chuyển giọng trình duyệt (kể cả error/timer đến sau)", async () => {
+    const { w, el } = await speakWord(3, async (el) => {
+      act(() => el.onplaying());
+    });
+    act(() => el.onerror());
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(3000);
+    });
+    expect(spoken.filter((t) => t === w)).toHaveLength(0);
+  });
+
+  it("lần bấm mới thay lần cũ: lần cũ đến muộn không được đọc", async () => {
+    const { result } = setup();
+    await flush();
+    audioEls.clear();
+    spoken.length = 0;
+    behavior = "hang";
+    act(() => result.current.speech.speak(WORDS[0].word));
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(50);
+    });
+    const old = made.find((a) => a.src.includes("/" + WORDS[0].word + ".mp3") && a.onerror);
+    act(() => result.current.speech.speak(WORDS[1].word));
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(2500);
+    });
+    // chỉ từ mới (lần bấm sau) được phép rơi về giọng trình duyệt; từ cũ phải im
+    expect(spoken).not.toContain(WORDS[0].word);
+    act(() => old.onerror?.());
+    expect(spoken).not.toContain(WORDS[0].word);
   });
 });

@@ -41,7 +41,7 @@ npm run deploy   # kiểm tra dữ liệu → chạy test → build → đẩy d
 - Từ mới của kho chung được trộn theo thứ tự ổn định (không học liền `abandon`/`abandoned`/`ability`...); danh sách riêng giữ thứ tự bạn nhập.
 - Phím tắt: Space lật thẻ, P phát âm, Z hoàn tác.
 - Quiz điền từ vào câu (kiểu TOEIC Part 5).
-- Âm thanh: file mp3 giọng người dựng sẵn (`public/audio`), dự phòng từ điển online rồi giọng trình duyệt. Mỗi lần đọc dùng phần tử `Audio` mới; file lỗi hoặc không phát được trong ~1,5 giây thì tự chuyển sang giọng trình duyệt.
+- Âm thanh: file mp3 giọng người dựng sẵn (`public/audio`), dự phòng từ điển online rồi giọng trình duyệt. Mỗi lần đọc dùng phần tử `Audio` mới; file lỗi hoặc không phát được trong ~1,5 giây thì tự chuyển sang giọng trình duyệt. Mỗi lần bấm chỉ nghe **một** nguồn (mp3 hoặc giọng trình duyệt, không bao giờ cả hai); mp3 đến muộn sau khi đã chuyển giọng sẽ bị dừng.
 - Danh sách từ riêng: nhập từ file `.docx`, `.csv`, `.tsv`, `.txt`.
 - Thống kê, chuỗi ngày, heatmap, dự báo ôn tập; xuất/nhập tiến độ JSON (kèm nhật ký ôn) và nhắc sao lưu khi quá 7 ngày.
 - Lưu trữ bằng **IndexedDB** (mỗi lần chấm chỉ ghi thẻ thay đổi); dữ liệu `localStorage` của bản cũ tự chuyển sang, và tự dùng lại `localStorage` nếu IndexedDB không dùng được.

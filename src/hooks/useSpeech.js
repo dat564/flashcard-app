@@ -59,9 +59,15 @@ export function useSpeech() {
     return () => sy.removeEventListener?.("voiceschanged", load);
   }, []);
 
+  const lastTts = useRef({ text: "", t: 0 });
   const speakBrowser = (text) => {
     const sy = window.speechSynthesis;
     if (!sy) return;
+    // Chrome/Android: cancel() rồi speak() liền nhau có thể làm câu cũ vẫn được đọc → đọc đúp.
+    // Cùng một nội dung gọi lại trong 400 ms thì bỏ qua.
+    const now = Date.now();
+    if (lastTts.current.text === text && now - lastTts.current.t < 400) return;
+    lastTts.current = { text, t: now };
     sy.cancel();
     const u = new SpeechSynthesisUtterance(text);
     const v = pickVoice(voices, voiceURI);
@@ -85,28 +91,35 @@ export function useSpeech() {
     if (voiceMode !== "human") return speakBrowser(text);
     const key = text.toLowerCase().trim();
     const current = () => seq === speakSeq.current;
+    // Mỗi lần bấm chỉ được nghe MỘT nguồn: file mp3 HOẶC giọng trình duyệt, không bao giờ cả hai.
+    //   pending → audio   : mp3 đã bắt đầu phát (không bao giờ chuyển sang giọng trình duyệt nữa)
+    //   pending → browser : mp3 lỗi / quá chậm → đọc bằng giọng trình duyệt đúng 1 lần,
+    //                       mp3 nào đến muộn sau đó sẽ bị dừng ngay
+    // Trước đây sự kiện lỗi, play() bị từ chối và bộ đếm giờ đều có thể gọi giọng trình duyệt,
+    // nên một từ bị đọc 2 lần (và mp3 đến muộn còn chồng lên giọng trình duyệt).
     const play = (a) => {
-      let started = false;
-      const timer = setTimeout(() => {
-        if (started || !current()) return;
+      let state = "pending";
+      let timer = 0;
+      const toBrowser = () => {
+        if (state !== "pending" || !current()) return;
+        state = "browser";
+        clearTimeout(timer);
         a.pause();
         speakBrowser(text);
-      }, 1500);
-      const giveUp = () => {
-        clearTimeout(timer);
-        if (!started && current()) speakBrowser(text);
       };
+      timer = setTimeout(toBrowser, 1500);
       a.playbackRate = rate;
       a.onplaying = () => {
-        started = true;
+        if (state === "browser" || !current()) return a.pause(); // đến muộn: bỏ
+        state = "audio";
         clearTimeout(timer);
       };
-      a.onerror = giveUp;
+      a.onerror = toBrowser;
       audioRef.current = a;
       try {
-        a.play().catch(giveUp);
+        a.play().catch(toBrowser);
       } catch {
-        giveUp();
+        toBrowser();
       }
     };
     const pre = audioEls.get(key);
