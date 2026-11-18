@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { PRACTICE_MAX } from "../../lib/constants";
 import { words } from "../../lib/words";
+import { levelOf, LEVELS, LEVEL_LABEL } from "../../lib/levels";
 
 export default function StartScreen({
   study,
@@ -40,6 +41,17 @@ export default function StartScreen({
   } = data;
   const { lastIds, undo } = study;
   const nothingDue = dueQueue.length === 0;
+
+  // Hôm nay có bao nhiêu từ mới ở từng mức độ (kho chung), vd. "12 cơ bản · 3 trung cấp"
+  const todayNew = newWords.slice(0, Math.max(0, Math.min(remainingNew, newWords.length)));
+  const lvCount = { 1: 0, 2: 0, 3: 0 };
+  todayNew.forEach((w) => (lvCount[levelOf(w)] += 1));
+  const todayNewBreakdown =
+    todayNew.length > 0
+      ? LEVELS.filter((l) => lvCount[l] > 0)
+          .map((l) => `${lvCount[l]} ${LEVEL_LABEL[l].toLowerCase()}`)
+          .join(" · ")
+      : "";
 
   return (
     <div className="start">
@@ -92,6 +104,11 @@ export default function StartScreen({
               <span>từ mới</span>
             </div>
           </div>
+        )}
+        {isMain && todayNewBreakdown && (
+          <p className="muted hero-sub">
+            Từ mới hôm nay: {todayNewBreakdown}
+          </p>
         )}
         <button
           className="primary"

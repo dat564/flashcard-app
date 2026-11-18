@@ -38,7 +38,8 @@ npm run deploy   # kiểm tra dữ liệu → chạy test → build → đẩy d
 - **Chưa nhớ** → thẻ luôn quay lại vào ngày mai, và được **hỏi lại đúng 1 lần** sau 3 thẻ trong cùng phiên. Lượt hỏi lại không đổi lịch và không tính thêm vào thống kê.
 - Thẻ đến hạn xếp theo xác suất nhớ thấp nhất trước. Thẻ cũ (lịch SM-2 của bản trước) tự chuyển sang FSRS khi ôn, không mất tiến độ.
 - Thống kê có "độ nhớ ước tính" (trung bình xác suất nhớ của các từ đã học).
-- Từ mới của kho chung được trộn theo thứ tự ổn định (không học liền `abandon`/`abandoned`/`ability`...); danh sách riêng giữ thứ tự bạn nhập.
+- Từ mới của kho chung học theo **mức độ phổ biến**: mặc định "Phổ biến trước" (Cơ bản → Trung cấp → Nâng cao, chia nhóm 0,5 Zipf; trong mỗi nhóm trộn ổn định để `abandon`/`abandoned` không đứng liền nhau). Đổi sang "Ngẫu nhiên" ở Thống kê. Danh sách riêng giữ thứ tự người dùng nhập.
+- Mỗi từ có độ phổ biến `z` (Zipf, từ `wordfreq`, tiếng Anh nói chung, không riêng TOEIC) và mức Cơ bản (z ≥ 5,0), Trung cấp (4,4–5,0), Nâng cao (< 4,4). Hiện nhãn mức trong Kho từ (có bộ lọc), tiến độ theo mức trong Thống kê và số từ mới theo mức trên màn hình bắt đầu. Phổ biến không có nghĩa là dễ (ví dụ `piano`, `spider` ít gặp nhưng dễ hiểu).
 - Phím tắt: Space lật thẻ, P phát âm, Z hoàn tác.
 - Quiz điền từ vào câu (kiểu TOEIC Part 5).
 - Âm thanh: file mp3 giọng người dựng sẵn (`public/audio`), dự phòng từ điển online rồi giọng trình duyệt. Mỗi lần đọc dùng phần tử `Audio` mới; file lỗi hoặc không phát được trong ~1,5 giây thì tự chuyển sang giọng trình duyệt. Mỗi lần bấm chỉ nghe **một** nguồn (mp3 hoặc giọng trình duyệt, không bao giờ cả hai); mp3 đến muộn sau khi đã chuyển giọng sẽ bị dừng.
@@ -52,12 +53,13 @@ npm run deploy   # kiểm tra dữ liệu → chạy test → build → đẩy d
 Mỗi từ có dạng:
 ```json
 { "id": 1, "word": "abandon", "pos": "v.", "ipa": "/ə'bændən/",
-  "example": "The company abandoned its plan.", "meaning": "bỏ, từ bỏ" }
+  "example": "The company abandoned its plan.", "meaning": "bỏ, từ bỏ", "z": 4.02 }
 ```
 
 | Lệnh | Tác dụng |
 | --- | --- |
 | `npm test` | Chạy bộ test (vitest): SRS, tối ưu FSRS (đối chiếu từng bước với ts-fsrs), IndexedDB, service worker, phát âm, quiz, thống kê, nhập file, phiên học |
+| `python scripts/add_frequency.py` | Gắn/cập nhật độ phổ biến `z` cho từng từ (cần `pip install wordfreq`) |
 | `npm run check` | Kiểm tra dữ liệu: thiếu từ/nghĩa/ví dụ, trùng id (lỗi làm `deploy` dừng); thiếu phiên âm/từ loại (cảnh báo) |
 | `npm run check-audio` | Liệt kê từ chưa có file mp3 |
 | `python gen_audio.py` | Tạo mp3 còn thiếu bằng `edge-tts` (`pip install edge-tts`) |

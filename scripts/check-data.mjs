@@ -18,6 +18,7 @@ for (const f of fs.readdirSync("src/data/words").filter((f) => f.endsWith(".json
     seenWord.set(k, w.id);
     if (!w.ipa) warn("thiếu phiên âm");
     if (!w.pos) warn("thiếu từ loại");
+    if (typeof w.z !== "number" || !(w.z > 0)) warn("thiếu độ phổ biến z (chạy: python scripts/add_frequency.py)");
   }
 }
 console.log(`\n${errors} lỗi, ${warns} cảnh báo`);

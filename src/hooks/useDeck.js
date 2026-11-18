@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { words } from "../lib/words";
 import { dueAt, isHard, retrievability } from "../lib/srs";
 import { buildBlankPool } from "../lib/quiz";
-import { mixKey } from "../lib/utils";
+import { orderNewWords, DEFAULT_NEW_ORDER } from "../lib/levels";
 
 // Dữ liệu dẫn xuất của bộ từ đang học (kho chung hoặc danh sách riêng)
 export function useDeck({ progress, deckId, newLimit, today }) {
@@ -35,10 +35,10 @@ export function useDeck({ progress, deckId, newLimit, today }) {
     .sort((a, b) => a.r - b.r)
     .map((x) => x.w);
   const unseen = deck.filter((w) => !cards[w.id]);
-  // Kho chung: trộn ổn định để không học liền các từ cùng gốc; danh sách riêng giữ thứ tự người dùng
-  const newWords = isMain
-    ? [...unseen].sort((a, b) => mixKey(a.id) - mixKey(b.id))
-    : unseen;
+  // Kho chung: theo cài đặt "Thứ tự từ mới" (mặc định: phổ biến trước, trộn ổn định trong từng nhóm);
+  // danh sách riêng giữ thứ tự người dùng nhập
+  const newOrder = progress.settings?.newOrder || DEFAULT_NEW_ORDER;
+  const newWords = isMain ? orderNewWords(unseen, newOrder) : unseen;
   const remainingNew = isMain
     ? Math.max(0, newLimit - (todayStats.newLearned || 0))
     : Infinity; // danh sách riêng: học hết, không giới hạn

@@ -10,6 +10,7 @@ import {
 import { words } from "../lib/words";
 import { isHard, retrievability, getRetention } from "../lib/srs";
 import { buildForecast, buildHeatmap } from "../lib/stats";
+import { levelOf, LEVELS, LEVEL_LABEL, NEW_ORDERS, DEFAULT_NEW_ORDER } from "../lib/levels";
 import Heatmap from "./stats/Heatmap";
 import Forecast from "./stats/Forecast";
 import VoiceSettings from "./stats/VoiceSettings";
@@ -51,6 +52,17 @@ export default function StatsTab({
     (progress.settings?.retention ?? getRetention()) * 100
   );
   const progressPct = Math.round((learnedCount / words.length) * 100);
+  // Tiến độ theo mức độ: số từ đã đưa vào học / tổng số từ của mức đó (kho chung)
+  const byLevel = useMemo(() => {
+    const r = { 1: [0, 0], 2: [0, 0], 3: [0, 0] };
+    for (const w of words) {
+      const l = levelOf(w);
+      r[l][1]++;
+      if (cards[w.id]) r[l][0]++;
+    }
+    return r;
+  }, [cards]);
+  const newOrder = progress.settings?.newOrder || DEFAULT_NEW_ORDER;
   const accuracy = todayStats.reviewed
     ? Math.round((todayStats.correct / todayStats.reviewed) * 100)
     : 0;
@@ -100,6 +112,44 @@ export default function StatsTab({
           <p className="muted">
             {learnedCount}/{words.length} từ đã học · độ nhớ tốt hôm nay{" "}
             {accuracy}%
+          </p>
+          <h3>Theo mức độ (độ phổ biến)</h3>
+          {LEVELS.map((l) => (
+            <div key={l} className="lv-row">
+              <span>
+                {LEVEL_LABEL[l]} <small>{byLevel[l][0]}/{byLevel[l][1]}</small>
+              </span>
+              <div className="track">
+                <i
+                  className={`lv${l}`}
+                  style={{ width: `${Math.round((byLevel[l][0] / byLevel[l][1]) * 100)}%` }}
+                />
+              </div>
+            </div>
+          ))}
+          <p className="muted">
+            Mức độ dựa trên độ phổ biến của từ trong tiếng Anh nói chung, không riêng
+            TOEIC; từ ít phổ biến chưa chắc khó hiểu.
+          </p>
+          <h3>Thứ tự từ mới (kho chung)</h3>
+          <select
+            value={newOrder}
+            onChange={(e) =>
+              setProgress((p) => ({
+                ...p,
+                settings: { ...p.settings, newOrder: e.target.value },
+              }))
+            }
+          >
+            {Object.entries(NEW_ORDERS).map(([k, label]) => (
+              <option key={k} value={k}>
+                {label}
+              </option>
+            ))}
+          </select>
+          <p className="muted">
+            "Phổ biến trước": học từ thông dụng trước, từ ít gặp sau (hợp khi mới bắt đầu).
+            Chỉ ảnh hưởng các từ chưa học.
           </p>
           <h3>Từ mới mỗi ngày (kho chung)</h3>
           <div className="goal">

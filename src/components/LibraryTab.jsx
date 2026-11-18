@@ -2,11 +2,13 @@ import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { words } from "../lib/words";
 import { isHard, statusOf } from "../lib/srs";
+import { levelOf, LEVEL_LABEL, LEVELS } from "../lib/levels";
 import WordRow from "./WordRow";
 
 export default function LibraryTab({ cards, speak }) {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("all");
+  const [level, setLevel] = useState("all");
   const [shown, setShown] = useState(100);
 
   const filtered = useMemo(() => {
@@ -19,11 +21,12 @@ export default function LibraryTab({ cards, speak }) {
           (v || "").toLowerCase().includes(q)
         );
       if (!match) return false;
+      if (level !== "all" && levelOf(w) !== +level) return false;
       const c = cards[w.id];
       if (filter === "hard") return isHard(c);
       return filter === "all" || statusOf(c, now) === filter;
     });
-  }, [query, filter, cards]);
+  }, [query, filter, level, cards]);
 
   return (
     <section className="page">
@@ -52,6 +55,20 @@ export default function LibraryTab({ cards, speak }) {
           <option value="due">Đến hạn ôn</option>
           <option value="learning">Đã lên lịch</option>
           <option value="hard">Từ khó</option>
+        </select>
+        <select
+          value={level}
+          onChange={(e) => {
+            setLevel(e.target.value);
+            setShown(100);
+          }}
+        >
+          <option value="all">Mọi mức độ</option>
+          {LEVELS.map((l) => (
+            <option key={l} value={l}>
+              {LEVEL_LABEL[l]}
+            </option>
+          ))}
         </select>
       </div>
       <div className="table">

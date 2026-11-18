@@ -142,9 +142,21 @@ Bước 2. Bấm "Bắt đầu". Phiên học gồm:
           a) Thẻ đến hạn, xếp theo xác suất nhớ thấp nhất trước (từ
              sắp quên nhất học đầu tiên, lúc đầu óc còn tỉnh).
           b) Từ mới của hôm nay (mặc định 20 từ/ngày, chỉnh 5–100).
-             Từ mới được trộn ngẫu nhiên nhưng cố định theo từng từ,
-             nên các từ cùng gốc (như abandon, abandoned) không bị
-             xếp liền nhau gây nhầm lẫn.
+             Từ mới được xếp theo ĐỘ PHỔ BIẾN: từ thông dụng trước,
+             từ ít gặp sau (Cơ bản → Trung cấp → Nâng cao). Trong mỗi
+             nhóm các từ được trộn cố định theo từng từ, nên các từ
+             cùng gốc (như abandon, abandoned) không bị xếp liền nhau
+             gây nhầm lẫn. Có thể đổi sang "Ngẫu nhiên" ở Thống kê.
+             Danh sách riêng giữ nguyên thứ tự bạn nhập.
+
+             Độ phổ biến tính từ tần suất xuất hiện của từ trong tiếng
+             Anh nói chung (thư viện wordfreq), KHÔNG riêng cho TOEIC:
+               Cơ bản    ~900 từ  (their, during, family, policy...)
+               Trung cấp ~1.360 từ
+               Nâng cao  ~1.230 từ (agenda, negotiate...)
+             Phổ biến không có nghĩa là dễ: "piano" hay "spider" ít
+             gặp nhưng dễ hiểu; còn từ thông dụng như "policy" có thể
+             lại khó với người mới.
 
 Bước 3. Với từng thẻ:
           1) Nhìn mặt trước và TỰ NHỚ câu trả lời (nói thầm hoặc nói
@@ -215,6 +227,9 @@ không bị giới hạn số từ mới mỗi ngày.
     không phải điểm kiểm tra thật. Con số hợp lý thường quanh mức
     nhớ mục tiêu hoặc cao hơn nếu bạn ôn đều.
   * Từ khó: số từ đang bị quên lặp đi lặp lại.
+  * Theo mức độ: số từ đã đưa vào học trên tổng số từ của từng mức
+    (Cơ bản / Trung cấp / Nâng cao), để biết bạn đang ở đâu trong lộ
+    trình "từ phổ biến trước".
   * Chuỗi ngày và bản đồ nhiệt: các ngày bạn có học (ôn thẻ, luyện
     tập hoặc làm quiz).
   * Dự báo 7 ngày: số thẻ sẽ đến hạn mỗi ngày, để bạn biết trước

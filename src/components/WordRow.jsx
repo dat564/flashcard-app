@@ -1,6 +1,7 @@
 import { Volume2 } from "lucide-react";
 import { isHard, statusOf, STATUS_LABEL } from "../lib/srs";
 import { metaOf } from "../lib/utils";
+import { levelOf, LEVEL_LABEL } from "../lib/levels";
 
 // Một dòng từ trong Kho từ / danh sách riêng
 export default function WordRow({ word, card, speak, showHard = false }) {
@@ -11,6 +12,9 @@ export default function WordRow({ word, card, speak, showHard = false }) {
         <b>
           {word.word}
           {showHard && isHard(card) && <em className="hard-tag">khó</em>}
+          {typeof word.z === "number" && (
+            <em className={`lv-tag lv${levelOf(word)}`}>{LEVEL_LABEL[levelOf(word)]}</em>
+          )}
         </b>
         <small>{metaOf(word)}</small>
       </div>

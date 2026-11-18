@@ -82,3 +82,13 @@
 .backup-nag { display: block; width: 100%; margin: 10px 0 0; padding: 10px 12px; border-radius: 10px; font-size: 13.5px; line-height: 1.45; text-align: left; color: var(--ink); background: color-mix(in srgb, var(--again) 10%, var(--surface)); border: 1px solid color-mix(in srgb, var(--again) 35%, var(--line)); cursor: pointer; }
 .note { margin: 8px 0 0; padding: 10px 12px; border-radius: 10px; font-size: 14px; line-height: 1.5; color: var(--ink); background: color-mix(in srgb, var(--accent) 8%, var(--surface)); border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line)); }
 .panel h3 svg { vertical-align: -2px; margin-right: 4px; }
+.lv-tag { margin-left: 6px; padding: 1px 6px; border-radius: 999px; font-size: 10.5px; font-style: normal; font-weight: 600; vertical-align: 1px; background: color-mix(in srgb, var(--accent) 12%, var(--surface)); color: var(--ink); }
+.lv-tag.lv1 { background: color-mix(in srgb, #2e9e5b 20%, var(--surface)); }
+.lv-tag.lv2 { background: color-mix(in srgb, #d99a1c 22%, var(--surface)); }
+.lv-tag.lv3 { background: color-mix(in srgb, #d6533f 20%, var(--surface)); }
+.lv-row { display: grid; grid-template-columns: 120px 1fr; align-items: center; gap: 10px; margin: 6px 0; font-size: 14px; }
+.lv-row small { color: var(--muted, #667); margin-left: 4px; }
+.lv-row .track i.lv1 { background: #2e9e5b; }
+.lv-row .track i.lv2 { background: #d99a1c; }
+.lv-row .track i.lv3 { background: #d6533f; }
+.hero-sub { margin: 8px 0 0; text-align: center; font-size: 13px; }
