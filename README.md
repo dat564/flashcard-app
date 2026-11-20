@@ -47,6 +47,13 @@ npm run deploy   # kiểm tra dữ liệu → chạy test → build → đẩy d
 - Thống kê, chuỗi ngày, heatmap, dự báo ôn tập; xuất/nhập tiến độ JSON (kèm nhật ký ôn) và nhắc sao lưu khi quá 7 ngày.
 - Lưu trữ bằng **IndexedDB** (mỗi lần chấm chỉ ghi thẻ thay đổi); dữ liệu `localStorage` của bản cũ tự chuyển sang, và tự dùng lại `localStorage` nếu IndexedDB không dùng được.
 - PWA: cài lên màn hình chính, học offline (audio được lưu dần khi nghe).
+- **Nhắc học & mục tiêu tuần** (Thống kê → "Nhắc học & mục tiêu tuần"):
+  - Thông báo nhắc mỗi ngày vào giờ bạn chọn, chỉ khi hôm nay **chưa học**; mỗi ngày nhắc tối đa một lần và chỉ trong 4 giờ sau giờ đã chọn (không qua nửa đêm).
+  - Hoạt động khi app đang mở hoặc ở nền; ở trình duyệt có Periodic Background Sync (Chrome/Edge, app đã cài) service worker còn nhắc được cả khi đóng app (giờ do trình duyệt quyết định nên có thể lệch). Không có máy chủ đẩy tin nên **không thể bảo đảm nhắc đúng giờ tuyệt đối khi app đã đóng**; iPhone/Safari không hỗ trợ cơ chế này.
+  - **Lời nhắc qua lịch (.ics)**: sự kiện lặp mỗi ngày có chuông, chạy đúng giờ trên mọi thiết bị (kể cả iPhone). Đây là cách chắc nhất để nhắc khi đóng app.
+  - Huy hiệu số thẻ đến hạn trên biểu tượng app (Badging API, nơi trình duyệt hỗ trợ).
+  - **Mục tiêu tuần**: chọn học bao nhiêu ngày/tuần (1–7, mặc định 5; tuần tính từ thứ Hai). Dải 7 ngày hiện ở màn hình học và ở Thống kê, có chúc mừng khi đạt.
+  - iPhone chỉ cho thông báo khi app đã thêm vào Màn hình chính.
 - Giao diện sáng/tối, responsive desktop và mobile.
 
 ## Dữ liệu và âm thanh
@@ -58,7 +65,7 @@ Mỗi từ có dạng:
 
 | Lệnh | Tác dụng |
 | --- | --- |
-| `npm test` | Chạy bộ test (vitest): SRS, tối ưu FSRS (đối chiếu từng bước với ts-fsrs), IndexedDB, service worker, phát âm, quiz, thống kê, nhập file, phiên học |
+| `npm test` | Chạy bộ test (vitest): SRS, tối ưu FSRS (đối chiếu từng bước với ts-fsrs), IndexedDB, service worker (cache âm thanh, nhắc học), phát âm, nhắc học và mục tiêu tuần, quiz, thống kê, nhập file, phiên học |
 | `python scripts/add_frequency.py` | Gắn/cập nhật độ phổ biến `z` cho từng từ (cần `pip install wordfreq`) |
 | `npm run check` | Kiểm tra dữ liệu: thiếu từ/nghĩa/ví dụ, trùng id (lỗi làm `deploy` dừng); thiếu phiên âm/từ loại (cảnh báo) |
 | `npm run check-audio` | Liệt kê từ chưa có file mp3 |

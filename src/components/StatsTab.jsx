@@ -17,6 +17,7 @@ import VoiceSettings from "./stats/VoiceSettings";
 import ThemePanel from "./stats/ThemePanel";
 import DataBackup from "./stats/DataBackup";
 import FsrsTuner from "./stats/FsrsTuner";
+import ReminderSettings from "./stats/ReminderSettings";
 
 export default function StatsTab({
   progress,
@@ -27,6 +28,7 @@ export default function StatsTab({
   setTheme,
   pwa,
   streak,
+  week,
   newLimit,
   setNewLimit,
   today,
@@ -203,6 +205,14 @@ export default function StatsTab({
           <Heatmap streak={streak} heat={heat} />
           <Forecast forecast={forecast} />
         </div>
+
+        <ReminderSettings
+          progress={progress}
+          setProgress={setProgress}
+          setToast={setToast}
+          week={week}
+          dueCount={dueCount}
+        />
 
         <FsrsTuner
           progress={progress}

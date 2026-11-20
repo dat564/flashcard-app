@@ -13,6 +13,7 @@ import {
 import { PRACTICE_MAX } from "../../lib/constants";
 import { words } from "../../lib/words";
 import { levelOf, LEVELS, LEVEL_LABEL } from "../../lib/levels";
+import WeekStrip from "../WeekStrip";
 
 export default function StartScreen({
   study,
@@ -23,6 +24,7 @@ export default function StartScreen({
   setTab,
   newLimit,
   streak,
+  week,
   backupStale,
 }) {
   const {
@@ -118,6 +120,8 @@ export default function StartScreen({
           {nothingDue ? "Đã hoàn thành" : "Bắt đầu học"}
         </button>
       </div>
+
+      {week && <WeekStrip week={week} />}
 
       {backupStale && (
         <button className="backup-nag" onClick={() => setTab("stats")}>

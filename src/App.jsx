@@ -9,6 +9,7 @@ import { useSpeech } from "./hooks/useSpeech";
 import { useDeck } from "./hooks/useDeck";
 import { useStudySession } from "./hooks/useStudySession";
 import { useQuiz } from "./hooks/useQuiz";
+import { useReminder } from "./hooks/useReminder";
 import Nav from "./components/Nav";
 import Toast from "./components/Toast";
 import StudyTab from "./components/study/StudyTab";
@@ -68,6 +69,7 @@ export default function App() {
     },
   });
   const streak = useMemo(() => calcStreaks(progress.stats), [progress.stats]);
+  const { week } = useReminder({ progress, setProgress, today, setToast });
 
   // Kết thúc mọi thứ đang chạy ở tab Học (phiên thẻ + quiz)
   const endAll = () => {
@@ -96,6 +98,7 @@ export default function App() {
             setTab={setTab}
             newLimit={newLimit}
             streak={streak}
+            week={week}
             backupStale={backupStale}
           />
         )}
@@ -125,6 +128,7 @@ export default function App() {
             setTheme={setTheme}
             pwa={pwa}
             streak={streak}
+            week={week}
             newLimit={newLimit}
             setNewLimit={setNewLimit}
             today={today}
