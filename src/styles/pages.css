@@ -110,3 +110,31 @@
 .week-dot.today i { border-color: var(--accent); }
 .week-dot.future { opacity: 0.55; }
 .week-dot small { font-size: 11px; color: var(--muted); }
+
+/* ---- Tổng kết phiên học ---- */
+.summary { display: flex; flex-direction: column; gap: 14px; padding: 8px 2px 24px; }
+.summary h2 { margin: 0; font-size: 22px; }
+.summary h3 { margin: 0 0 6px; font-size: 15px; }
+.summary-main { display: flex; align-items: center; gap: 18px; }
+.summary .big { margin: 0 0 2px; font-size: 18px; font-weight: 700; }
+.summary .muted { margin: 0; font-size: 13px; }
+.ring { --pct: 0%; flex: none; width: 96px; height: 96px; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(var(--accent) var(--pct), var(--line) 0); position: relative; }
+.ring::before { content: ""; position: absolute; inset: 9px; border-radius: 50%; background: var(--bg, var(--surface)); }
+.ring b { position: relative; font-size: 22px; }
+.forgot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.forgot li { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+.forgot-word { border: 0; background: transparent; padding: 0; font: inherit; font-weight: 700; color: var(--accent); cursor: pointer; }
+.outlook p { margin: 2px 0; font-size: 14px; }
+.outlook svg { vertical-align: -3px; }
+.summary-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+.summary-actions button { flex: 1 1 160px; }
+
+/* ---- Tỉ lệ nhớ thực tế ---- */
+.retention-bars { position: relative; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px; height: 128px; padding-bottom: 18px; box-sizing: border-box; margin: 10px 0 14px; }
+.retention-bars .target-line { position: absolute; left: 0; right: 0; bottom: calc(18px + (100% - 18px) * var(--tp, 0.9)); border-top: 2px dashed var(--accent); opacity: 0.55; pointer-events: none; }
+.rbar { position: relative; min-height: 0; }
+.rbar-fill { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 100%; max-width: 28px; min-height: 2px; border-radius: 6px 6px 0 0; background: var(--accent); transition: height 0.25s; }
+.rbar small { position: absolute; top: 100%; margin-top: 3px; left: 0; right: 0; text-align: center; font-size: 10.5px; color: var(--muted); }
+.rbar.faint .rbar-fill { opacity: 0.35; }
+.warn-note { border-color: color-mix(in srgb, var(--bad, #d9534f) 45%, var(--line)); background: color-mix(in srgb, var(--bad, #d9534f) 8%, var(--surface)); }
+@media (prefers-reduced-motion: reduce) { .rbar-fill { transition: none; } }

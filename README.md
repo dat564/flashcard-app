@@ -47,6 +47,8 @@ npm run deploy   # kiểm tra dữ liệu → chạy test → build → đẩy d
 - Thống kê, chuỗi ngày, heatmap, dự báo ôn tập; xuất/nhập tiến độ JSON (kèm nhật ký ôn) và nhắc sao lưu khi quá 7 ngày.
 - Lưu trữ bằng **IndexedDB** (mỗi lần chấm chỉ ghi thẻ thay đổi); dữ liệu `localStorage` của bản cũ tự chuyển sang, và tự dùng lại `localStorage` nếu IndexedDB không dùng được.
 - PWA: cài lên màn hình chính, học offline (audio được lưu dần khi nghe).
+- **Tổng kết sau mỗi phiên**: số thẻ nhớ, tách từ mới / thẻ ôn lại (kèm tỉ lệ nhớ lại), thời gian học thực (khoảng nghỉ trên 60 giây chỉ tính 60 giây), danh sách từ cần chú ý (bấm để nghe), kết quả của lượt hỏi lại, số thẻ đến hạn hôm nay/ngày mai, chuỗi ngày và tuần. Hiện cả khi kết thúc sớm (nếu đã chấm ít nhất một thẻ) và ở chế độ luyện tập (có ghi rõ không đổi lịch ôn).
+- **Tỉ lệ nhớ thực tế** (Thống kê): trong các lượt ôn lại thẻ đã học, bạn nhớ được bao nhiêu % (7 ngày / 30 ngày / tất cả + biểu đồ 8 tuần), so với mức nhớ mục tiêu bằng khoảng tin cậy Wilson 95%; chỉ kết luận "thấp hơn / cao hơn" khi cả khoảng nằm hẳn một phía, và đề xuất mức mục tiêu mới (nút áp dụng) nếu thấp hơn. Nhật ký ôn có trường `n` (1 = học mới, 0 = ôn lại).
 - **Nhắc học & mục tiêu tuần** (Thống kê → "Nhắc học & mục tiêu tuần"):
   - Thông báo nhắc mỗi ngày vào giờ bạn chọn, chỉ khi hôm nay **chưa học**; mỗi ngày nhắc tối đa một lần và chỉ trong 4 giờ sau giờ đã chọn (không qua nửa đêm).
   - Hoạt động khi app đang mở hoặc ở nền; ở trình duyệt có Periodic Background Sync (Chrome/Edge, app đã cài) service worker còn nhắc được cả khi đóng app (giờ do trình duyệt quyết định nên có thể lệch). Không có máy chủ đẩy tin nên **không thể bảo đảm nhắc đúng giờ tuyệt đối khi app đã đóng**; iPhone/Safari không hỗ trợ cơ chế này.
@@ -65,7 +67,7 @@ Mỗi từ có dạng:
 
 | Lệnh | Tác dụng |
 | --- | --- |
-| `npm test` | Chạy bộ test (vitest): SRS, tối ưu FSRS (đối chiếu từng bước với ts-fsrs), IndexedDB, service worker (cache âm thanh, nhắc học), phát âm, nhắc học và mục tiêu tuần, quiz, thống kê, nhập file, phiên học |
+| `npm test` | Chạy bộ test (vitest): SRS, tối ưu FSRS (đối chiếu từng bước với ts-fsrs), IndexedDB, service worker (cache âm thanh, nhắc học), phát âm, nhắc học và mục tiêu tuần, tổng kết phiên, tỉ lệ nhớ thực tế, quiz, thống kê, nhập file, phiên học |
 | `python scripts/add_frequency.py` | Gắn/cập nhật độ phổ biến `z` cho từng từ (cần `pip install wordfreq`) |
 | `npm run check` | Kiểm tra dữ liệu: thiếu từ/nghĩa/ví dụ, trùng id (lỗi làm `deploy` dừng); thiếu phiên âm/từ loại (cảnh báo) |
 | `npm run check-audio` | Liệt kê từ chưa có file mp3 |
@@ -88,6 +90,5 @@ Nhật ký ôn chỉ bắt đầu ghi từ phiên bản này nên tối ưu tham
 `PHUONG-PHAP-HOC.txt`: giải thích phương pháp học, thuật toán FSRS và cách dùng ứng dụng mỗi ngày.
 
 ## Việc có thể làm tiếp
-- Thêm nút đánh giá "Khó" / "Dễ" (FSRS thiết kế cho 4 mức; nhật ký ôn và bộ tối ưu đã hỗ trợ sẵn các mức này).
 - Đồng bộ tiến độ giữa các thiết bị (hiện chỉ có sao lưu/nhập tay).
 - Tạo audio còn thiếu: `npm run check-audio` rồi `python gen_audio.py`.

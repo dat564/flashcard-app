@@ -18,6 +18,7 @@ import ThemePanel from "./stats/ThemePanel";
 import DataBackup from "./stats/DataBackup";
 import FsrsTuner from "./stats/FsrsTuner";
 import ReminderSettings from "./stats/ReminderSettings";
+import RetentionPanel from "./stats/RetentionPanel";
 
 export default function StatsTab({
   progress,
@@ -205,6 +206,8 @@ export default function StatsTab({
           <Heatmap streak={streak} heat={heat} />
           <Forecast forecast={forecast} />
         </div>
+
+        <RetentionPanel progress={progress} setProgress={setProgress} />
 
         <ReminderSettings
           progress={progress}

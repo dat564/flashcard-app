@@ -91,7 +91,8 @@ Mức nhớ mục tiêu chỉnh được ở Thống kê → "Mức nhớ mục 
   - Cao hơn: nhớ chắc hơn nhưng phải ôn nhiều thẻ hơn mỗi ngày.
   - Thấp hơn: ôn ít hơn nhưng quên nhiều hơn.
   - Gợi ý: 90% khi học thong thả; 93–95% khi sắp thi (và cũng nên
-    dùng mức này vì app chỉ có hai nút chấm, xem mục 9).
+    dùng mức này vì app chỉ có hai nút chấm, xem mục 9; mục 6 có cách
+    kiểm chứng bằng số liệu).
 
 Thẻ cũ từ các phiên bản trước (lịch 1-3-7-14 ngày nhân hệ số) được
 chuyển sang FSRS tự động: độ bền suy ra từ khoảng ôn đã hẹn, độ
@@ -176,7 +177,29 @@ Bước 4. Khi bấm "Chưa nhớ", thẻ được HỎI LẠI ĐÚNG MỘT LẦ
         Từ đó sẽ lại hiện ngày mai để kiểm tra xem bạn có thật sự
         nhớ không.
 
-Bước 5. Hết phiên, ứng dụng ghi lại tiến độ, chuỗi ngày và thống kê.
+Bước 5. Hết phiên, ứng dụng hiện MÀN HÌNH TỔNG KẾT (xem mục 4.1) và ghi
+        lại tiến độ, chuỗi ngày và thống kê.
+
+4.1  Màn hình tổng kết sau mỗi phiên
+     Ngay khi hết phiên (hoặc khi bạn bấm X giữa chừng sau khi đã chấm ít
+     nhất một thẻ), ứng dụng cho bạn xem bạn vừa làm được gì:
+       - Phần trăm và số thẻ bạn nhớ (ví dụ "Nhớ 18/24 thẻ").
+       - Tách riêng: số TỪ MỚI học, số thẻ ÔN LẠI và tỉ lệ nhớ lại ở các
+         thẻ ôn lại. Tỉ lệ ở thẻ ôn lại mới là con số phản ánh trí nhớ
+         thật của bạn; từ mới lần đầu gặp nên không so được.
+       - Thời gian học thực. Chỉ cộng khoảng cách giữa hai lần chấm, mỗi
+         khoảng tối đa 60 giây, nên lúc bạn đi pha cà phê hoặc quên đóng
+         ứng dụng không bị tính là đang học.
+       - Các từ bạn bấm "Chưa nhớ" (tối đa 8 từ hiện ra, bấm vào từ để
+         nghe lại) và những từ đó sẽ hiện lại vào ngày mai. Nếu trong
+         phiên có từ được hỏi lại, ứng dụng cho biết bạn nhớ lại được bao
+         nhiêu từ ngay lúc đó.
+       - Còn bao nhiêu thẻ đến hạn hôm nay, ngày mai có thêm bao nhiêu thẻ.
+       - Chuỗi ngày và tiến độ mục tiêu tuần.
+     Bấm "Xong" để về màn hình học, hoặc "Học thêm từ mới" nếu còn từ mới.
+     Với chế độ luyện tập (ôn từ khó, ôn ngẫu nhiên...), màn hình tổng
+     kết ghi rõ đây là luyện tập: kết quả không đổi lịch ôn.
+     Màn hình này chỉ để bạn nhìn lại và lấy động lực; nó không đổi lịch ôn.
 
 Chấm nhầm thì bấm Z (hoặc nút Hoàn tác) để quay lại thẻ trước.
 
@@ -223,9 +246,33 @@ không bị giới hạn số từ mới mỗi ngày.
   * Lượt ôn hôm nay: số lần bạn đã chấm thẻ (không tính lượt hỏi
     lại trong phiên).
   * Độ nhớ ước tính: trung bình xác suất nhớ (FSRS) của các từ đã
-    học, tại thời điểm hiện tại. Đây là ước lượng của thuật toán,
+    học, tại thời điểm hiện tại. Đây là số do MÔ HÌNH dự đoán (xem
+    "Tỉ lệ nhớ thực tế" bên dưới để so với kết quả thật). Đây là ước lượng của thuật toán,
     không phải điểm kiểm tra thật. Con số hợp lý thường quanh mức
     nhớ mục tiêu hoặc cao hơn nếu bạn ôn đều.
+  * Tỉ lệ nhớ thực tế: trong các lượt ÔN LẠI thẻ đã học, bạn thật sự
+    nhớ được bao nhiêu phần trăm. Ứng dụng tính từ nhật ký ôn và hiện
+    cho 7 ngày, 30 ngày, toàn bộ nhật ký, kèm biểu đồ 8 tuần gần nhất
+    (đường nét đứt là mức nhớ mục tiêu). Không tính: lần học đầu của
+    từ mới, luyện tập, lượt hỏi lại trong phiên. Cột mờ là tuần có
+    dưới 10 lượt, chưa đáng tin.
+    Đây là cách KIỂM CHỨNG lịch ôn có khớp với bạn không. FSRS hẹn lịch
+    sao cho bạn còn nhớ khoảng 90% (hoặc mức bạn đặt) khi đến hạn; nếu
+    thực tế bạn nhớ thấp hơn hẳn, lịch đang giãn quá nhanh với bạn.
+    Cách đọc kết luận (cần ít nhất 30 lượt ôn lại):
+      - "Khớp mục tiêu": con số thực tế nằm trong khoảng hợp lý quanh
+        mục tiêu. Không cần làm gì.
+      - "Thấp hơn mục tiêu": bạn quên nhiều hơn dự kiến. Ứng dụng gợi ý
+        nâng mức nhớ mục tiêu (có nút áp dụng) và khuyên chấm "Chưa
+        nhớ" khi phân vân.
+      - "Cao hơn mục tiêu": bạn nhớ tốt hơn dự kiến; có thể hạ mức nhớ
+        mục tiêu để ôn ít hơn, hoặc giữ nguyên nếu muốn chắc chắn.
+    "Khoảng tin cậy 95%" là biên độ sai số do ít dữ liệu: ví dụ thực
+    tế 85% với khoảng 77%–91% nghĩa là con số thật nhiều khả năng nằm
+    trong khoảng đó. Ứng dụng chỉ kết luận "thấp hơn" hay "cao hơn" khi
+    CẢ khoảng này nằm hẳn một phía của mục tiêu, để tránh kết luận
+    vội theo may rủi. Đừng chỉnh mức mục tiêu liên tục theo từng tuần;
+    hãy đợi đủ dữ liệu và chỉ đổi khi có kết luận rõ.
   * Từ khó: số từ đang bị quên lặp đi lặp lại.
   * Theo mức độ: số từ đã đưa vào học trên tổng số từ của từng mức
     (Cơ bản / Trung cấp / Nâng cao), để biết bạn đang ở đâu trong lộ
@@ -329,11 +376,14 @@ không bị giới hạn số từ mới mỗi ngày.
 9. HẠN CHẾ CẦN BIẾT
 ----------------------------------------------------------------
 
-  * Chỉ có hai nút chấm ("Chưa nhớ" / "Đã nhớ"). FSRS thiết kế cho
-    bốn mức (Quên / Khó / Tốt / Dễ). Với hai nút, mọi lần nhớ đều
-    được coi như "Tốt", kể cả khi bạn nhớ rất vất vả, nên lịch có
-    thể giãn hơi nhanh. Cách giảm: chấm "Chưa nhớ" khi phân vân,
-    và/hoặc tăng "mức nhớ mục tiêu" lên 93–95%.
+  * Ứng dụng CỐ Ý chỉ có hai nút chấm ("Chưa nhớ" / "Đã nhớ"), giống
+    nhiều ứng dụng flashcard phổ biến, để chấm nhanh và ít phải cân
+    nhắc. Đổi lại, mọi lần nhớ đều được coi như nhau, kể cả khi bạn
+    nhớ rất vất vả (FSRS vốn thiết kế cho bốn mức), nên lịch có thể
+    giãn hơi nhanh với từ bạn nhớ miễn cưỡng. Cách bù, không cần thêm
+    nút: chấm "Chưa nhớ" khi phân vân, và dùng "Tỉ lệ nhớ thực tế"
+    (mục 6) để biết lịch có đang giãn quá nhanh không; nếu có, tăng
+    "mức nhớ mục tiêu" (ví dụ 93–95%).
   * Ban đầu FSRS dùng bộ tham số mặc định chung. Tối ưu theo từng
     người (mục 3.1) cần đủ lịch sử ôn; khi dữ liệu còn ít, kết quả
     tối ưu có thể chưa ổn định, vì vậy app chỉ đề nghị áp dụng khi
@@ -341,6 +391,11 @@ không bị giới hạn số từ mới mỗi ngày.
     cài đặt (không phải bộ tối ưu chính thức của dự án FSRS), nên
     mức cải thiện thường nhỏ hơn.
   * "Độ nhớ ước tính" là mô hình dự đoán, có thể lệch với thực tế.
+  * "Tỉ lệ nhớ thực tế" chỉ tính từ nhật ký ôn, vốn mới được ghi từ
+    khi có tính năng này, nên cần học thêm một thời gian mới có số
+    liệu. Với ít lượt ôn con số dao động nhiều (hãy nhìn khoảng tin
+    cậy). Nhật ký cũ chưa đánh dấu thẻ mới hay ôn lại, nên lượt đầu
+    tiên của mỗi thẻ trong nhật ký cũ bị bỏ qua cho chắc.
   * Nhắc học bằng thông báo không đảm bảo đúng giờ khi đã đóng app
     (xem mục 6.1); muốn chắc chắn hãy dùng lời nhắc qua lịch.
   * Ứng dụng giúp ghi nhớ TỪ VỰNG; nó không thay thế luyện đề, nghe

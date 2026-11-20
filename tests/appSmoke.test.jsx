@@ -34,6 +34,8 @@ describe("App — smoke test (nối nhắc học & mục tiêu tuần)", () => {
     await waitFor(() => expect(screen.getByText(/Nhắc học & mục tiêu tuần/)).toBeTruthy());
     expect(screen.getByRole("checkbox", { name: /Nhắc tôi học mỗi ngày/ })).toBeTruthy();
     expect(screen.getByRole("button", { name: /Thêm lời nhắc vào lịch/ })).toBeTruthy();
+    expect(screen.getByText(/Tỉ lệ nhớ thực tế/)).toBeTruthy();
+    expect(await screen.findByText(/Chưa đủ dữ liệu: cần thêm 30 lượt/)).toBeTruthy();
     expect(screen.getAllByText(/Tuần này: 0\/5 ngày/).length).toBeGreaterThanOrEqual(1);
   }, 60000);
 });

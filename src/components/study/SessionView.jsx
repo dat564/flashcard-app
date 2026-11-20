@@ -48,7 +48,8 @@ export default function SessionView({ study, data, speech }) {
         <button
           className="icon-btn sm"
           title="Kết thúc phiên"
-          onClick={study.endSession}
+          aria-label="Kết thúc phiên"
+          onClick={study.finishEarly}
         >
           <X size={16} />
         </button>

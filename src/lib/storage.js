@@ -160,9 +160,16 @@ export function saveProgress(p) {
   return queue;
 }
 
-/* ---------- Nhật ký ôn (cho tối ưu FSRS) ----------
- * Mỗi lượt chấm thẻ thật (không phải luyện tập / lượt hỏi lại): {c: id thẻ, t: ms, g: 1 | 3}
+/* ---------- Nhật ký ôn (cho tối ưu FSRS và thống kê tỉ lệ nhớ thực tế) ----------
+ * Mỗi lượt chấm thẻ thật (không phải luyện tập / lượt hỏi lại): {c: id thẻ, t: ms, g: 1 | 3, n?: 1 | 0}
+ * n = 1: lần học đầu tiên của thẻ mới; n = 0: ôn lại thẻ đã học. Dòng cũ không có n.
  */
+const rowOf = (r) => ({
+  c: String(r.c),
+  t: r.t,
+  g: r.g,
+  ...(r.n === 0 || r.n === 1 ? { n: r.n } : {}),
+});
 const readLocalReviews = () => {
   try {
     return JSON.parse(localStorage.getItem(REVIEWS_LS) || "[]");
@@ -182,11 +189,11 @@ export async function logReview(entry) {
   try {
     if (backend === "idb" && db) {
       const tx = db.transaction("reviews", "readwrite");
-      tx.objectStore("reviews").add({ c: String(entry.c), t: entry.t, g: entry.g });
+      tx.objectStore("reviews").add(rowOf(entry));
       await txDone(tx);
     } else {
       const list = readLocalReviews();
-      list.push({ c: String(entry.c), t: entry.t, g: entry.g });
+      list.push(rowOf(entry));
       writeLocalReviews(list);
     }
   } catch (e) {
@@ -215,7 +222,7 @@ export async function getReviews() {
   try {
     if (backend === "idb" && db) {
       const rows = await wrap(db.transaction("reviews", "readonly").objectStore("reviews").getAll());
-      return rows.map(({ c, t, g }) => ({ c, t, g })).sort((a, b) => a.t - b.t);
+      return rows.map(rowOf).sort((a, b) => a.t - b.t);
     }
     return readLocalReviews().sort((a, b) => a.t - b.t);
   } catch (e) {
@@ -236,10 +243,10 @@ export async function importReviews(list) {
     if (backend === "idb" && db) {
       const tx = db.transaction("reviews", "readwrite");
       const s = tx.objectStore("reviews");
-      for (const r of fresh) s.add({ c: String(r.c), t: r.t, g: r.g });
+      for (const r of fresh) s.add(rowOf(r));
       await txDone(tx);
     } else {
-      writeLocalReviews([...readLocalReviews(), ...fresh.map((r) => ({ c: String(r.c), t: r.t, g: r.g }))]);
+      writeLocalReviews([...readLocalReviews(), ...fresh.map(rowOf)]);
     }
   } catch (e) {
     lastError = e;

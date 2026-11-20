@@ -3,6 +3,7 @@ import { PRACTICE_MAX } from "../lib/constants";
 import { nextSchedule, insertRelearn } from "../lib/srs";
 import { logReview, removeReview } from "../lib/storage";
 import { shuffle } from "../lib/utils";
+import { summarizeSession } from "../lib/sessionSummary";
 import { preloadAudio, unlockAudio } from "../lib/audio";
 import { useSwipe } from "./useSwipe";
 
@@ -30,6 +31,9 @@ export function useStudySession({
   const [lastSession, setLastSession] = useState(null); // {deckId, ids}
   const [undo, setUndo] = useState(null); // trạng thái trước khi chấm thẻ gần nhất
   const [relearn, setRelearn] = useState([]); // id thẻ vừa bấm "Chưa nhớ", đang được hỏi lại trong phiên
+  const [tally, setTally] = useState([]); // các lượt chấm trong phiên: {id, r, isNew, pass, t}
+  const [meta, setMeta] = useState({ startedAt: 0, mode: "due" });
+  const [summary, setSummary] = useState(null); // tổng kết phiên vừa xong (hiện cho tới khi bấm Xong)
   const spokenRef = useRef(""); // thẻ đã tự đọc, để không đọc lặp
 
   const enVi = direction === "en-vi";
@@ -61,8 +65,18 @@ export function useStudySession({
     const scheduled = nextSchedule(old, rating);
     // Ghi nhật ký lượt ôn thật (dùng để tối ưu tham số FSRS); luyện tập và lượt hỏi lại không tính
     const logT = !practice && !isRelearnPass ? Date.now() : null;
-    if (logT) logReview({ c: current.id, t: logT, g: again ? 1 : 3 });
+    if (logT) logReview({ c: current.id, t: logT, g: again ? 1 : 3, n: old ? 0 : 1 });
+    const entry = {
+      id: current.id,
+      r: rating,
+      isNew: !practice && !old, // luyện tập không tính là học từ mới
+      pass: isRelearnPass ? 2 : 1,
+      t: Date.now(),
+    };
+    const nextTally = [...tally, entry];
+    setTally(nextTally);
     setUndo({
+      tally,
       logT,
       session,
       index,
@@ -114,7 +128,15 @@ export function useStudySession({
       setIndex(0);
       setShowAnswer(false);
       setRelearn([]);
-      setToast("Hoàn thành lượt học! 🎉");
+      setSummary(
+        summarizeSession({
+          entries: nextTally,
+          startedAt: meta.startedAt,
+          endedAt: Date.now(),
+          practice,
+          mode: meta.mode,
+        })
+      );
     } else {
       setSession(nextSession);
       setIndex(next);
@@ -154,6 +176,7 @@ export function useStudySession({
       return { ...p, cards: cs, stats: st };
     });
     setUndo(null);
+    setTally(u.tally || []);
     setRelearn(u.relearn || []);
     setSession(u.session);
     setIndex(u.index);
@@ -186,6 +209,9 @@ export function useStudySession({
     if (mode !== "last") setLastSession({ deckId, ids });
     setUndo(null);
     setRelearn([]);
+    setTally([]);
+    setSummary(null);
+    setMeta({ startedAt: Date.now(), mode });
     spokenRef.current = "";
     // Đọc luôn từ đầu tiên ngay trong cú chạm (iOS chỉ cho phát tiếng ở đây)
     const first = wordById.get(ids[0]);
@@ -204,11 +230,31 @@ export function useStudySession({
   function endSession() {
     setUndo(null);
     setRelearn([]);
+    setTally([]);
+    setSummary(null);
     setSession([]);
     setIndex(0);
     setShowAnswer(false);
     swipe.resetSwipe();
   }
+
+  // Người dùng bấm X giữa chừng: nếu đã chấm ít nhất một thẻ thì cho xem tổng kết phần đã học
+  function finishEarly() {
+    const done = tally.some((e) => e.pass === 1);
+    const s = done
+      ? summarizeSession({
+          entries: tally,
+          startedAt: meta.startedAt,
+          endedAt: Date.now(),
+          practice,
+          early: true,
+          mode: meta.mode,
+        })
+      : null;
+    endSession();
+    if (s) setSummary(s);
+  }
+  const dismissSummary = () => setSummary(null);
 
   const toggleDirection = () => {
     setDirection((v) => (v === "en-vi" ? "vi-en" : "en-vi"));
@@ -275,10 +321,13 @@ export function useStudySession({
     lastIds,
     sessionPct,
     swipe,
+    summary,
     commit,
     undoLast,
     startStudy,
     endSession,
+    finishEarly,
+    dismissSummary,
     toggleDirection,
   };
 }
