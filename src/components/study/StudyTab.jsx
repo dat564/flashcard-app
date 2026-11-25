@@ -1,3 +1,4 @@
+import BreakScreen from "./BreakScreen";
 import QuizView from "./QuizView";
 import SessionSummary from "./SessionSummary";
 import SessionView from "./SessionView";
@@ -8,6 +9,12 @@ export default function StudyTab({ study, quizApi, data, speech, ...startProps }
     <section className="study">
       {quizApi.quiz ? (
         <QuizView api={quizApi} speech={speech} />
+      ) : study.pause && study.session.length > 0 ? (
+        <BreakScreen
+          pause={study.pause}
+          onContinue={study.resumeFromBreak}
+          onStop={study.finishEarly}
+        />
       ) : study.session.length > 0 && study.current ? (
         <SessionView study={study} data={data} speech={speech} />
       ) : study.summary ? (

@@ -48,13 +48,16 @@ export function useDeck({ progress, deckId, newLimit, today }) {
   );
   const reviewsLeft = Math.max(0, MAX_REVIEWS_PER_DAY - reviewedOld);
   const reviewQueue = dueWords.slice(0, reviewsLeft);
+  const deferredCount = dueWords.length - reviewQueue.length;
   // Nợ nhiều thì tạm dừng từ mới (tính cả thẻ đã ôn hôm nay để không bật lại giữa ngày)
   const backlog = dueWords.length + reviewedOld;
   const newPaused = isMain && backlog > BACKLOG_NEW_STOP;
+  // từ bấm "Đã biết từ này" không tốn hạn mức từ mới trong ngày
+  const newUsed = Math.max(0, (todayStats.newLearned || 0) - (todayStats.known || 0));
   const remainingNew = isMain
     ? newPaused
       ? 0
-      : Math.max(0, newLimit - (todayStats.newLearned || 0))
+      : Math.max(0, newLimit - newUsed)
     : Infinity; // danh sách riêng: học hết, không giới hạn
 
   const dueQueue = useMemo(

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { PRACTICE_MAX } from "../lib/constants";
 import { nextSchedule, insertRelearn } from "../lib/srs";
+import { shouldBreak } from "../lib/chunks";
 import { logReview, removeReview } from "../lib/storage";
 import { shuffle } from "../lib/utils";
 import { summarizeSession } from "../lib/sessionSummary";
@@ -34,6 +35,7 @@ export function useStudySession({
   const [tally, setTally] = useState([]); // các lượt chấm trong phiên: {id, r, isNew, pass, t}
   const [meta, setMeta] = useState({ startedAt: 0, mode: "due" });
   const [summary, setSummary] = useState(null); // tổng kết phiên vừa xong (hiện cho tới khi bấm Xong)
+  const [pause, setPause] = useState(null); // nghỉ giữa phiên: {done, left, good, again} hoặc null
   const spokenRef = useRef(""); // thẻ đã tự đọc, để không đọc lặp
 
   const enVi = direction === "en-vi";
@@ -59,16 +61,19 @@ export function useStudySession({
     if (!current) return;
     const old = cards[current.id];
     const again = rating === "again";
+    const known = rating === "known"; // "Đã biết từ này" (chỉ từ mới)
     // Lượt hỏi lại (lần thứ hai trong phiên): KHÔNG đổi lịch ôn / thống kê
     // (lần "Chưa nhớ" đầu tiên đã tính rồi)
     const isRelearnPass = !practice && relearn.includes(current.id);
     const scheduled = nextSchedule(old, rating);
     // Ghi nhật ký lượt ôn thật (dùng để tối ưu tham số FSRS); luyện tập và lượt hỏi lại không tính
-    const logT = !practice && !isRelearnPass ? Date.now() : null;
+    // ("Đã biết" cũng không ghi: đó không phải một lần thử nhớ thật nên sẽ làm lệch việc tối ưu FSRS)
+    const logT = !practice && !isRelearnPass && !known ? Date.now() : null;
     if (logT) logReview({ c: current.id, t: logT, g: again ? 1 : 3, n: old ? 0 : 1 });
     const entry = {
       id: current.id,
-      r: rating,
+      r: again ? "again" : "good", // "Đã biết" tính là nhớ trong tổng kết
+      known,
       isNew: !practice && !old, // luyện tập không tính là học từ mới
       pass: isRelearnPass ? 2 : 1,
       t: Date.now(),
@@ -101,7 +106,10 @@ export function useStudySession({
         }
         day.reviewed += 1;
         if (!again) day.correct += 1;
-        if (!old && typeof current.id === "number") day.newLearned += 1; // chỉ kho chung tính vào hạn mức từ mới/ngày
+        if (!old && typeof current.id === "number") {
+          day.newLearned += 1; // chỉ kho chung tính vào hạn mức từ mới/ngày
+          if (known) day.known = (day.known || 0) + 1; // từ "đã biết" không tốn hạn mức từ mới
+        }
         st[today] = day;
         return {
           ...p,
@@ -141,15 +149,34 @@ export function useStudySession({
       setSession(nextSession);
       setIndex(next);
       setShowAnswer(false);
+      // nghỉ giữa phiên sau mỗi CHUNK_SIZE thẻ
+      const done = nextTally.filter((e) => e.pass === 1).length;
+      const left = nextSession.length - next;
+      if (shouldBreak(done, left)) {
+        const first = nextTally.filter((e) => e.pass === 1);
+        setPause({
+          done,
+          left,
+          good: first.filter((e) => e.r === "good").length,
+          again: first.filter((e) => e.r === "again").length,
+        });
+      }
     }
   }
 
   // Bay thẻ ra (thẻ kế tiếp nhô lên cùng lúc) rồi mới ghi kết quả
   function commit(rating) {
-    if (swipe.leavingRef.current || !current) return;
-    swipe.flyOut(rating);
+    if (swipe.leavingRef.current || !current || pause) return;
+    if (rating === "known" && (cards[current.id] || practice)) return; // chỉ dành cho từ mới
+    swipe.flyOut(rating === "again" ? "again" : "good");
+    // sắp hiện màn hình nghỉ thì chưa đọc thẻ kế tiếp
+    const relPass = !practice && relearn.includes(current.id);
+    const willBreak = shouldBreak(
+      tally.filter((e) => e.pass === 1).length + (relPass ? 0 : 1),
+      session.length + (!practice && rating === "again" && !relPass ? 1 : 0) - (index + 1)
+    );
     // Thẻ kế tiếp đã hiện sẵn phía sau: đọc luôn lúc vuốt
-    if (autoSpeak && enVi) {
+    if (autoSpeak && enVi && !willBreak) {
       const nid = session[index + 1];
       const nw = nid != null ? wordById.get(nid) : null;
       if (nw) {
@@ -176,6 +203,7 @@ export function useStudySession({
       return { ...p, cards: cs, stats: st };
     });
     setUndo(null);
+    setPause(null);
     setTally(u.tally || []);
     setRelearn(u.relearn || []);
     setSession(u.session);
@@ -211,6 +239,7 @@ export function useStudySession({
     setRelearn([]);
     setTally([]);
     setSummary(null);
+    setPause(null);
     setMeta({ startedAt: Date.now(), mode });
     spokenRef.current = "";
     // Đọc luôn từ đầu tiên ngay trong cú chạm (iOS chỉ cho phát tiếng ở đây)
@@ -228,6 +257,7 @@ export function useStudySession({
   }
 
   function endSession() {
+    setPause(null);
     setUndo(null);
     setRelearn([]);
     setTally([]);
@@ -264,18 +294,22 @@ export function useStudySession({
   /* ---------- phím tắt (đăng ký một lần, luôn gọi bản handler mới nhất) ---------- */
   const keyRef = useRef(null);
   keyRef.current = (e) => {
-    if (
-      tab !== "study" ||
-      !current ||
-      e.target.matches?.("input, select, textarea")
-    )
+    if (tab !== "study" || e.target.matches?.("input, select, textarea")) return;
+    if (pause) {
+      if (e.code === "Space" || e.key === "Enter") {
+        e.preventDefault();
+        setPause(null);
+      }
       return;
+    }
+    if (!current) return;
     if (e.code === "Space") {
       e.preventDefault();
       setShowAnswer((v) => !v);
     }
     if (e.key === "ArrowLeft" || e.key === "1") commit("again");
     if (e.key === "ArrowRight" || e.key === "2") commit("good");
+    if (e.key === "3") commit("known");
     if (e.key === "p" || e.key === "P") speak(current.word);
     if (e.key === "z" || e.key === "Z") undoLast();
   };
@@ -297,12 +331,12 @@ export function useStudySession({
 
   // Tự đọc: Anh → Việt đọc ngay khi thẻ hiện; Việt → Anh đọc khi lật ra đáp án
   useEffect(() => {
-    if (!autoSpeak || tab !== "study" || !current || !enVi) return;
+    if (!autoSpeak || tab !== "study" || !current || !enVi || pause) return;
     const key = `${current.id}-${index}`;
     if (spokenRef.current === key) return; // đã đọc lúc vuốt / lúc bấm bắt đầu
     spokenRef.current = key;
     speak(current.word);
-  }, [current?.id, index, autoSpeak, enVi, tab]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [current?.id, index, autoSpeak, enVi, tab, pause]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!autoSpeak || tab !== "study" || !current || enVi || !showAnswer)
       return;
@@ -322,6 +356,8 @@ export function useStudySession({
     sessionPct,
     swipe,
     summary,
+    pause,
+    resumeFromBreak: () => setPause(null),
     commit,
     undoLast,
     startStudy,

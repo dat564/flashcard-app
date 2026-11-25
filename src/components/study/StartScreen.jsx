@@ -48,10 +48,7 @@ export default function StartScreen({
   const nothingDue = dueQueue.length === 0;
 
   // Hôm nay có bao nhiêu từ mới ở từng mức độ (kho chung), vd. "12 cơ bản · 3 trung cấp"
-  const todayNew = newWords.slice(
-    0,
-    Math.max(0, Math.min(remainingNew, newWords.length))
-  );
+  const todayNew = newWords.slice(0, Math.max(0, Math.min(remainingNew, newWords.length)));
   const lvCount = { 1: 0, 2: 0, 3: 0 };
   todayNew.forEach((w) => (lvCount[levelOf(w)] += 1));
   const todayNewBreakdown =
@@ -98,8 +95,8 @@ export default function StartScreen({
         <h2>{nothingDue ? "Hôm nay bạn đã xong!" : "Sẵn sàng học chưa?"}</h2>
         {nothingDue ? (
           <p>
-            Không còn thẻ nào cần ôn hôm nay. Quay lại ngày mai để ôn tiếp, hoặc
-            học thêm ngay bên dưới nếu bạn còn hứng.
+            Không còn thẻ nào cần ôn hôm nay. Quay lại ngày mai để ôn tiếp, hoặc học
+            thêm ngay bên dưới nếu bạn còn hứng.
           </p>
         ) : (
           <div className="hero-nums">
@@ -115,18 +112,18 @@ export default function StartScreen({
         )}
         {deferredCount > 0 && (
           <p className="muted hero-sub">
-            Còn {deferredCount} thẻ đến hạn được để sang ngày mai (giới hạn ôn
-            mỗi ngày).
+            Còn {deferredCount} thẻ đến hạn được để sang ngày mai (giới hạn ôn mỗi ngày).
           </p>
         )}
         {newPaused && (
           <p className="muted hero-sub">
-            Đang tạm dừng từ mới vì thẻ ôn đang dồn nhiều. Ôn bớt rồi từ mới sẽ
-            tự bật lại.
+            Đang tạm dừng từ mới vì thẻ ôn đang dồn nhiều. Ôn bớt rồi từ mới sẽ tự bật lại.
           </p>
         )}
         {isMain && todayNewBreakdown && (
-          <p className="muted hero-sub">Từ mới hôm nay: {todayNewBreakdown}</p>
+          <p className="muted hero-sub">
+            Từ mới hôm nay: {todayNewBreakdown}
+          </p>
         )}
         <button
           className="primary"
@@ -165,8 +162,8 @@ export default function StartScreen({
                 className="more-btn strong"
                 onClick={() => study.startStudy("more")}
               >
-                <Plus size={16} /> Học thêm{" "}
-                {Math.min(newLimit, newWords.length)} từ mới
+                <Plus size={16} /> Học thêm {Math.min(newLimit, newWords.length)}{" "}
+                từ mới
               </button>
             )}
             {hardIds.length > 0 && (

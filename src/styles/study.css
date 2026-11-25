@@ -93,3 +93,15 @@
 .mini-stats div { display: flex; flex-direction: column; gap: 2px; }
 .mini-stats strong { font-size: 24px; }
 .mini-stats span { font-size: 13px; color: var(--muted); }
+
+/* nút "Đã biết từ này" (từ mới) + màn hình nghỉ giữa phiên */
+.actions { flex-direction: column; align-items: stretch; }
+.known-btn {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  align-self: center; margin-top: 8px; padding: 6px 12px;
+  border: 0; background: transparent; color: var(--muted);
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.known-btn:hover { color: var(--ink); }
+.break-actions { display: flex; flex-direction: column; gap: 8px; align-items: center; width: 100%; }

@@ -6,6 +6,7 @@ import {
   RETENTION_MIN,
   RETENTION_MAX,
   RELEARN_GAP,
+  KNOWN_DAYS,
   HARD_LAPSES,
   HARD_REPS,
 } from "./constants";
@@ -98,6 +99,20 @@ export function retrievability(card, now = Date.now()) {
 //   lapses (số lần bấm "Chưa nhớ"), status, stability, difficulty, state (của FSRS).
 export function nextSchedule(card, rating, now = Date.now()) {
   const c = card || {};
+  // "Đã biết từ này": hẹn thẳng KNOWN_DAYS ngày, thẻ được coi là dễ (difficulty thấp)
+  if (rating === "known") {
+    const g = scheduler.next(toFsrsCard(card, now), new Date(now), Rating.Good).card;
+    return {
+      dueAt: startOfDay(now + KNOWN_DAYS * DAY),
+      reps: (c.reps || 0) + 1,
+      interval: KNOWN_DAYS,
+      lapses: c.lapses || 0,
+      status: "review",
+      stability: KNOWN_DAYS,
+      difficulty: Math.min(g.difficulty, 3),
+      state: g.state,
+    };
+  }
   const again = rating === "again";
   const next = scheduler.next(
     toFsrsCard(card, now),

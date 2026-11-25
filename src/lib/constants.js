@@ -21,6 +21,9 @@ export const MAX_DAYS = 365; // khoảng ôn tối đa
 // Giới hạn tải ôn tập (tránh dồn hàng trăm thẻ vào một ngày)
 export const MAX_REVIEWS_PER_DAY = 200; // tối đa thẻ ÔN LẠI mỗi ngày; phần dư để sang hôm sau
 export const BACKLOG_NEW_STOP = 150; // tổng thẻ đến hạn trong ngày vượt mức này thì tạm dừng từ mới
+export const KNOWN_DAYS = 30; // nút "Đã biết từ này": hẹn ôn lại sau chừng này ngày
+export const CHUNK_SIZE = 50; // sau mỗi chừng này thẻ thì hỏi nghỉ hay học tiếp
+export const CHUNK_MIN_LEFT = 10; // chỉ hỏi nghỉ nếu còn nhiều hơn chừng này thẻ
 export const RELEARN_GAP = 3; // thẻ "Chưa nhớ" được hỏi lại 1 lần sau chừng này thẻ trong cùng phiên
 // "Từ khó"
 export const HARD_LAPSES = 3;

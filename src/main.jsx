@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./styles.css";
 import { loadWords } from "./lib/words";
 import { initStorage } from "./lib/storage";
+import { requestPersistence } from "./lib/persist";
 
 const root = document.getElementById("root");
 
@@ -25,6 +26,9 @@ function showError() {
   document.getElementById("retry").onclick = () => {
     root.textContent = "Đang tải…";
     start().catch(showError);
+
+// Xin lưu trữ bền vững ở lần chạm đầu tiên (cần thao tác của người dùng ở một số trình duyệt)
+window.addEventListener("pointerdown", () => requestPersistence(), { once: true });
   };
 }
 

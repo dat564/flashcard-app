@@ -312,6 +312,7 @@ export function mergeProgress(a, b) {
         correct: Math.max(m.correct, s.correct || 0),
         newLearned: Math.max(m.newLearned, s.newLearned || 0),
         practiced: Math.max(m.practiced || 0, s.practiced || 0),
+        ...(m.known || s.known ? { known: Math.max(m.known || 0, s.known || 0) } : {}),
       };
     }
   }
