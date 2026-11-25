@@ -3,6 +3,7 @@ import { words } from "../lib/words";
 import { dueAt, isHard, retrievability } from "../lib/srs";
 import { buildBlankPool } from "../lib/quiz";
 import { orderNewWords, DEFAULT_NEW_ORDER } from "../lib/levels";
+import { MAX_REVIEWS_PER_DAY, BACKLOG_NEW_STOP } from "../lib/constants";
 
 // Dữ liệu dẫn xuất của bộ từ đang học (kho chung hoặc danh sách riêng)
 export function useDeck({ progress, deckId, newLimit, today }) {
@@ -39,12 +40,25 @@ export function useDeck({ progress, deckId, newLimit, today }) {
   // danh sách riêng giữ thứ tự người dùng nhập
   const newOrder = progress.settings?.newOrder || DEFAULT_NEW_ORDER;
   const newWords = isMain ? orderNewWords(unseen, newOrder) : unseen;
+  // Giới hạn tải: thẻ ôn lại đã làm hôm nay (không tính từ mới) trừ vào hạn mức ngày.
+  // Thẻ đến hạn dư ra không mất, chỉ để sang ngày sau (vẫn ưu tiên thẻ sắp quên nhất).
+  const reviewedOld = Math.max(
+    0,
+    (todayStats.reviewed || 0) - (todayStats.newLearned || 0)
+  );
+  const reviewsLeft = Math.max(0, MAX_REVIEWS_PER_DAY - reviewedOld);
+  const reviewQueue = dueWords.slice(0, reviewsLeft);
+  // Nợ nhiều thì tạm dừng từ mới (tính cả thẻ đã ôn hôm nay để không bật lại giữa ngày)
+  const backlog = dueWords.length + reviewedOld;
+  const newPaused = isMain && backlog > BACKLOG_NEW_STOP;
   const remainingNew = isMain
-    ? Math.max(0, newLimit - (todayStats.newLearned || 0))
+    ? newPaused
+      ? 0
+      : Math.max(0, newLimit - (todayStats.newLearned || 0))
     : Infinity; // danh sách riêng: học hết, không giới hạn
 
   const dueQueue = useMemo(
-    () => [...dueWords, ...newWords.slice(0, remainingNew)],
+    () => [...reviewQueue, ...newWords.slice(0, remainingNew)],
     [progress, today, newLimit, deckId] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
@@ -59,7 +73,10 @@ export function useDeck({ progress, deckId, newLimit, today }) {
     todayStats,
     isLearned,
     learnedCount,
-    dueCount: dueWords.length,
+    dueCount: dueWords.length, // tổng thẻ đến hạn (thật)
+    reviewCount: reviewQueue.length, // số thẻ ôn lại sẽ học hôm nay (sau giới hạn)
+    deferredCount, // thẻ đến hạn để sang ngày sau
+    newPaused, // từ mới đang tạm dừng vì nợ nhiều
     newWords,
     remainingNew,
     dueQueue,

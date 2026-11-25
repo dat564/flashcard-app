@@ -18,6 +18,9 @@ export const FSRS_RETENTION = 0.9; // xác suất nhớ mục tiêu lúc đến 
 export const RETENTION_MIN = 0.8;
 export const RETENTION_MAX = 0.97;
 export const MAX_DAYS = 365; // khoảng ôn tối đa
+// Giới hạn tải ôn tập (tránh dồn hàng trăm thẻ vào một ngày)
+export const MAX_REVIEWS_PER_DAY = 200; // tối đa thẻ ÔN LẠI mỗi ngày; phần dư để sang hôm sau
+export const BACKLOG_NEW_STOP = 150; // tổng thẻ đến hạn trong ngày vượt mức này thì tạm dừng từ mới
 export const RELEARN_GAP = 3; // thẻ "Chưa nhớ" được hỏi lại 1 lần sau chừng này thẻ trong cùng phiên
 // "Từ khó"
 export const HARD_LAPSES = 3;
