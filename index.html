@@ -14,9 +14,97 @@
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="TOEIC Recall" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <!-- Font tải nền, không chặn việc hiển thị app (mất mạng thì dùng font hệ thống) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      id="gfonts"
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      media="print"
+      onload="this.media='all';this.dataset.done='1'"
+      onerror="this.dataset.done='1'"
+    />
+    <style>
+      /* Màn hình chờ: vẽ ngay từ HTML, trước khi JS/CSS của app tải xong */
+      #splash {
+        --s-bg1: #ffffff; --s-bg2: #eef0ff; --s-ink: #171a2e; --s-muted: #6a6f8a;
+        --s-accent: #4f46e5; --s-track: #e6e8f2;
+        position: fixed; inset: 0; z-index: 9999;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        gap: 14px; padding: 24px; text-align: center;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        color: var(--s-ink);
+        background: radial-gradient(120% 70% at 50% 0%, var(--s-bg2), var(--s-bg1) 70%);
+        transition: opacity 0.35s ease, visibility 0.35s ease;
+      }
+      html[data-theme="dark"] #splash {
+        --s-bg1: #0f1120; --s-bg2: #1b1d3d; --s-ink: #eceefb; --s-muted: #9aa0c0;
+        --s-accent: #8b82ff; --s-track: #2a2f4a;
+      }
+      @media (prefers-color-scheme: dark) {
+        html:not([data-theme="light"]) #splash {
+          --s-bg1: #0f1120; --s-bg2: #1b1d3d; --s-ink: #eceefb; --s-muted: #9aa0c0;
+          --s-accent: #8b82ff; --s-track: #2a2f4a;
+        }
+      }
+      #splash.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+      #splash .logo {
+        width: 84px; height: 84px; border-radius: 22px; display: block;
+        box-shadow: 0 18px 40px -16px rgba(79, 70, 229, 0.55);
+        animation: splash-pop 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+      }
+      #splash h1 { margin: 6px 0 0; font-size: 24px; letter-spacing: -0.01em; }
+      #splash p { margin: 0; font-size: 14px; color: var(--s-muted); max-width: 280px; line-height: 1.5; }
+      #splash .bar {
+        width: 150px; height: 4px; border-radius: 99px; overflow: hidden;
+        background: var(--s-track); margin-top: 4px;
+      }
+      #splash .bar i {
+        display: block; width: 40%; height: 100%; border-radius: inherit;
+        background: var(--s-accent); animation: splash-slide 1.1s ease-in-out infinite;
+      }
+      #splash .err { display: none; flex-direction: column; align-items: center; gap: 12px; }
+      #splash.error .err { display: flex; }
+      #splash.error .bar, #splash.error .msg { display: none; }
+      #splash button {
+        border: 0; border-radius: 999px; padding: 11px 26px; font-size: 15px; font-weight: 600;
+        color: #fff; background: var(--s-accent); cursor: pointer;
+      }
+      @keyframes splash-slide { 0% { transform: translateX(-110%); } 100% { transform: translateX(260%); } }
+      @keyframes splash-pop { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) {
+        #splash .logo { animation: none; }
+        #splash .bar i { animation: none; width: 100%; opacity: 0.5; }
+      }
+    </style>
+    <script>
+      /* Áp giao diện đã lưu ngay từ đầu để màn hình chờ không bị nháy sáng → tối */
+      try {
+        var t = localStorage.getItem("toeic-recall-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
   </head>
   <body>
-    <div id="root" style="padding:32px;text-align:center;font-family:system-ui,sans-serif;color:#667">Đang tải…</div>
+    <div id="root"></div>
+    <div id="splash" role="status" aria-live="polite">
+      <img class="logo" src="%BASE_URL%icon-192.png" width="84" height="84" alt="" />
+      <h1>TOEIC Recall</h1>
+      <p class="msg" id="splash-msg">Đang chuẩn bị từ vựng của bạn…</p>
+      <div class="bar"><i></i></div>
+      <div class="err">
+        <p>Không tải được dữ liệu từ vựng. Kiểm tra kết nối mạng rồi thử lại.</p>
+        <button id="retry" type="button">Thử lại</button>
+      </div>
+    </div>
+    <script>
+      /* mạng chậm thì báo cho người dùng biết app vẫn đang chạy */
+      setTimeout(function () {
+        var m = document.getElementById("splash-msg");
+        if (m) m.textContent = "Mạng hơi chậm, vẫn đang tải…";
+      }, 6000);
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

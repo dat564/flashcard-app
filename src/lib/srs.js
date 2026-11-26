@@ -99,17 +99,21 @@ export function retrievability(card, now = Date.now()) {
 //   lapses (số lần bấm "Chưa nhớ"), status, stability, difficulty, state (của FSRS).
 export function nextSchedule(card, rating, now = Date.now()) {
   const c = card || {};
-  // "Đã biết từ này": hẹn thẳng KNOWN_DAYS ngày, thẻ được coi là dễ (difficulty thấp)
+  // "Đã biết từ này" (từ mới) / "Quá dễ" (thẻ đang ôn): đẩy thẳng ra xa, thẻ được coi là dễ.
+  //   từ mới: KNOWN_DAYS ngày; thẻ đang ôn: gấp đôi khoảng ôn thường, tối thiểu KNOWN_DAYS ngày
   if (rating === "known") {
     const g = scheduler.next(toFsrsCard(card, now), new Date(now), Rating.Good).card;
+    const interval = card
+      ? clamp(Math.max(KNOWN_DAYS, Math.round(g.scheduled_days * 2)), 1, MAX_DAYS)
+      : KNOWN_DAYS;
     return {
-      dueAt: startOfDay(now + KNOWN_DAYS * DAY),
+      dueAt: startOfDay(now + interval * DAY),
       reps: (c.reps || 0) + 1,
-      interval: KNOWN_DAYS,
+      interval,
       lapses: c.lapses || 0,
       status: "review",
-      stability: KNOWN_DAYS,
-      difficulty: Math.min(g.difficulty, 3),
+      stability: interval,
+      difficulty: card ? Math.max(1, g.difficulty - 1) : Math.min(g.difficulty, 3),
       state: g.state,
     };
   }

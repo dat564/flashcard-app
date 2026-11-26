@@ -77,7 +77,16 @@ describe("useStudySession — nút Đã biết", () => {
     expect(day.known).toBe(1);
   });
 
-  it("thẻ đã có lịch (ôn lại) thì bỏ qua phím 'đã biết'", () => {
+  it("thẻ đang ôn: 'Quá dễ' đẩy ra xa (≥ 30 ngày), không tính từ mới", () => {
+    const s0 = nextSchedule(undefined, "good");
+    const card = { ...s0, lastReviewed: Date.now() - 864e5 * s0.interval };
+    const s = nextSchedule(card, "known");
+    expect(s.interval).toBeGreaterThanOrEqual(KNOWN_DAYS);
+    expect(s.interval).toBeGreaterThan(nextSchedule(card, "good").interval);
+    expect(s.lapses).toBe(card.lapses);
+  });
+
+  it("luyện tập thì bỏ qua phím 'đã biết'", () => {
     const { result } = setup(4);
     act(() => result.current.study.startStudy("due"));
     rate(result, "good"); // thẻ 1 thành thẻ đã học

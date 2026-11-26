@@ -1,5 +1,5 @@
 import { Check, Sparkles, X } from "lucide-react";
-import { KNOWN_DAYS, RATINGS } from "../../lib/constants";
+import { RATINGS } from "../../lib/constants";
 import { fmtInterval, nextSchedule } from "../../lib/srs";
 
 const ICONS = { again: X, good: Check };
@@ -34,14 +34,15 @@ export default function RatingBar({ card, practice, relearning, onRate }) {
           );
         })}
       </div>
-      {/* Chỉ với từ mới: bỏ qua nhanh từ đã biết sẵn */}
-      {!card && !practice && (
+      {/* Từ mới: "Đã biết từ này"; thẻ đang ôn: "Quá dễ" (đẩy xa hơn bình thường) */}
+      {!practice && !relearning && (
         <button
           className="known-btn"
           title="Phím tắt: 3"
           onClick={() => onRate("known")}
         >
-          <Sparkles size={14} /> Đã biết từ này · ôn lại sau {fmtInterval(KNOWN_DAYS)}
+          <Sparkles size={14} /> {card ? "Quá dễ" : "Đã biết từ này"} · ôn lại sau{" "}
+          {fmtInterval(nextSchedule(card, "known").interval)}
         </button>
       )}
     </div>

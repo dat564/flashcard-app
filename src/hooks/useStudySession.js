@@ -61,7 +61,7 @@ export function useStudySession({
     if (!current) return;
     const old = cards[current.id];
     const again = rating === "again";
-    const known = rating === "known"; // "Đã biết từ này" (chỉ từ mới)
+    const known = rating === "known"; // "Đã biết từ này" (từ mới) / "Quá dễ" (thẻ đang ôn)
     // Lượt hỏi lại (lần thứ hai trong phiên): KHÔNG đổi lịch ôn / thống kê
     // (lần "Chưa nhớ" đầu tiên đã tính rồi)
     const isRelearnPass = !practice && relearn.includes(current.id);
@@ -167,7 +167,8 @@ export function useStudySession({
   // Bay thẻ ra (thẻ kế tiếp nhô lên cùng lúc) rồi mới ghi kết quả
   function commit(rating) {
     if (swipe.leavingRef.current || !current || pause) return;
-    if (rating === "known" && (cards[current.id] || practice)) return; // chỉ dành cho từ mới
+    // "Đã biết / Quá dễ": không dùng ở luyện tập và ở lượt hỏi lại
+    if (rating === "known" && (practice || relearn.includes(current.id))) return;
     swipe.flyOut(rating === "again" ? "again" : "good");
     // sắp hiện màn hình nghỉ thì chưa đọc thẻ kế tiếp
     const relPass = !practice && relearn.includes(current.id);
