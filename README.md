@@ -92,3 +92,20 @@ Nhật ký ôn chỉ bắt đầu ghi từ phiên bản này nên tối ưu tham
 ## Việc có thể làm tiếp
 - Đồng bộ tiến độ giữa các thiết bị (hiện chỉ có sao lưu/nhập tay).
 - Tạo audio còn thiếu: `npm run check-audio` rồi `python gen_audio.py`.
+
+## Luyện thi TOEIC (tab "Luyện thi")
+
+Bộ máy câu hỏi dùng chung cho Part 1–7:
+
+- **Luyện tập**: xem đáp án + giải thích ngay sau mỗi câu. **Thi thử**: chỉ chấm ở cuối. **Thi thử mini**: trộn các Part như đề thật.
+- **Ôn câu sai**: câu sai được nhớ lại; làm đúng thì tự bỏ khỏi danh sách.
+- **Bấm vào từ bất kỳ** trong đề để tra nghĩa (kho từ của app) và lưu vào danh sách "Từ trong đề thi" (tab Từ của tôi) kèm câu chứa từ làm ví dụ.
+- **Phần nghe** (Part 1–4) đọc `transcript` bằng giọng của trình duyệt (hội thoại dùng 2 giọng khác nhau); đề có `audio` (URL file mp3) thì phát file.
+
+### Thêm đề
+- Đề dựng sẵn: thêm file `src/data/exam/<tên>.json` (tự được nạp).
+- Đề của người dùng: tab Luyện thi → "Nhập đề của bạn" (.json hoặc .csv). Có nút tải file mẫu JSON/CSV. Đề nhập lưu trong IndexedDB riêng (`toeic-recall-exam`), có nút sao lưu/khôi phục.
+- Định dạng JSON và quy tắc kiểm tra nằm ở đầu `src/lib/examSchema.js`. Mỗi "unit" = một đoạn văn / đoạn nghe / tranh kèm 1 hay nhiều câu; `answer` là `"A"`–`"F"` hoặc số tính từ 1. Part 6 dùng `[1]`, `[2]`… trong đoạn văn và `blank` trong câu hỏi.
+- Lưu ý bản quyền: không đưa đề thi thật của ETS vào repo công khai.
+
+Mã nguồn: `src/lib/exam*.js` (định dạng, lưu trữ, chấm điểm, âm thanh), `src/hooks/useExamData.js`, `src/components/exam/*`, `src/styles/exam.css`. Test: `tests/exam*.test.*`.

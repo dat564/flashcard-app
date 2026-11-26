@@ -5,7 +5,7 @@
  *  - Nhắc học khi app đóng (Periodic Background Sync) và mở app khi bấm vào thông báo.
  * Đổi VERSION để buộc người dùng tải lại bản mới.
  */
-const VERSION = "v6";
+const VERSION = "v7";
 const SHELL = `toeic-shell-${VERSION}`;
 const AUDIO = "toeic-audio-v2"; // v2: bỏ cache cũ có thể chứa phản hồi không phải audio
 const SCOPE = self.registration.scope;

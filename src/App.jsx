@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, useEffect } from "react";
 import { calcStreaks } from "./lib/stats";
 import { configureSrs } from "./lib/srs";
 import { todayKey } from "./lib/utils";
@@ -16,6 +16,7 @@ import StudyTab from "./components/study/StudyTab";
 import LibraryTab from "./components/LibraryTab";
 import MineTab from "./components/MineTab";
 import StatsTab from "./components/StatsTab";
+import ExamTab from "./components/exam/ExamTab";
 import "./styles/index.css";
 
 export default function App() {
@@ -26,6 +27,10 @@ export default function App() {
 
   const [tab, setTab] = useState("study");
   const [toast, setToast] = useState("");
+  const [examSeen, setExamSeen] = useState(false); // tab Luyện thi giữ nguyên trạng thái sau lần mở đầu tiên
+  useEffect(() => {
+    if (tab === "exam") setExamSeen(true);
+  }, [tab]);
   const closeToast = useCallback(() => setToast(""), []);
   const [newLimit, setNewLimit] = useState(progress.settings?.newPerDay || 20);
   const [deckId, setDeckId] = useState(progress.settings?.activeDeck || "main");
@@ -101,6 +106,17 @@ export default function App() {
             week={week}
             backupStale={backupStale}
           />
+        )}
+        {(tab === "exam" || examSeen) && (
+          <div hidden={tab !== "exam"}>
+            <ExamTab
+              active={tab === "exam"}
+              progress={progress}
+              setProgress={setProgress}
+              speech={speech}
+              setToast={setToast}
+            />
+          </div>
         )}
         {tab === "library" && (
           <LibraryTab cards={data.cards} speak={speech.speak} />

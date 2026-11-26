@@ -2,6 +2,7 @@ import {
   BarChart3,
   Brain,
   FolderOpen,
+  GraduationCap,
   Layers,
   Library,
   Monitor,
@@ -11,6 +12,7 @@ import {
 
 const TABS = [
   ["study", "Học", Layers],
+  ["exam", "Luyện thi", GraduationCap],
   ["library", "Kho từ", Library],
   ["mine", "Từ của tôi", FolderOpen],
   ["stats", "Thống kê", BarChart3],

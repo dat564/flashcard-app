@@ -1,0 +1,497 @@
+{
+ "id": "starter",
+ "title": "Bộ khởi đầu (đề gốc)",
+ "description": "Một ít câu mẫu cho mỗi Part để thử các chế độ. Nội dung thật sẽ bổ sung sau, hoặc nhập đề của bạn.",
+ "units": [
+  {
+   "id": "p1-01",
+   "part": 1,
+   "image": "data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 260%22%3E%3Crect width=%22400%22 height=%22260%22 fill=%22%23e8ecf8%22/%3E%3Crect y=%22190%22 width=%22400%22 height=%2270%22 fill=%22%23c9b79c%22/%3E%3Crect x=%2240%22 y=%2240%22 width=%2290%22 height=%2270%22 rx=%224%22 fill=%22%23fff%22 stroke=%22%239aa3c7%22 stroke-width=%223%22/%3E%3Cline x1=%2285%22 y1=%2240%22 x2=%2285%22 y2=%22110%22 stroke=%22%239aa3c7%22 stroke-width=%223%22/%3E%3Cline x1=%2240%22 y1=%2275%22 x2=%22130%22 y2=%2275%22 stroke=%22%239aa3c7%22 stroke-width=%223%22/%3E%3Crect x=%2290%22 y=%22150%22 width=%22230%22 height=%2216%22 rx=%223%22 fill=%22%238a6a45%22/%3E%3Crect x=%22100%22 y=%22166%22 width=%2210%22 height=%2270%22 fill=%22%236f5436%22/%3E%3Crect x=%22300%22 y=%22166%22 width=%2210%22 height=%2270%22 fill=%22%236f5436%22/%3E%3Crect x=%22150%22 y=%2296%22 width=%22110%22 height=%2254%22 rx=%224%22 fill=%22%232b2f4a%22/%3E%3Crect x=%22156%22 y=%22102%22 width=%2298%22 height=%2242%22 fill=%22%237d8cff%22/%3E%3Crect x=%22140%22 y=%22146%22 width=%22130%22 height=%226%22 rx=%222%22 fill=%22%23555a7a%22/%3E%3Crect x=%22285%22 y=%22128%22 width=%2218%22 height=%2222%22 rx=%223%22 fill=%22%23fff%22 stroke=%22%239aa3c7%22 stroke-width=%222%22/%3E%3Cpath d=%22M303 134h6a5 5 0 0 1 0 10h-6%22 fill=%22none%22 stroke=%22%239aa3c7%22 stroke-width=%222%22/%3E%3Crect x=%22335%22 y=%22120%22 width=%2226%22 height=%2230%22 rx=%223%22 fill=%22%23b8643c%22/%3E%3Ccircle cx=%22348%22 cy=%22108%22 r=%2214%22 fill=%22%234fae6b%22/%3E%3Ccircle cx=%22338%22 cy=%22116%22 r=%229%22 fill=%22%235cc17b%22/%3E%3C/svg%3E",
+   "transcript": [
+    "(Tranh: một bàn làm việc có máy tính xách tay, tách cà phê và cây cảnh.)"
+   ],
+   "questions": [
+    {
+     "text": "",
+     "options": [
+      "A laptop computer is on the desk.",
+      "A man is typing on the keyboard.",
+      "Some chairs are stacked against the wall.",
+      "A window is being cleaned."
+     ],
+     "answer": "A",
+     "explanation": "Trong tranh có máy tính xách tay trên bàn và không có người nào, nên (B) và (D) sai; không thấy ghế nào chồng lên nhau nên (C) sai.",
+     "tags": [
+      "Nghe · Mô tả tranh"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2-01",
+   "part": 2,
+   "transcript": [
+    "Where can I find the printer paper?"
+   ],
+   "questions": [
+    {
+     "text": "",
+     "options": [
+      "It's in the supply closet.",
+      "I printed it yesterday.",
+      "Yes, I paid by card."
+     ],
+     "answer": "A",
+     "explanation": "Câu hỏi Where → trả lời bằng nơi chốn. (B) lặp âm 'print' để gây nhiễu.",
+     "tags": [
+      "Hỏi – đáp · Where"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2-02",
+   "part": 2,
+   "transcript": [
+    "When does the new store open?"
+   ],
+   "questions": [
+    {
+     "text": "",
+     "options": [
+      "On the second floor.",
+      "Next Tuesday, I think.",
+      "About fifty employees."
+     ],
+     "answer": "B",
+     "explanation": "When hỏi thời điểm → 'Next Tuesday'. (A) trả lời cho Where, (C) cho How many.",
+     "tags": [
+      "Hỏi – đáp · When"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2-03",
+   "part": 2,
+   "transcript": [
+    "Would you like some coffee while you wait?"
+   ],
+   "questions": [
+    {
+     "text": "",
+     "options": [
+      "No, thanks. I'm fine.",
+      "The waiting room is full.",
+      "It was a long meeting."
+     ],
+     "answer": "A",
+     "explanation": "Câu mời → từ chối lịch sự 'No, thanks.' là hợp lý. (B) lặp từ 'wait'.",
+     "tags": [
+      "Hỏi – đáp · Lời mời / đề nghị"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2-04",
+   "part": 2,
+   "transcript": [
+    "Why was the conference postponed?"
+   ],
+   "questions": [
+    {
+     "text": "",
+     "options": [
+      "At the convention center.",
+      "Because the speaker is ill.",
+      "It's postponed to May."
+     ],
+     "answer": "B",
+     "explanation": "Why → trả lời lý do bằng 'Because...'. (C) lặp từ 'postponed' nhưng không nêu lý do.",
+     "tags": [
+      "Hỏi – đáp · Why"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2-05",
+   "part": 2,
+   "transcript": [
+    "Haven't you finished the sales report yet?"
+   ],
+   "questions": [
+    {
+     "text": "",
+     "options": [
+      "Almost. I'll send it this afternoon.",
+      "It was a good sale.",
+      "The reports are on the shelf."
+     ],
+     "answer": "A",
+     "explanation": "Câu hỏi phủ định vẫn trả lời theo nội dung: gần xong và sẽ gửi chiều nay. (B) gây nhiễu bằng 'sale'.",
+     "tags": [
+      "Hỏi – đáp · Câu hỏi phủ định"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p3-01",
+   "part": 3,
+   "transcript": [
+    "Woman: Hi, Ahmed. Did you hear that the quarterly sales meeting has been moved?",
+    "Man: No, I didn't. I thought it was scheduled for Thursday morning.",
+    "Woman: It was, but the regional manager's flight was delayed. It's now on Friday at two o'clock.",
+    "Man: That works better for me, actually. I have a client call on Thursday. Should I let the others on the team know?",
+    "Woman: Thanks, but I already sent them an e-mail. Could you reserve the large conference room, though?",
+    "Man: Sure. I'll do that right after lunch."
+   ],
+   "questions": [
+    {
+     "text": "What is the conversation mainly about?",
+     "options": [
+      "A delayed flight",
+      "A change in a meeting schedule",
+      "A client complaint",
+      "A new sales policy"
+     ],
+     "answer": "B",
+     "explanation": "Cả hai người nói về việc cuộc họp được dời từ thứ Năm sang thứ Sáu.",
+     "tags": [
+      "Nghe · Ý chính"
+     ]
+    },
+    {
+     "text": "Why was the meeting moved?",
+     "options": [
+      "A room was unavailable.",
+      "The manager's travel was delayed.",
+      "A client requested it.",
+      "A holiday was announced."
+     ],
+     "answer": "B",
+     "explanation": "Người phụ nữ nói chuyến bay của giám đốc khu vực bị hoãn.",
+     "tags": [
+      "Nghe · Chi tiết"
+     ]
+    },
+    {
+     "text": "What will the man do after lunch?",
+     "options": [
+      "Send an e-mail",
+      "Call a client",
+      "Reserve a room",
+      "Book a flight"
+     ],
+     "answer": "C",
+     "explanation": "Người phụ nữ nhờ đặt phòng họp lớn và anh nói sẽ làm ngay sau bữa trưa.",
+     "tags": [
+      "Nghe · Hành động tiếp theo"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p4-01",
+   "part": 4,
+   "transcript": [
+    "Speaker: Good morning, everyone, and welcome to Harbor View Hotel's monthly staff meeting. Before we begin, I'd like to share two updates.",
+    "Speaker: First, starting next Monday, the front desk will use a new reservation system. Training sessions will be held in the lobby office on Thursday and Friday afternoons, and all front desk staff are required to attend.",
+    "Speaker: Second, we'll be hosting a large travel convention in July, so we're looking for volunteers to help with check-in.",
+    "Speaker: If you're interested, please sign up on the bulletin board outside the break room by the end of this week. Thank you."
+   ],
+   "questions": [
+    {
+     "text": "Who is the speaker most likely addressing?",
+     "options": [
+      "Hotel guests",
+      "Hotel employees",
+      "Travel agents",
+      "Convention organizers"
+     ],
+     "answer": "B",
+     "explanation": "'Monthly staff meeting' cho thấy người nghe là nhân viên khách sạn.",
+     "tags": [
+      "Nghe · Đối tượng / bối cảnh"
+     ]
+    },
+    {
+     "text": "What will happen next Monday?",
+     "options": [
+      "A convention will begin.",
+      "A new system will be introduced.",
+      "The lobby will be repainted.",
+      "A training session will end."
+     ],
+     "answer": "B",
+     "explanation": "Từ thứ Hai tới, quầy lễ tân sẽ dùng hệ thống đặt phòng mới.",
+     "tags": [
+      "Nghe · Chi tiết"
+     ]
+    },
+    {
+     "text": "What are listeners asked to do by the end of the week?",
+     "options": [
+      "Attend a Friday meeting",
+      "Submit a travel request",
+      "Sign up to volunteer",
+      "Complete a survey"
+     ],
+     "answer": "C",
+     "explanation": "Ai muốn làm tình nguyện thì ghi tên trên bảng thông báo trước cuối tuần.",
+     "tags": [
+      "Nghe · Yêu cầu / hành động"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p5-01",
+   "part": 5,
+   "questions": [
+    {
+     "text": "The marketing team will ------ the new campaign at the board meeting on Friday.",
+     "options": [
+      "presents",
+      "present",
+      "presenting",
+      "presented"
+     ],
+     "answer": "B",
+     "explanation": "Sau trợ động từ 'will' dùng động từ nguyên mẫu → present.",
+     "tags": [
+      "Ngữ pháp · Dạng động từ"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p5-02",
+   "part": 5,
+   "questions": [
+    {
+     "text": "Employees must submit expense reports ------ the end of each month.",
+     "options": [
+      "by",
+      "until",
+      "during",
+      "since"
+     ],
+     "answer": "A",
+     "explanation": "'by' + mốc thời gian = chậm nhất vào lúc đó. 'until' đi với hành động kéo dài tới mốc.",
+     "tags": [
+      "Ngữ pháp · Giới từ"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p5-03",
+   "part": 5,
+   "questions": [
+    {
+     "text": "Ms. Tanaka is ------ for coordinating all overseas shipments.",
+     "options": [
+      "response",
+      "responsible",
+      "responsibly",
+      "responsibility"
+     ],
+     "answer": "B",
+     "explanation": "Sau 'is' cần tính từ; cấu trúc be responsible for.",
+     "tags": [
+      "Ngữ pháp · Từ loại"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p5-04",
+   "part": 5,
+   "questions": [
+    {
+     "text": "The new software is ------ easier to use than the previous version.",
+     "options": [
+      "very",
+      "much",
+      "more",
+      "so"
+     ],
+     "answer": "B",
+     "explanation": "'much' bổ nghĩa cho so sánh hơn (much easier). 'very' không đứng trước dạng so sánh hơn.",
+     "tags": [
+      "Ngữ pháp · So sánh"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p5-05",
+   "part": 5,
+   "questions": [
+    {
+     "text": "Please contact the human resources department ------ you have any questions about your benefits.",
+     "options": [
+      "if",
+      "unless",
+      "although",
+      "so"
+     ],
+     "answer": "A",
+     "explanation": "'if' mở mệnh đề điều kiện: nếu bạn có thắc mắc. 'unless' mang nghĩa phủ định nên không hợp.",
+     "tags": [
+      "Ngữ pháp · Liên từ"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p5-06",
+   "part": 5,
+   "questions": [
+    {
+     "text": "The company's profits ------ significantly during the third quarter.",
+     "options": [
+      "rose",
+      "raised",
+      "arose",
+      "arisen"
+     ],
+     "answer": "A",
+     "explanation": "'rise' là nội động từ (tự tăng), 'raise' cần tân ngữ. 'arose' nghĩa là phát sinh.",
+     "tags": [
+      "Từ vựng · Động từ dễ nhầm"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p6-01",
+   "part": 6,
+   "passages": [
+    {
+     "title": "Notice",
+     "text": "To: All Staff\nFrom: Facilities Department\nSubject: Parking Lot Closure\n\nPlease be advised that the east parking lot will be closed from Monday, March 3, to Friday, March 7, [1] repaving work. During this period, employees are encouraged to park in the garage on Maple Street. A shuttle bus will [2] between the garage and the main entrance every ten minutes from 7:30 A.M. to 9:30 A.M. and from 4:30 P.M. to 6:30 P.M. [3] We apologize for any inconvenience this may cause. [4] you have any questions about this notice, please contact the Facilities Department at extension 214."
+    }
+   ],
+   "questions": [
+    {
+     "text": "",
+     "options": [
+      "due to",
+      "in case",
+      "as long as",
+      "even though"
+     ],
+     "answer": "A",
+     "explanation": "Sau chỗ trống là cụm danh từ 'repaving work' nên cần giới từ: due to (do, vì).",
+     "tags": [
+      "Ngữ pháp · Liên từ / giới từ"
+     ],
+     "blank": 1
+    },
+    {
+     "text": "",
+     "options": [
+      "operate",
+      "operating",
+      "be operated",
+      "operates"
+     ],
+     "answer": "A",
+     "explanation": "Sau 'will' dùng động từ nguyên mẫu; chủ ngữ là 'a shuttle bus' đang chủ động chạy.",
+     "tags": [
+      "Ngữ pháp · Dạng động từ"
+     ],
+     "blank": 2
+    },
+    {
+     "text": "",
+     "options": [
+      "Please allow extra time for your commute during this week.",
+      "Parking permits must be renewed every year.",
+      "The cafeteria menu will change next month.",
+      "Applications for the new position are due Friday."
+     ],
+     "answer": "A",
+     "explanation": "Câu chèn phải liên quan đến việc đỗ xe / đi lại trong tuần đóng bãi xe và dẫn đến lời xin lỗi.",
+     "tags": [
+      "Đọc · Chèn câu"
+     ],
+     "blank": 3
+    },
+    {
+     "text": "",
+     "options": [
+      "Because",
+      "If",
+      "Unless",
+      "While"
+     ],
+     "answer": "B",
+     "explanation": "'If you have any questions' là cấu trúc thông báo quen thuộc, hợp nghĩa nhất.",
+     "tags": [
+      "Ngữ pháp · Liên từ"
+     ],
+     "blank": 4
+    }
+   ]
+  },
+  {
+   "id": "p7-01",
+   "part": 7,
+   "passages": [
+    {
+     "title": "E-mail",
+     "text": "From: Daniel Ortiz <d.ortiz@brightpath.example>\nTo: Laura Chen <l.chen@brightpath.example>\nDate: June 12\nSubject: Training session\n\nHi Laura,\n\nThank you for agreeing to lead the customer service training next week. The session is scheduled for Wednesday, June 18, from 10:00 A.M. to 12:00 P.M. in Conference Room B on the third floor. About twenty new employees will attend.\n\nCould you please send me your presentation slides by Monday so that I can print handouts? Also, let me know if you need any equipment. The room has a projector, but you will need to bring your own laptop adapter.\n\nBest regards,\nDaniel Ortiz\nHuman Resources"
+    }
+   ],
+   "questions": [
+    {
+     "text": "What is the purpose of the e-mail?",
+     "options": [
+      "To cancel a meeting",
+      "To confirm details of a training session",
+      "To request a job reference",
+      "To announce a new policy"
+     ],
+     "answer": "B",
+     "explanation": "Thư nhắc lại thời gian, địa điểm, số người tham dự và nhờ chuẩn bị cho buổi tập huấn.",
+     "tags": [
+      "Đọc · Mục đích / ý chính"
+     ]
+    },
+    {
+     "text": "What does Mr. Ortiz ask Ms. Chen to do by Monday?",
+     "options": [
+      "Reserve a conference room",
+      "Print handouts",
+      "Send her slides",
+      "Contact new employees"
+     ],
+     "answer": "C",
+     "explanation": "Anh nhờ gửi slide trước thứ Hai để anh in tài liệu phát; việc in là của anh.",
+     "tags": [
+      "Đọc · Chi tiết"
+     ]
+    },
+    {
+     "text": "What does Ms. Chen need to bring?",
+     "options": [
+      "A projector",
+      "A laptop adapter",
+      "Printed handouts",
+      "A list of attendees"
+     ],
+     "answer": "B",
+     "explanation": "Phòng có máy chiếu, nhưng cô phải tự mang bộ chuyển đổi cho laptop.",
+     "tags": [
+      "Đọc · Chi tiết"
+     ]
+    }
+   ]
+  }
+ ]
+}
